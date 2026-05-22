@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genergy — PV Fleet Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f1419;color:#e2e8f0;min-height:100vh;padding:16px}
+.container{max-width:100%;margin:0 auto;padding:0 4px}
+.header{text-align:center;margin-bottom:18px;position:relative}
+.header h1{font-size:1.6rem;margin-bottom:4px;color:#fff;font-weight:500}
+.last-updated{color:#64748b;font-size:0.75rem}
+.user-bar{position:absolute;top:0;right:0;display:flex;gap:8px;align-items:center}
+.user-badge{font-size:0.65rem;color:#9ca3af;background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:3px 10px}
+.user-badge strong{color:#60a5fa}
+.logout-btn{font-size:0.6rem;color:#ef4444;cursor:pointer;background:none;border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:2px 8px}
+.logout-btn:hover{background:rgba(239,68,68,0.15)}
+/* Login overlay */
+.login-overlay{position:fixed;inset:0;background:rgba(10,14,20,0.97);z-index:1000;display:flex;align-items:center;justify-content:center}
+.login-box{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:16px;padding:40px;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.08)}
+.login-box h2{color:#fff;font-size:1.4rem;margin-bottom:6px;text-align:center}
+.login-box .sub{color:#64748b;font-size:0.75rem;text-align:center;margin-bottom:24px}
+.login-box input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(15,20,25,0.6);color:#e2e8f0;font-size:0.85rem;margin-bottom:12px}
+.login-box input:focus{outline:none;border-color:#3b82f6}
+.login-box button{width:100%;padding:10px;border-radius:8px;border:none;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-weight:600;cursor:pointer;font-size:0.9rem}
+.login-box button:hover{opacity:0.9}
+.login-err{color:#ef4444;font-size:0.72rem;text-align:center;margin-top:8px;min-height:18px}
+/* Fleet */
+.fleet-summary{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+.fleet-top{display:flex;align-items:flex-end;justify-content:center;gap:32px;margin-bottom:4px}
+.fleet-side{text-align:right;padding-bottom:6px;min-width:120px}
+.fleet-side-val{font-size:1.2rem;font-weight:600;color:#9ca3af}
+.fleet-side-sub{font-size:0.95rem;font-weight:500;color:#6b7280}
+.fleet-side-pct{font-size:0.8rem;font-weight:700;margin-top:2px}
+.fleet-side-label{font-size:0.6rem;color:#6b7280;margin-top:1px}
+.fleet-today{text-align:center}
+.fleet-total{font-size:3.2rem;font-weight:700;color:#fff;line-height:1}
+.fleet-total span{font-size:1.2rem;color:#9ca3af}
+.fleet-label{color:#9ca3af;font-size:0.75rem;margin-bottom:12px;text-align:center}
+.fleet-status-bar{background:rgba(10,15,26,0.6);border-radius:10px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.fleet-status-label{color:#9ca3af;font-size:0.8rem}
+.fleet-status-badges{display:flex;gap:8px;flex-wrap:wrap}
+.fleet-badge{display:flex;align-items:center;gap:6px;padding:4px 12px;border-radius:14px;cursor:pointer;transition:all 0.2s;user-select:none}
+.fleet-badge:hover{transform:scale(1.05)}
+.fleet-badge.active{box-shadow:0 0 0 2px #fff}
+.fleet-badge.ok-b{background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3)}
+.fleet-badge.low-b{background:rgba(251,146,60,0.15);border:1px solid rgba(251,146,60,0.3)}
+.fleet-badge.off-b{background:rgba(107,114,128,0.15);border:1px solid rgba(107,114,128,0.3)}
+.bd{width:7px;height:7px;border-radius:50%}
+.ok-b .bd{background:#22c55e;box-shadow:0 0 6px #22c55e}.low-b .bd{background:#fb923c;box-shadow:0 0 6px #fb923c}.off-b .bd{background:#6b7280;box-shadow:0 0 6px #6b7280}
+.bc{font-weight:700;font-size:0.8rem}
+.ok-b .bc{color:#22c55e}.low-b .bc{color:#fb923c}.off-b .bc{color:#6b7280}
+/* Controls */
+.controls{display:flex;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.ctrl-btn{padding:6px 14px;border-radius:7px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#9ca3af;cursor:pointer;font-size:0.72rem;font-weight:500;transition:all 0.25s}
+.ctrl-btn:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#60a5fa}
+.ctrl-btn.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.ctrl-btn.map-btn{background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#22c55e}
+.ctrl-btn.map-btn:hover{background:rgba(34,197,94,0.3)}
+.ctrl-btn.rotate-active{background:rgba(168,85,247,0.2);border-color:#a855f7;color:#a855f7;animation:pulse-rotate 2s infinite}
+@keyframes pulse-rotate{0%,100%{box-shadow:0 0 0 0 rgba(168,85,247,0.3)}50%{box-shadow:0 0 8px 2px rgba(168,85,247,0.3)}}
+.dropdown{position:relative;display:inline-block}
+.dropdown-toggle{padding:6px 14px;border-radius:7px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#9ca3af;cursor:pointer;font-size:0.72rem;font-weight:500;transition:all 0.25s}
+.dropdown-toggle:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#60a5fa}
+.dropdown-toggle.has-sel{border-color:#3b82f6;color:#60a5fa}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;margin-top:4px;background:#1a2332;border:1px solid rgba(255,255,255,0.15);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.5);z-index:200;min-width:240px;max-height:400px;overflow-y:auto;padding:6px 0}
+.dropdown-menu.show{display:block}
+.dropdown-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;font-size:0.78rem;color:#cbd5e1;transition:background 0.15s}
+.dropdown-item:hover{background:rgba(59,130,246,0.15)}
+.dropdown-item input[type=checkbox]{accent-color:#3b82f6;width:14px;height:14px}
+.dropdown-divider{height:1px;background:rgba(255,255,255,0.08);margin:4px 0}
+.dropdown-header{padding:6px 14px;font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.group-row{display:flex;gap:6px;padding:6px 14px;align-items:center}
+.group-row input{flex:1;background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:#e2e8f0;padding:5px 8px;font-size:0.72rem}
+.group-row button{padding:5px 12px;border-radius:4px;border:none;background:#3b82f6;color:#fff;font-size:0.7rem;cursor:pointer;white-space:nowrap}
+.group-sites{max-height:200px;overflow-y:auto;padding:4px 14px}
+.group-sites label{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.7rem;color:#cbd5e1;cursor:pointer}
+.group-del{font-size:0.6rem;color:#ef4444;cursor:pointer;margin-left:auto;padding:2px 6px;border-radius:3px}
+.group-del:hover{background:rgba(239,68,68,0.2)}
+/* Date nav */
+.date-nav{display:flex;align-items:center;gap:6px}
+.date-nav button{background:rgba(15,20,25,0.4);border:1px solid rgba(255,255,255,0.1);color:#9ca3af;border-radius:5px;padding:4px 8px;cursor:pointer;font-size:0.7rem;transition:all 0.2s}
+.date-nav button:hover{background:rgba(59,130,246,0.2);color:#60a5fa;border-color:#3b82f6}
+.date-nav input[type=date]{background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:5px;color:#e2e8f0;padding:4px 8px;font-size:0.68rem}
+.legend-bar{display:flex;justify-content:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:0.65rem;color:#6b7280}
+.legend-swatch{width:16px;height:4px;border-radius:1px}
+/* Cards */
+.sites-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:20px;transition:opacity 0.5s}
+.sites-grid.fading{opacity:0.3}
+.site-card{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,0.3);transition:all 0.3s;cursor:pointer;border:2px solid rgba(255,255,255,0.08);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.site-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.5);border-color:rgba(255,255,255,0.2)}
+.site-card.hidden{display:none}
+.site-topbar{padding:10px 12px 4px}
+.site-row1{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:2px}
+.site-row1-left{display:flex;align-items:center;gap:5px;min-width:0}
+.site-row2{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.sn{font-size:0.85rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.si{width:8px;height:8px;border-radius:50%;box-shadow:0 0 6px currentColor;flex-shrink:0}
+.si.ok{background:#22c55e;color:#22c55e}.si.low{background:#fb923c;color:#fb923c}
+.si.underperforming{background:#fb923c;color:#fb923c}.si.fault{background:#ef4444;color:#ef4444}
+.si.offline{background:#6b7280;color:#6b7280}.si.no_data{background:#6b7280;color:#6b7280}.si.unknown{background:#6b7280;color:#6b7280}
+.sp{font-size:0.5rem;font-weight:700;padding:2px 5px;border-radius:3px;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0}
+.sp.fusionsolar{background:rgba(234,88,12,.25);color:#fb923c}
+.sp.goodwe{background:rgba(34,197,94,.25);color:#22c55e}
+.sp.sunsynk{background:rgba(96,165,250,.25);color:#60a5fa}
+.sp.soliscloud{background:rgba(168,85,247,.25);color:#a855f7}
+.sp.solarman{background:rgba(244,114,182,.25);color:#f472b6}
+.skwh{font-size:0.9rem;font-weight:700;color:#fff;white-space:nowrap}
+.skwh i{font-size:0.65rem;color:#9ca3af;font-style:normal}
+.sl{font-size:0.65rem;font-weight:700;white-space:nowrap}
+.sl.ok{color:#22c55e}.sl.low,.sl.underperforming{color:#fb923c}.sl.fault{color:#ef4444}
+.sl.offline,.sl.no_data,.sl.unknown{color:#6b7280}
+.site-badges{display:flex;flex-direction:column;gap:2px;align-items:flex-end;flex-shrink:0}
+.sb{font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.05);white-space:nowrap}
+.sb.good{color:#22c55e}.sb.warn{color:#fb923c}.sb.bad{color:#ef4444}.sb.irr{color:#eab308}
+.card-toggle{font-size:0.5rem;padding:2px 6px;border-radius:3px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#6b7280;cursor:pointer;transition:all 0.2s;position:absolute;top:6px;right:6px;z-index:10}
+.card-toggle:hover{color:#60a5fa;border-color:#3b82f6}
+.site-chart-wrapper{flex:1;min-height:160px;position:relative;padding:2px 6px 6px}
+.site-chart-container{position:absolute;top:0;left:6px;right:6px;bottom:6px}
+/* Map */
+.map-overlay{position:fixed;inset:0;background:#0a0e14;z-index:500;display:none;overflow:hidden}
+.map-overlay.show{display:block}
+.map-close{position:absolute;top:10px;right:310px;color:#9ca3af;font-size:1.2rem;cursor:pointer;z-index:600;background:rgba(15,20,25,0.8);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.15)}
+.map-close:hover{color:#fff;background:rgba(59,130,246,0.3)}
+.dark-popup .leaflet-popup-content-wrapper{background:transparent!important;box-shadow:none!important;border:none!important;padding:0!important}
+.dark-popup .leaflet-popup-content{margin:0!important}
+.dark-popup .leaflet-popup-tip{background:#1a2332!important}
+.leaflet-container{background:#0a0e14!important}
+.collapsed{display:none!important}
+.chevron.open{transform:rotate(0deg)}.chevron:not(.open){transform:rotate(-90deg)}
+#mapCardsRow::-webkit-scrollbar{height:4px}
+#mapCardsRow::-webkit-scrollbar-track{background:rgba(255,255,255,0.03)}
+#mapCardsRow::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+.map-site-card{flex-shrink:0;width:300px;background:rgba(20,28,38,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(8px)}
+.map-site-card:hover{border-color:rgba(59,130,246,0.4);transform:translateY(-2px)}
+.map-card-chart{height:180px;position:relative;margin-top:4px}
+.scroll-arrows{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:60}
+.scroll-arrow{width:36px;height:36px;border-radius:50%;background:rgba(30,41,54,0.9);border:1px solid rgba(255,255,255,0.15);color:#9ca3af;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all 0.2s;box-shadow:0 2px 10px rgba(0,0,0,0.3)}
+.scroll-arrow:hover{background:rgba(59,130,246,0.3);border-color:#3b82f6;color:#fff}
+.refresh-btn{position:fixed;bottom:20px;right:20px;padding:8px 16px;border-radius:18px;border:none;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;cursor:pointer;font-size:0.75rem;font-weight:600;box-shadow:0 4px 15px rgba(59,130,246,0.4);transition:all 0.3s;z-index:50}
+.refresh-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,0.6)}
+.loading{text-align:center;padding:50px;font-size:1.1rem;color:#94a3b8}
+.footer-note{text-align:left;color:#64748b;font-size:0.65rem;margin-top:10px;padding-left:4px}
+.platforms-coming{background:rgba(168,85,247,0.08);border:1px dashed rgba(168,85,247,0.3);border-radius:8px;padding:8px 14px;color:#a855f7;font-size:0.7rem;text-align:center;margin-bottom:10px}
+.manage-btn{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#60a5fa;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:500;transition:all 0.2s}
+.manage-btn:hover{background:rgba(59,130,246,0.3);color:#fff;border-color:#3b82f6}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:#1a2332;border-radius:14px;padding:24px;max-width:760px;width:100%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.08)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.modal-title{font-size:1.2rem;font-weight:600;color:#fff;margin:0}
+.modal-close{background:none;border:none;color:#9ca3af;font-size:1.4rem;cursor:pointer;padding:0 8px;line-height:1}
+.modal-close:hover{color:#fff}
+.modal-help{font-size:0.78rem;color:#94a3b8;margin-bottom:14px;line-height:1.5}
+.modal-body{flex:1;overflow-y:auto;padding-right:6px}
+.modal-platform{margin-bottom:18px}
+.modal-platform-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.6px;color:#60a5fa;font-weight:600;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,0.15)}
+.modal-site-row{display:flex;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;transition:background 0.15s;gap:10px}
+.modal-site-row:hover{background:rgba(255,255,255,0.04)}
+.modal-site-row.is-locked{opacity:0.6;cursor:not-allowed}
+.modal-site-row.is-locked:hover{background:transparent}
+.modal-site-row input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#3b82f6;flex-shrink:0}
+.modal-site-row input[type="checkbox"]:disabled{cursor:not-allowed}
+.modal-site-name{font-size:0.85rem;color:#e2e8f0;flex:1}
+.modal-site-badge{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.5px;background:rgba(251,146,60,0.15);color:#fb923c;padding:2px 6px;border-radius:4px;border:1px solid rgba(251,146,60,0.3);flex-shrink:0}
+.modal-site-id{font-size:0.7rem;color:#6b7280;font-family:Consolas,monospace}
+.modal-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);gap:12px}
+.modal-status{font-size:0.75rem;color:#9ca3af;flex:1}
+.modal-status.saving{color:#fb923c}
+.modal-status.saved{color:#22c55e}
+.modal-status.error{color:#ef4444}
+.modal-btn{padding:7px 16px;border-radius:7px;border:none;cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.2s}
+.modal-btn.primary{background:#3b82f6;color:#fff}
+.modal-btn.primary:hover{background:#2563eb}
+.modal-btn.primary:disabled{background:#1e3a5f;cursor:not-allowed;opacity:0.6}
+.modal-btn.secondary{background:rgba(255,255,255,0.06);color:#cbd5e1;border:1px solid rgba(255,255,255,0.1)}
+.modal-btn.secondary:hover{background:rgba(255,255,255,0.12)}
+@media(max-width:500px){.sites-grid{grid-template-columns:1fr}.fleet-top{flex-direction:column;align-items:center;gap:10px}.scroll-arrows{display:none}.user-bar{position:static;justify-content:center;margin-top:6px}}
+</style>
+</head>
+<body>
+<!-- Login overlay -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <h2>Genergy PV Dashboard</h2>
+        <div class="sub">Sign in to access fleet monitoring</div>
+        <input type="text" id="loginUser" placeholder="Username" autocomplete="username">
+        <div style="position:relative">
+            <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+            <button type="button" onclick="togglePassVis()" id="passToggle" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#6b7280;cursor:pointer;font-size:0.8rem;padding:4px" title="Show password">👁</button>
+        </div>
+        <button onclick="doLogin()">Sign In</button>
+        <div class="login-err" id="loginErr"></div>
+    </div>
+</div>
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- Map overlay -->
+<div class="map-overlay" id="mapOverlay">
+    <div class="map-close" onclick="closeMap()">✕</div>
+    <div style="position:absolute;top:0;left:0;right:0;z-index:510;display:flex;justify-content:center;padding:6px 60px 0">
+        <div style="text-align:center"><div style="color:#fff;font-size:1.1rem;font-weight:600">Genergy — PV Fleet Dashboard</div><div style="color:#64748b;font-size:0.6rem" id="mapUpdated"></div></div>
+    </div>
+    <div id="mapLeftPanel" style="position:absolute;top:10px;left:10px;z-index:520;width:280px">
+        <div style="background:rgba(20,28,38,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:8px;backdrop-filter:blur(8px)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px">
+                <div style="font-size:0.7rem;color:#9ca3af" id="mapYestVal">--</div>
+                <div style="font-size:0.7rem;color:#eab308" id="mapIrrVal">--</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+                <div style="font-size:0.6rem;color:#6b7280" id="mapYestSub">--</div>
+                <div style="font-size:0.6rem;color:#6b7280" id="mapIrrSub">--</div>
+            </div>
+            <div style="text-align:center;margin:6px 0 2px"><span style="font-size:2rem;font-weight:700;color:#fff" id="mapFleetTotal">0</span> <span style="font-size:0.85rem;color:#9ca3af">kWh</span></div>
+            <div style="text-align:center;font-size:0.6rem;color:#9ca3af">Total Fleet Generation Today</div>
+        </div>
+        <div style="background:rgba(20,28,38,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:10px;backdrop-filter:blur(8px);overflow:hidden">
+            <div onclick="document.getElementById('stationBody').classList.toggle('collapsed');this.querySelector('.chevron').classList.toggle('open')" style="padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:10px">
+                <div style="display:flex">
+                    <div style="width:18px;height:18px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:#fff;font-weight:700;margin-right:-4px;z-index:2" id="mapOffCount">0</div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#fb923c;display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:#fff;font-weight:700;margin-right:-4px;z-index:1" id="mapLowCount">0</div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:#fff;font-weight:700" id="mapOkCount">0</div>
+                </div>
+                <div style="font-size:1.5rem;font-weight:700;color:#fff" id="mapStationCount">0</div>
+                <div style="font-size:0.65rem;color:#9ca3af;flex:1">Station Number</div>
+                <div class="chevron open" style="color:#9ca3af;font-size:0.7rem;transition:transform 0.3s">▼</div>
+            </div>
+            <div id="stationBody" style="padding:0 12px 10px;border-top:1px solid rgba(255,255,255,0.06)">
+                <div style="font-size:0.6rem;color:#9ca3af;margin:8px 0 6px">🌿 Environmental Contributions</div>
+                <div style="display:flex;gap:6px">
+                    <div style="flex:1;background:rgba(10,15,26,0.5);border-radius:6px;padding:8px;text-align:center">
+                        <div style="font-size:0.9rem;font-weight:700;color:#fff" id="envCoal">--</div>
+                        <div style="font-size:0.5rem;color:#6b7280">Standard Coal Saved</div>
+                    </div>
+                    <div style="flex:1;background:rgba(10,15,26,0.5);border-radius:6px;padding:8px;text-align:center">
+                        <div style="font-size:0.9rem;font-weight:700;color:#22c55e" id="envTrees">--</div>
+                        <div style="font-size:0.5rem;color:#6b7280">≈ Trees Planted</div>
+                    </div>
+                    <div style="flex:1;background:rgba(10,15,26,0.5);border-radius:6px;padding:8px;text-align:center">
+                        <div style="font-size:0.9rem;font-weight:700;color:#60a5fa" id="envCo2">--</div>
+                        <div style="font-size:0.5rem;color:#6b7280">CO₂ Reduction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mapRightPanel" style="position:absolute;top:10px;right:10px;z-index:520;width:300px">
+        <div style="background:rgba(20,28,38,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;backdrop-filter:blur(8px);margin-bottom:8px">
+            <div style="font-size:0.7rem;color:#9ca3af;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+                <span>Alarms</span>
+            </div>
+            <div style="text-align:center;margin-bottom:6px">
+                <svg width="110" height="110" viewBox="0 0 110 110">
+                    <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+                    <circle cx="55" cy="55" r="42" fill="none" stroke="#ef4444" stroke-width="8" stroke-dasharray="0 264" stroke-linecap="round" transform="rotate(-90 55 55)" id="ringOffline"/>
+                    <circle cx="55" cy="55" r="42" fill="none" stroke="#fb923c" stroke-width="8" stroke-dasharray="0 264" stroke-linecap="round" transform="rotate(-90 55 55)" id="ringLow"/>
+                    <circle cx="55" cy="55" r="42" fill="none" stroke="#22c55e" stroke-width="8" stroke-dasharray="0 264" stroke-linecap="round" transform="rotate(-90 55 55)" id="ringOk"/>
+                    <text x="55" y="50" text-anchor="middle" fill="#fff" font-size="24" font-weight="700" id="alarmTotal">0</text>
+                    <text x="55" y="66" text-anchor="middle" fill="#9ca3af" font-size="8">Total Faults</text>
+                </svg>
+                <div style="display:flex;justify-content:center;gap:12px;font-size:0.55rem">
+                    <span style="color:#ef4444">● Offline <span id="alarmOffN">0</span></span>
+                    <span style="color:#fb923c">● Low <span id="alarmLowN">0</span></span>
+                    <span style="color:#22c55e">● OK <span id="alarmOkN">0</span></span>
+                </div>
+            </div>
+        </div>
+        <div id="alarmSlider" style="background:rgba(20,28,38,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:10px;backdrop-filter:blur(8px);max-height:400px;overflow:hidden">
+            <div id="alarmCards"></div>
+        </div>
+    </div>
+    <div id="leafletMap" style="position:absolute;inset:0;z-index:500"></div>
+    <div id="mapBottomStrip" style="position:absolute;bottom:0;left:0;right:0;z-index:520;background:linear-gradient(transparent,rgba(10,14,20,0.95) 30%);padding:60px 10px 10px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:0 4px">
+            <select id="mapCardFilter" onchange="renderMapCards()" style="background:rgba(15,20,25,0.8);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#e2e8f0;padding:4px 8px;font-size:0.65rem">
+                <option value="all">All Sites</option>
+                <option value="location">By Location</option>
+                <option value="client">By Client Group</option>
+            </select>
+            <select id="mapCardGroup" onchange="renderMapCards()" style="background:rgba(15,20,25,0.8);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#e2e8f0;padding:4px 8px;font-size:0.65rem;display:none"></select>
+            <button onclick="toggleMapCardMode()" id="mapCardModeBtn" style="background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.4);color:#60a5fa;border-radius:5px;padding:3px 8px;cursor:pointer;font-size:0.6rem;font-weight:600">30-Day Avg</button>
+            <button onclick="mapCardsScroll(-1)" style="background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.1);color:#9ca3af;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:0.8rem">◀</button>
+            <button onclick="mapCardsScroll(1)" style="background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.1);color:#9ca3af;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:0.8rem">▶</button>
+            <button id="trainBtn" onclick="toggleTrain()" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#22c55e;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:0.65rem;font-weight:600">▶ Auto</button>
+        </div>
+        <div id="mapCardsRow" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scroll-behavior:smooth"></div>
+    </div>
+</div>
+
+<div class="container" id="mainDash">
+    <div class="header">
+        <h1>Genergy — PV Fleet Dashboard</h1>
+        <div class="last-updated" id="lastUpdated">Loading...</div>
+        <div class="user-bar" id="userBar"></div>
+    </div>
+    <div class="fleet-summary">
+        <div class="fleet-top">
+            <div class="fleet-side">
+                <div class="fleet-side-val" id="yestVal">--</div>
+                <div class="fleet-side-sub" id="yestByHourVal">--</div>
+                <div class="fleet-side-pct" id="genPct" style="color:#6b7280">--%</div>
+                <div class="fleet-side-label">Yesterday (full / by hour)</div>
+            </div>
+            <div class="fleet-today"><div class="fleet-total" id="fleetTotal">0 <span>kWh</span></div></div>
+            <div class="fleet-side" style="text-align:left">
+                <div class="fleet-side-val" id="todayIrrVal" style="color:#eab308">--</div>
+                <div class="fleet-side-sub" id="yestIrrVal">--</div>
+                <div class="fleet-side-label" id="irrPctLabel">Today / Yesterday irradiation</div>
+            </div>
+        </div>
+        <div class="fleet-label">Total Fleet Generation Today</div>
+        <div class="fleet-status-bar">
+            <div class="fleet-status-label">Fleet Status</div>
+            <div class="fleet-status-badges" id="statusBadges"></div>
+        </div>
+    </div>
+    <div class="controls">
+        <div class="dropdown" id="platformDrop">
+            <button class="dropdown-toggle" onclick="toggleDrop('platformMenu')">Platform ▾</button>
+            <div class="dropdown-menu" id="platformMenu">
+                <label class="dropdown-item"><input type="checkbox" value="fusionsolar" onchange="applyFilters()" checked> FusionSolar</label>
+                <label class="dropdown-item"><input type="checkbox" value="vrm" onchange="applyFilters()" checked> VRM (Victron)</label>
+                <label class="dropdown-item"><input type="checkbox" value="solarmanpv" onchange="applyFilters()" checked> SolarmanPV</label>
+                <label class="dropdown-item"><input type="checkbox" value="soliscloud" onchange="applyFilters()" checked> SolisCloud</label>
+                <label class="dropdown-item"><input type="checkbox" value="sunsynk" onchange="applyFilters()" checked> Sunsynk</label>
+                <label class="dropdown-item"><input type="checkbox" value="sigenergy" onchange="applyFilters()" checked> Sigenergy</label>
+                <label class="dropdown-item"><input type="checkbox" value="sungrow" onchange="applyFilters()" checked> Sungrow</label>
+            </div>
+        </div>
+        <div class="dropdown" id="groupDrop">
+            <button class="dropdown-toggle" onclick="toggleDrop('groupMenu')">Client Group ▾</button>
+            <div class="dropdown-menu" id="groupMenu"></div>
+        </div>
+        <button class="ctrl-btn" onclick="clearAllFilters()">All</button>
+        <span style="color:#374151">|</span>
+        <button class="ctrl-btn" id="modeToday" onclick="switchMode('today')">Bar Graph</button>
+        <button class="ctrl-btn active" id="modeAvg" onclick="switchMode('average')">30-Day Average</button>
+        <button class="ctrl-btn map-btn" onclick="openMap()">🗺 Map</button>
+        <span style="color:#374151">|</span>
+        <div class="date-nav">
+            <button onclick="dateBack()" title="Previous day">◀</button>
+            <input type="date" id="datePicker" onchange="goToDate(this.value)">
+            <button onclick="dateForward()" title="Next day">▶</button>
+            <button onclick="goToToday()" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:#22c55e" title="Jump to today">Today</button>
+        </div>
+        <span style="color:#374151">|</span>
+        <div class="dropdown" id="rotateDrop">
+            <button class="ctrl-btn" id="rotateBtn" onclick="toggleRotate()" title="Auto-rotate through groups every 15s">▶ Rotate</button>
+            <select id="rotateType" style="background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:5px;color:#9ca3af;padding:4px 6px;font-size:0.65rem;cursor:pointer" title="Rotate by">
+                <option value="client">Client Groups</option>
+                <option value="location">Locations</option>
+            </select>
+        </div>
+    </div>
+    <div class="legend-bar" id="legendBar"></div>
+    <div class="platforms-coming">All major platforms wired in — site configs to be added per platform as credentials land</div>
+    <div id="rotateHeading" style="text-align:center;margin-bottom:10px;display:none"><span style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);color:#a855f7;padding:6px 20px;border-radius:20px;font-size:0.8rem;font-weight:600" id="rotateLabel"></span></div>
+    <div id="sitesContainer" class="sites-grid"><div class="loading">Loading site data...</div></div>
+    <div class="footer-note">Auto-refreshes every 5 min · Workflows run 06:00–18:00 SAST</div>
+    <button class="refresh-btn" onclick="loadAllSites()">🔄 Refresh</button>
+</div>
+<div class="scroll-arrows">
+    <button class="scroll-arrow" onclick="window.scrollBy({top:-400,behavior:'smooth'})">▲</button>
+    <button class="scroll-arrow" onclick="window.scrollBy({top:400,behavior:'smooth'})">▼</button>
+</div>
+
+<!-- Hidden Sites management modal (admin-only). Reads/writes data/hidden_sites.json -->
+<div class="modal-overlay" id="hiddenSitesModal" onclick="if(event.target===this)closeHiddenSitesModal()">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 class="modal-title">Manage Sites</h3>
+            <button class="modal-close" onclick="closeHiddenSitesModal()" title="Close">×</button>
+        </div>
+        <div class="modal-help">
+            Untick any site to hide it from the dashboard. The site's data keeps updating in the background — only the display is affected. Changes save to <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px;color:#cbd5e1">data/hidden_sites.json</code> and apply on next page load.
+        </div>
+        <div class="modal-body" id="hiddenSitesList">Loading…</div>
+        <div class="modal-footer">
+            <div class="modal-status" id="hiddenSitesStatus"></div>
+            <button class="modal-btn secondary" onclick="closeHiddenSitesModal()">Cancel</button>
+            <button class="modal-btn primary" id="hiddenSitesSave" onclick="saveHiddenSites()">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────
+// Configuration — paths relative to this index.html, repo root.
+// ─────────────────────────────────────────────────────────────────────────
+const SITES_INDEX_URL = "./sites_index.json";
+const HIDDEN_SITES_URL = "./data/hidden_sites.json";
+const AUTH_URL = "./data/auth.json";
+const REPO_OWNER = "GenergyDashboard";
+const REPO_NAME = "Fleet-Monitoring-Platform";
+const SETTINGS_PATH = "data/user_settings.json";
+
+// Working hour window for legacy compatibility — most charts focus 05:00-21:00.
+const HOUR_START = 5, HOUR_END = 21;
+const CHART_LABELS = Array.from({length: HOUR_END - HOUR_START},
+    (_, i) => { const h = i + HOUR_START; return (h < 10 ? '0' : '') + h + ':00'; });
+function slH(arr) { return (arr || new Array(24).fill(0)).slice(HOUR_START, HOUR_END); }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Auth — ported from the existing dashboard, identical UX
+// ─────────────────────────────────────────────────────────────────────────
+let AUTH_DATA = null;
+let currentUser = null;
+let syncToken = null;
+
+async function sha256(message) {
+    const buf = new TextEncoder().encode(message);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function togglePassVis() {
+    const inp = document.getElementById('loginPass');
+    const btn = document.getElementById('passToggle');
+    if (inp.type === 'password') { inp.type='text'; btn.textContent='🔒'; }
+    else                          { inp.type='password'; btn.textContent='👁'; }
+}
+
+async function loadAuthData() {
+    try {
+        const r = await fetch(AUTH_URL);
+        if (!r.ok) throw new Error('auth.json not found');
+        AUTH_DATA = await r.json();
+        return true;
+    } catch (e) {
+        console.error('Failed to load auth:', e);
+        AUTH_DATA = null;
+        return false;
+    }
+}
+
+async function doLogin() {
+    const u = document.getElementById('loginUser').value.trim().toLowerCase();
+    const p = document.getElementById('loginPass').value;
+    const errEl = document.getElementById('loginErr');
+    errEl.textContent = 'Signing in...';
+
+    if (!AUTH_DATA) await loadAuthData();
+    if (!AUTH_DATA) { errEl.textContent = 'Auth system unavailable'; return; }
+
+    const userData = AUTH_DATA[u];
+    if (!userData) { errEl.textContent = 'Invalid username or password'; return; }
+
+    const inputHash = await sha256(p);
+    if (inputHash !== userData.hash) { errEl.textContent = 'Invalid username or password'; return; }
+
+    currentUser = { username: u, role: userData.role, display: userData.display };
+    localStorage.setItem('g_session', JSON.stringify({ username: u }));
+    document.getElementById('loginOverlay').style.display = 'none';
+    errEl.textContent = '';
+    renderUserBar();
+    syncToken = await decryptSyncToken(p);
+    await loadSettings();
+    loadAllSites();
+}
+
+function doLogout() {
+    localStorage.removeItem('g_session');
+    currentUser = null;
+    document.getElementById('loginOverlay').style.display = 'flex';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+}
+
+async function checkLogin() {
+    await loadAuthData();
+    try {
+        const s = localStorage.getItem('g_session');
+        if (s && AUTH_DATA) {
+            const session = JSON.parse(s);
+            const userData = AUTH_DATA[session.username];
+            if (userData) {
+                currentUser = { username: session.username, role: userData.role, display: userData.display };
+                document.getElementById('loginOverlay').style.display = 'none';
+                renderUserBar();
+                await loadSettings();
+                return true;
+            }
+        }
+    } catch (e) {}
+    document.getElementById('loginOverlay').style.display = 'flex';
+    return false;
+}
+
+function renderUserBar() {
+    const bar = document.getElementById('userBar');
+    if (!currentUser) { bar.innerHTML = ''; return; }
+    const manageBtn = isAdmin()
+        ? `<button class="manage-btn" onclick="openHiddenSitesModal()">Manage Sites</button>` : '';
+    bar.innerHTML = `<span class="user-badge">Signed in as <strong>${currentUser.display}</strong></span>${manageBtn}<button class="logout-btn" onclick="doLogout()">Sign Out</button>`;
+}
+function isAdmin() { return currentUser && currentUser.role === 'admin'; }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Settings sync via GitHub API (ported as-is)
+// ─────────────────────────────────────────────────────────────────────────
+let userSettings = {};
+let settingsSHA = null;
+
+async function decryptSyncToken(password) {
+    const u = currentUser?.username;
+    const enc = AUTH_DATA?._sync_tokens?.[u];
+    if (!enc || !enc.salt || !enc.nonce || !enc.ciphertext) return null;
+    try {
+        const salt = Uint8Array.from(atob(enc.salt), c => c.charCodeAt(0));
+        const nonce = Uint8Array.from(atob(enc.nonce), c => c.charCodeAt(0));
+        const ct = Uint8Array.from(atob(enc.ciphertext), c => c.charCodeAt(0));
+        const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+        const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'}, km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+        const dec = await crypto.subtle.decrypt({name:'AES-GCM', iv:nonce}, key, ct);
+        return new TextDecoder().decode(dec);
+    } catch (e) { return null; }
+}
+
+async function loadSettings() {
+    try {
+        if (syncToken) {
+            const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SETTINGS_PATH}`, {
+                headers: { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' }
+            });
+            if (r.ok) {
+                const data = await r.json();
+                settingsSHA = data.sha;
+                userSettings = JSON.parse(atob(data.content.replace(/\s/g, '')));
+                return;
+            }
+        }
+    } catch (e) {}
+    try {
+        const r = await fetch(`./${SETTINGS_PATH}?t=${Date.now()}`);
+        if (r.ok) userSettings = await r.json();
+    } catch (e) {}
+    try { const s = localStorage.getItem('g_settings'); if (s) userSettings = JSON.parse(s); } catch (e) {}
+}
+
+let saveDebounce = null;
+async function saveSettings() {
+    localStorage.setItem('g_settings', JSON.stringify(userSettings));
+    if (!syncToken) return;
+    for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(userSettings, null, 2))));
+            const body = { message: `Update user settings - ${new Date().toISOString().slice(0,16)}`, content };
+            if (settingsSHA) body.sha = settingsSHA;
+            const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SETTINGS_PATH}`, {
+                method:'PUT',
+                headers:{ 'Authorization': `token ${syncToken}`, 'Accept':'application/vnd.github.v3+json', 'Content-Type':'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (r.ok) { const d = await r.json(); settingsSHA = d.content.sha; return; }
+            if (r.status === 409) {
+                const fr = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SETTINGS_PATH}`, {
+                    headers:{ 'Authorization': `token ${syncToken}`, 'Accept':'application/vnd.github.v3+json' }
+                });
+                if (fr.ok) { const fd = await fr.json(); settingsSHA = fd.sha; }
+                continue;
+            }
+            return;
+        } catch (e) { return; }
+    }
+}
+
+function ldGrp() {
+    const u = currentUser?.username || 'anon';
+    return (userSettings[u] && userSettings[u].groups) || {};
+}
+function svGrp(g) {
+    const u = currentUser?.username || 'anon';
+    if (!userSettings[u]) userSettings[u] = {};
+    userSettings[u].groups = g;
+    localStorage.setItem('g_settings', JSON.stringify(userSettings));
+    if (saveDebounce) clearTimeout(saveDebounce);
+    saveDebounce = setTimeout(() => saveSettings(), 500);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Hidden Sites management — modal UI for admins. Reads & writes
+// data/hidden_sites.json via the GitHub API using the user's PAT (same
+// mechanism saveSettings() uses for user_settings.json).
+// ─────────────────────────────────────────────────────────────────────────
+const HIDDEN_SITES_PATH = "data/hidden_sites.json";
+let hiddenSitesSHA = null;       // GitHub file SHA - needed for PUT
+let hiddenSitesAll = [];          // all sites (incl. currently-hidden) for the modal
+
+// Pretty labels for the platform headers in the modal.
+const PLATFORM_LABELS = {
+    fusionsolar: "FusionSolar (Huawei)",
+    vrm:         "VRM (Victron)",
+    soliscloud:  "SolisCloud",
+    sunsynk:     "Sunsynk",
+    goodwe:      "GoodWe",
+    solarman:    "SolarmanPV",
+};
+
+async function openHiddenSitesModal() {
+    if (!isAdmin()) { alert("Manage Sites is admin-only."); return; }
+    const modal = document.getElementById('hiddenSitesModal');
+    const listEl = document.getElementById('hiddenSitesList');
+    const statusEl = document.getElementById('hiddenSitesStatus');
+    const saveBtn = document.getElementById('hiddenSitesSave');
+
+    modal.classList.add('open');
+    listEl.textContent = 'Loading…';
+    statusEl.textContent = '';
+    statusEl.className = 'modal-status';
+    saveBtn.disabled = false;
+
+    // Fetch sites_index (everything, including currently-hidden) and the
+    // hide list. loadSitesIndex() already filters, so re-fetch raw here.
+    let allSites = [], hiddenIds = new Set(), sha = null;
+    try {
+        const [idxR, hidR] = await Promise.all([
+            fetch(SITES_INDEX_URL + '?t=' + Date.now()),
+            // Use GitHub API to get the file's SHA at the same time as content -
+            // we need the SHA to PUT updates.
+            syncToken
+                ? fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${HIDDEN_SITES_PATH}`,
+                         { headers: { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' } })
+                : fetch(HIDDEN_SITES_URL + '?t=' + Date.now()),
+        ]);
+        if (!idxR.ok) throw new Error('sites_index.json not found');
+        const idx = await idxR.json();
+        allSites = idx.sites || [];
+        if (hidR && hidR.ok) {
+            if (syncToken) {
+                // GitHub API path - returns {content (base64), sha}
+                const meta = await hidR.json();
+                sha = meta.sha;
+                const decoded = decodeURIComponent(escape(atob(meta.content.replace(/\n/g, ''))));
+                const parsed = JSON.parse(decoded);
+                (parsed.hidden_site_ids || []).forEach(id => hiddenIds.add(id));
+            } else {
+                const parsed = await hidR.json();
+                (parsed.hidden_site_ids || []).forEach(id => hiddenIds.add(id));
+            }
+        }
+    } catch (e) {
+        listEl.textContent = `Failed to load: ${e.message}`;
+        return;
+    }
+    hiddenSitesAll = allSites;
+    hiddenSitesSHA = sha;
+
+    // Group by platform, render checkboxes (CHECKED = visible, unchecked = hidden)
+    const byPlatform = {};
+    allSites.forEach(s => {
+        const p = s.platform || 'unknown';
+        if (!byPlatform[p]) byPlatform[p] = [];
+        byPlatform[p].push(s);
+    });
+
+    const platformOrder = ['fusionsolar', 'vrm', 'soliscloud', 'sunsynk', 'goodwe', 'solarman'];
+    const orderedPlatforms = [
+        ...platformOrder.filter(p => byPlatform[p]),
+        ...Object.keys(byPlatform).filter(p => !platformOrder.includes(p)),
+    ];
+
+    listEl.innerHTML = orderedPlatforms.map(p => {
+        const sites = byPlatform[p].slice().sort((a, b) => a.name.localeCompare(b.name));
+        const label = PLATFORM_LABELS[p] || p;
+        const rows = sites.map(s => {
+            const configHidden = !!s.hidden;
+            const globalHidden = hiddenIds.has(s.site_id);
+            const checked = (configHidden || globalHidden) ? '' : 'checked';
+            // Config-hidden sites can't be re-enabled here - they're locked
+            // off in their own config.json. Show a badge and disable the
+            // checkbox so it's obvious where to go to change it.
+            const disabled = configHidden ? 'disabled' : '';
+            const badge = configHidden
+                ? `<span class="modal-site-badge" title="Hidden in this site's config.json (hidden: true). Edit the config file directly to unhide.">config</span>`
+                : '';
+            return `<label class="modal-site-row${configHidden ? ' is-locked' : ''}">
+                <input type="checkbox" data-site-id="${s.site_id}" ${checked} ${disabled}>
+                <span class="modal-site-name">${s.name}</span>
+                ${badge}
+                <span class="modal-site-id">${s.site_id}</span>
+            </label>`;
+        }).join('');
+        return `<div class="modal-platform">
+            <div class="modal-platform-title">${label} — ${sites.length} site${sites.length === 1 ? '' : 's'}</div>
+            ${rows}
+        </div>`;
+    }).join('');
+
+    if (!syncToken) {
+        statusEl.textContent = 'Read-only: no sync token available, save disabled';
+        statusEl.className = 'modal-status error';
+        saveBtn.disabled = true;
+    }
+}
+
+function closeHiddenSitesModal() {
+    document.getElementById('hiddenSitesModal').classList.remove('open');
+}
+
+async function saveHiddenSites() {
+    if (!syncToken) return;
+    const statusEl = document.getElementById('hiddenSitesStatus');
+    const saveBtn = document.getElementById('hiddenSitesSave');
+
+    // Collect unchecked = hidden
+    const checkboxes = document.querySelectorAll('#hiddenSitesList input[type="checkbox"]');
+    const hiddenIds = [];
+    checkboxes.forEach(cb => { if (!cb.checked) hiddenIds.push(cb.dataset.siteId); });
+
+    const payload = {
+        hidden_site_ids: hiddenIds,
+        note: "Site IDs listed here are excluded from the dashboard (grid + map + status counts + dropdowns) but their workflows still run and their data files still update in the repo. Direct URLs like site.html?site=<id> still work. Edited via the dashboard's Manage Sites modal."
+    };
+
+    statusEl.textContent = 'Saving…';
+    statusEl.className = 'modal-status saving';
+    saveBtn.disabled = true;
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+            const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2) + '\n')));
+            const body = {
+                message: `Update hidden sites - ${new Date().toISOString().slice(0, 16)}`,
+                content,
+            };
+            if (hiddenSitesSHA) body.sha = hiddenSitesSHA;
+            const r = await fetch(
+                `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${HIDDEN_SITES_PATH}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${syncToken}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+            if (r.ok) {
+                const d = await r.json();
+                hiddenSitesSHA = d.content.sha;
+                statusEl.textContent = `Saved ${hiddenIds.length} hidden — reload dashboard to apply`;
+                statusEl.className = 'modal-status saved';
+                saveBtn.disabled = false;
+                // Auto-close after a moment so the change feels confirmed
+                setTimeout(() => { closeHiddenSitesModal(); window.location.reload(); }, 1500);
+                return;
+            }
+            if (r.status === 409) {
+                // SHA mismatch - someone else changed the file. Refresh SHA and retry.
+                const fr = await fetch(
+                    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${HIDDEN_SITES_PATH}`,
+                    { headers: { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' } });
+                if (fr.ok) { hiddenSitesSHA = (await fr.json()).sha; }
+                continue;
+            }
+            const errBody = await r.text();
+            throw new Error(`HTTP ${r.status}: ${errBody.slice(0, 150)}`);
+        } catch (e) {
+            statusEl.textContent = `Save failed: ${e.message}`;
+            statusEl.className = 'modal-status error';
+            saveBtn.disabled = false;
+            return;
+        }
+    }
+    statusEl.textContent = 'Save failed after 3 attempts';
+    statusEl.className = 'modal-status error';
+    saveBtn.disabled = false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Helpers — formatting, date, SAST
+// ─────────────────────────────────────────────────────────────────────────
+function fmt(n, d=1) {
+    const f = Number(n).toFixed(d);
+    const [i, dec] = f.split('.');
+    return i.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (dec !== undefined ? '.' + dec : '');
+}
+function fmtI(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+function todaySAST() {
+    const n = new Date();
+    const s = new Date(n.getTime() + (2 * 60 - n.getTimezoneOffset()) * 60000);
+    return s.toISOString().slice(0, 10);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Schema adapter — wraps a site's data.json + history.json + hourly_history.json
+// into the shape the rest of the dashboard expects, drawing from the
+// new normalized schema fields.
+// ─────────────────────────────────────────────────────────────────────────
+function siteIsStale(site) {
+    if (!site.loaded || !site.updated_at) return true;
+    const updDate = site.updated_at.slice(0, 10);
+    return updDate !== todaySAST();
+}
+
+// Map the schema's status field onto the dashboard's three-tier ok/low/offline.
+function effectiveStatus(site) {
+    if (siteIsStale(site)) return 'offline';
+    const s = (site.current && site.current.status) || 'unknown';
+    if (s === 'online') return 'ok';
+    if (s === 'underperforming') return 'low';
+    if (s === 'fault' || s === 'offline' || s === 'no_data' || s === 'unknown') return 'offline';
+    return 'offline';
+}
+
+// Today's PV per hour (from energy.hourly.pv).
+function getPvHourly(site) {
+    const arr = new Array(24).fill(0);
+    const hourly = site.energy?.hourly?.pv || [];
+    hourly.forEach(e => {
+        if (!e.time) return;
+        const h = parseInt(e.time.split(' ')[1].split(':')[0]);
+        if (h >= 0 && h < 24) arr[h] = e.value || 0;
+    });
+    return arr;
+}
+
+// Today's irradiation hourly (from irradiation.today_hourly).
+function getIrradHourly(site) {
+    const arr = new Array(24).fill(0);
+    const hourly = site.irradiation?.today_hourly || [];
+    hourly.forEach(e => {
+        if (!e.time) return;
+        const h = parseInt(e.time.split(' ')[1].split(':')[0]);
+        if (h >= 0 && h < 24) arr[h] = e.value || 0;
+    });
+    return arr;
+}
+
+// Build a date-keyed history map { 'YYYY-MM-DD': {total_kwh, hourly[24], irradiation[24]} }
+// from the new daily history.json + per-day reconstruction from hourly_history.json.
+function getHistoryByDate(site) {
+    const out = {};
+    (site.history?.days || []).forEach(d => {
+        if (d.date) out[d.date] = { total_kwh: d.pv_kwh || 0, hourly: new Array(24).fill(0), irradiation: new Array(24).fill(0) };
+    });
+    // Overlay hourly history where available - more accurate than daily-only.
+    const hh = site.hourly_history?.hours || [];
+    hh.forEach(h => {
+        if (!h.time) return;
+        const [d, t] = h.time.split(' ');
+        const hr = parseInt(t.split(':')[0]);
+        if (!out[d]) out[d] = { total_kwh: 0, hourly: new Array(24).fill(0), irradiation: new Array(24).fill(0) };
+        out[d].hourly[hr] = h.pv || 0;
+    });
+    // Recompute daily totals from hourly where hourly was filled (more accurate).
+    Object.keys(out).forEach(d => {
+        const sumHourly = out[d].hourly.reduce((a, b) => a + b, 0);
+        if (sumHourly > 0) out[d].total_kwh = Math.round(sumHourly * 100) / 100;
+    });
+    return out;
+}
+
+// Yesterday's totals (full day, plus only-up-to-this-hour for live comparison).
+function getYesterday(site) {
+    const hist = getHistoryByDate(site);
+    const dates = Object.keys(hist).sort();
+    if (dates.length < 1) return { full: 0, byHour: 0 };
+    const yToday = todaySAST();
+    const yest = dates.filter(d => d < yToday).pop();
+    if (!yest) return { full: 0, byHour: 0 };
+    const yd = hist[yest];
+    const lh = lastDataHour(site);
+    return { full: yd.total_kwh || 0, byHour: (yd.hourly || []).slice(0, lh + 1).reduce((a,b) => a+b, 0) };
+}
+
+// Last hour with data today.
+function lastDataHour(site) {
+    const pv = getPvHourly(site);
+    for (let i = 23; i >= 0; i--) if (pv[i] > 0) return i;
+    return 0;
+}
+
+// 30-day percentile band stats, computed from hourly_history.json.
+// Returns { hourly_avg[24], hourly_min[24], hourly_max[24], hourly_p25[24],
+//           hourly_p75[24], hourly_irrad_avg[24], daily_avg, daily_min, daily_max, sample_days }
+function compute30DayStats(site) {
+    const hh = site.hourly_history?.hours || [];
+    if (!hh.length) return emptyStats();
+    const today = todaySAST();
+    const cutoff = (() => {
+        const d = new Date(today + 'T00:00:00');
+        d.setDate(d.getDate() - 30);
+        return d.toISOString().slice(0, 10);
+    })();
+    // Bucket by hour-of-day.
+    const buckets = Array.from({ length: 24 }, () => []);
+    const dailyTotals = {};
+    hh.forEach(h => {
+        if (!h.time) return;
+        const [d, t] = h.time.split(' ');
+        if (d < cutoff || d >= today) return;     // exclude today (partial)
+        const hr = parseInt(t.split(':')[0]);
+        const pv = h.pv || 0;
+        buckets[hr].push(pv);
+        dailyTotals[d] = (dailyTotals[d] || 0) + pv;
+    });
+    const hourly_avg = new Array(24).fill(0);
+    const hourly_min = new Array(24).fill(0);
+    const hourly_max = new Array(24).fill(0);
+    const hourly_p25 = new Array(24).fill(0);
+    const hourly_p75 = new Array(24).fill(0);
+    const hourly_irrad_avg = new Array(24).fill(0);   // not in new schema yet
+    for (let h = 0; h < 24; h++) {
+        const arr = buckets[h];
+        if (!arr.length) continue;
+        const sorted = [...arr].sort((a, b) => a - b);
+        hourly_avg[h] = Math.round((arr.reduce((a, b) => a + b, 0) / arr.length) * 100) / 100;
+        hourly_min[h] = sorted[0];
+        hourly_max[h] = sorted[sorted.length - 1];
+        hourly_p25[h] = sorted[Math.floor(sorted.length * 0.25)];
+        hourly_p75[h] = sorted[Math.floor(sorted.length * 0.75)];
+    }
+    const dailyVals = Object.values(dailyTotals);
+    return {
+        hourly_avg, hourly_min, hourly_max, hourly_p25, hourly_p75, hourly_irrad_avg,
+        daily_avg: dailyVals.length ? Math.round((dailyVals.reduce((a,b) => a+b, 0) / dailyVals.length) * 10) / 10 : 0,
+        daily_min: dailyVals.length ? Math.min(...dailyVals) : 0,
+        daily_max: dailyVals.length ? Math.max(...dailyVals) : 0,
+        sample_days: dailyVals.length,
+    };
+}
+function emptyStats() {
+    return {
+        hourly_avg: new Array(24).fill(0), hourly_min: new Array(24).fill(0),
+        hourly_max: new Array(24).fill(0), hourly_p25: new Array(24).fill(0),
+        hourly_p75: new Array(24).fill(0), hourly_irrad_avg: new Array(24).fill(0),
+        daily_avg: 0, daily_min: 0, daily_max: 0, sample_days: 0,
+    };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Site loading — discover via sites_index.json, then fetch per-site files
+// ─────────────────────────────────────────────────────────────────────────
+let ALL_SITES = [];          // entries from sites_index.json
+let allSitesData = [];       // augmented with data.json / history.json / hourly_history.json + computed fields
+let siteCharts = {}, currentMode = 'average', statusFilter = null, viewDate = null;
+let cardOverrides = {}, rotateInterval = null, rotateGroups = [], rotateIdx = 0;
+Chart.defaults.devicePixelRatio = window.devicePixelRatio * 2 || 2;
+
+async function loadSitesIndex() {
+    // Fetch the manifest and the hide list in parallel; both are tiny.
+    // Hidden sites are dropped from ALL_SITES here, BEFORE anything else
+    // reads it - so the grid, map, dropdowns, status counts, auto-rotate
+    // and alarm list all see the filtered array automatically.
+    let idx = { sites: [] };
+    let hiddenIds = new Set();
+    try {
+        const [idxR, hidR] = await Promise.all([
+            fetch(SITES_INDEX_URL),
+            fetch(HIDDEN_SITES_URL).catch(() => null),
+        ]);
+        if (!idxR.ok) throw new Error('sites_index.json not found');
+        idx = await idxR.json();
+        if (hidR && hidR.ok) {
+            const hidData = await hidR.json();
+            (hidData.hidden_site_ids || []).forEach(id => hiddenIds.add(id));
+        }
+    } catch (e) {
+        console.error('Failed to load sites index:', e);
+        ALL_SITES = [];
+        return;
+    }
+    const all = idx.sites || [];
+    // Hide if EITHER the site's own config.json has "hidden": true,
+    // OR the global hidden_sites.json lists its site_id.
+    // The two sources are independent and additive - either is sufficient
+    // to hide a site, neither is required.
+    ALL_SITES = all.filter(s => !s.hidden && !hiddenIds.has(s.site_id));
+    const totalHidden = all.length - ALL_SITES.length;
+    if (totalHidden > 0) {
+        const perConfig = all.filter(s => s.hidden).map(s => s.site_id);
+        const globalIds = [...hiddenIds];
+        console.log(`Hiding ${totalHidden} site(s) - per-config: [${perConfig.join(', ')}] global: [${globalIds.join(', ')}]`);
+    }
+}
+
+async function loadOneSite(siteMeta) {
+    const tries = [siteMeta.data_path, siteMeta.history_path, siteMeta.hourly_path];
+    try {
+        const [dataR, histR, hhR] = await Promise.all(tries.map(p => fetch('./' + p)));
+        if (!dataR.ok) throw 0;
+        const data = await dataR.json();
+        const history = histR.ok ? await histR.json() : { days: [] };
+        const hourly_history = hhR.ok ? await hhR.json() : { hours: [] };
+        const site = {
+            ...siteMeta,
+            ...data,
+            loaded: true,
+            history,
+            hourly_history,
+        };
+        site.stats_30day = compute30DayStats(site);
+        return site;
+    } catch (e) {
+        return {
+            ...siteMeta,
+            loaded: false,
+            current: { status: 'offline', power_kw: 0, today_kwh: 0 },
+            energy: { today: {}, hourly: { pv: [], import: [], export: [], charge: [], discharge: [] } },
+            irradiation: { today_hourly: [] },
+            history: { days: [] },
+            hourly_history: { hours: [] },
+            stats_30day: emptyStats(),
+        };
+    }
+}
+
+async function loadAllSites(silent = false) {
+    if (!ALL_SITES.length) await loadSitesIndex();
+    allSitesData = await Promise.all(ALL_SITES.map(loadOneSite));
+    // Sort: offline first, then low, then ok; within group by today's PV desc.
+    allSitesData.sort((a, b) => {
+        const o = { offline: 0, low: 1, ok: 2 };
+        const da = effectiveStatus(a), db = effectiveStatus(b);
+        const d = (o[da] ?? 2) - (o[db] ?? 2);
+        return d !== 0 ? d : ((b.energy?.today?.pv || 0) - (a.energy?.today?.pv || 0));
+    });
+    if (!silent) buildGroupMenu();
+    const dp = document.getElementById('datePicker');
+    if (!dp.value) dp.value = todaySAST();
+    updateDashboard(silent);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Groups (ported, identical UX)
+// ─────────────────────────────────────────────────────────────────────────
+let editingGroup = '';
+function buildGroupMenu() {
+    const groups = ldGrp(), menu = document.getElementById('groupMenu'), gn = Object.keys(groups);
+    let html = '<div class="dropdown-header">Filter by Group</div>';
+    if (!gn.length) html += '<div class="dropdown-item" style="color:#6b7280;font-size:0.7rem">No groups yet</div>';
+    else gn.forEach(g => { html += `<div class="dropdown-item" style="justify-content:space-between"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;flex:1"><input type="checkbox" value="${g}" onchange="applyFilters()"> ${g} (${groups[g].length})</label>${isAdmin() ? `<span class="group-del" onclick="event.stopPropagation();deleteGroup('${g}')">✕</span>` : ''}</div>`; });
+    if (isAdmin()) {
+        const locs = [...new Set(ALL_SITES.map(s => s.location?.town).filter(Boolean))].sort();
+        html += `<div class="dropdown-divider"></div><div class="dropdown-header">Quick Create from Location</div>`;
+        html += `<div class="group-row"><select id="locGroupSel" style="flex:1;background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:#e2e8f0;padding:5px;font-size:0.72rem"><option value="">Select location...</option>${locs.map(l => `<option value="${l}">${l} (${ALL_SITES.filter(s => s.location?.town === l).length})</option>`).join('')}</select><button onclick="createLocGroup()">Create</button></div>`;
+        html += `<div class="dropdown-divider"></div><div class="dropdown-header">Create Custom Group</div>`;
+        html += `<div class="group-row"><input id="newGrpName" placeholder="Group name..." onkeydown="if(event.key==='Enter')showGroupEditor()"><button onclick="showGroupEditor()">Next →</button></div>`;
+        if (gn.length) {
+            html += `<div class="dropdown-divider"></div><div class="dropdown-header">Edit Group</div>`;
+            html += `<div class="group-row"><select id="editGrpSel" style="flex:1;background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:4px;color:#e2e8f0;padding:5px;font-size:0.72rem" onchange="editingGroup=this.value;buildGroupMenu()"><option value="">Choose group...</option>${gn.map(g => `<option value="${g}" ${editingGroup === g ? 'selected' : ''}>${g}</option>`).join('')}</select></div>`;
+            if (editingGroup && groups[editingGroup]) {
+                html += `<div class="group-sites" style="max-height:250px">`;
+                const selected = ALL_SITES.filter(s => groups[editingGroup].includes(s.name));
+                const unselected = ALL_SITES.filter(s => !groups[editingGroup].includes(s.name));
+                if (selected.length) html += `<div style="font-size:0.55rem;color:#22c55e;padding:4px 0;font-weight:600">✓ In group (${selected.length})</div>`;
+                selected.forEach(s => { html += `<label style="background:rgba(34,197,94,0.08);border-radius:4px;padding:4px 6px;margin-bottom:2px"><input type="checkbox" checked onchange="togSiteGrp('${s.name.replace(/'/g, "\\'")}',this.checked)"> ${s.name} <span style="color:#4b5563;font-size:0.55rem">${s.location?.town || ''}</span></label>`; });
+                if (unselected.length) html += `<div style="font-size:0.55rem;color:#6b7280;padding:4px 0;font-weight:600;margin-top:4px">Available (${unselected.length})</div>`;
+                unselected.forEach(s => { html += `<label><input type="checkbox" onchange="togSiteGrp('${s.name.replace(/'/g, "\\'")}',this.checked)"> ${s.name} <span style="color:#4b5563;font-size:0.55rem">${s.location?.town || ''}</span></label>`; });
+                html += `</div>`;
+            }
+        }
+        html += `<div class="dropdown-divider"></div>`;
+        const hasEnc = AUTH_DATA && AUTH_DATA._sync_tokens && AUTH_DATA._sync_tokens[currentUser?.username];
+        const syncActive = !!syncToken;
+        html += `<div style="padding:4px 14px;font-size:0.5rem;color:${syncActive ? '#22c55e' : hasEnc ? '#22c55e' : '#fb923c'}">${syncActive ? '✅ Settings sync active — changes save to all devices' : hasEnc ? '✅ Sync enabled — sign out & back in to activate' : '⚠️ No sync token found for this user'}</div>`;
+    }
+    menu.innerHTML = html;
+}
+function keepGroupOpen() { setTimeout(() => { document.getElementById('groupMenu').classList.add('show'); }, 10); }
+function showGroupEditor() {
+    const inp = document.getElementById('newGrpName'); const n = inp.value.trim();
+    if (!n) { inp.focus(); return; }
+    const g = ldGrp(); if (!g[n]) g[n] = []; svGrp(g); inp.value = ''; editingGroup = n;
+    buildGroupMenu(); keepGroupOpen();
+}
+function createLocGroup() {
+    const sel = document.getElementById('locGroupSel'); const loc = sel.value; if (!loc) return;
+    const g = ldGrp(); g[loc] = ALL_SITES.filter(s => s.location?.town === loc).map(s => s.name);
+    svGrp(g); buildGroupMenu(); keepGroupOpen();
+}
+function deleteGroup(n) { const g = ldGrp(); delete g[n]; svGrp(g); if (editingGroup === n) editingGroup = ''; buildGroupMenu(); keepGroupOpen(); applyFilters(); }
+function togSiteGrp(name, checked) {
+    const g = ldGrp(); if (!editingGroup || !g[editingGroup]) return;
+    if (checked && !g[editingGroup].includes(name)) g[editingGroup].push(name);
+    if (!checked) g[editingGroup] = g[editingGroup].filter(n => n !== name);
+    svGrp(g);
+    const sitesDiv = document.querySelector('#groupMenu .group-sites');
+    if (!sitesDiv) return;
+    const scrollTop = sitesDiv.scrollTop;
+    const selected = ALL_SITES.filter(s => g[editingGroup].includes(s.name));
+    const unselected = ALL_SITES.filter(s => !g[editingGroup].includes(s.name));
+    let html = '';
+    if (selected.length) html += `<div style="font-size:0.55rem;color:#22c55e;padding:4px 0;font-weight:600">✓ In group (${selected.length})</div>`;
+    selected.forEach(s => { html += `<label style="background:rgba(34,197,94,0.08);border-radius:4px;padding:4px 6px;margin-bottom:2px"><input type="checkbox" checked onchange="togSiteGrp('${s.name.replace(/'/g, "\\'")}',this.checked)"> ${s.name} <span style="color:#4b5563;font-size:0.55rem">${s.location?.town || ''}</span></label>`; });
+    if (unselected.length) html += `<div style="font-size:0.55rem;color:#6b7280;padding:4px 0;font-weight:600;margin-top:4px">Available (${unselected.length})</div>`;
+    unselected.forEach(s => { html += `<label><input type="checkbox" onchange="togSiteGrp('${s.name.replace(/'/g, "\\'")}',this.checked)"> ${s.name} <span style="color:#4b5563;font-size:0.55rem">${s.location?.town || ''}</span></label>`; });
+    sitesDiv.innerHTML = html;
+    sitesDiv.scrollTop = scrollTop;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Filters / date nav / rotate (ported logic, adapted to new shape)
+// ─────────────────────────────────────────────────────────────────────────
+function getSelPlatforms() { return [...document.querySelectorAll('#platformMenu input:checked')].map(c => c.value); }
+function getSelGroups() { return [...document.querySelectorAll('#groupMenu input[type=checkbox]:checked')].map(c => c.value); }
+function siteInScope(site) {
+    if (!getSelPlatforms().includes(site.platform)) return false;
+    const sg = getSelGroups();
+    if (sg.length > 0) { const ag = ldGrp(); if (!sg.some(g => (ag[g] || []).includes(site.name))) return false; }
+    return true;
+}
+function siteVisible(site) {
+    if (!siteInScope(site)) return false;
+    if (statusFilter) {
+        const eff = effectiveStatus(site);
+        if (statusFilter === 'offline' && eff !== 'offline') return false;
+        if (statusFilter === 'low' && eff !== 'low') return false;
+        if (statusFilter === 'ok' && eff !== 'ok') return false;
+    }
+    return true;
+}
+function applyFilters() {
+    document.querySelector('#platformDrop .dropdown-toggle').classList.toggle('has-sel', getSelPlatforms().length < 3);
+    document.querySelector('#groupDrop .dropdown-toggle').classList.toggle('has-sel', getSelGroups().length > 0);
+    updateDashboard();
+}
+function clearAllFilters() {
+    statusFilter = null;
+    document.querySelectorAll('#platformMenu input').forEach(c => c.checked = true);
+    document.querySelectorAll('#groupMenu input[type=checkbox]').forEach(c => c.checked = false);
+    document.querySelector('#platformDrop .dropdown-toggle').classList.remove('has-sel');
+    document.querySelector('#groupDrop .dropdown-toggle').classList.remove('has-sel');
+    updateDashboard();
+}
+function toggleStatus(st) { statusFilter = statusFilter === st ? null : st; updateDashboard(); }
+
+function dateBack() {
+    const dp = document.getElementById('datePicker');
+    const d = new Date(dp.value); d.setDate(d.getDate() - 1);
+    dp.value = d.toISOString().slice(0, 10); goToDate(dp.value);
+}
+function dateForward() {
+    const dp = document.getElementById('datePicker');
+    const d = new Date(dp.value); d.setDate(d.getDate() + 1);
+    const today = todaySAST();
+    dp.value = d.toISOString().slice(0, 10);
+    if (dp.value > today) dp.value = today;
+    goToDate(dp.value);
+}
+function goToDate(dateStr) { viewDate = dateStr === todaySAST() ? null : dateStr; updateDashboard(); }
+function goToToday() { document.getElementById('datePicker').value = todaySAST(); viewDate = null; updateDashboard(); }
+
+function toggleRotate() {
+    if (rotateInterval) {
+        clearInterval(rotateInterval); rotateInterval = null;
+        document.getElementById('rotateBtn').classList.remove('rotate-active');
+        document.getElementById('rotateBtn').textContent = '▶ Rotate';
+        document.getElementById('rotateHeading').style.display = 'none';
+        clearAllFilters(); return;
+    }
+    const rotateType = document.getElementById('rotateType').value;
+    if (rotateType === 'client') {
+        const gn = Object.keys(ldGrp());
+        if (!gn.length) { alert('Create client groups first'); return; }
+        rotateGroups = gn;
+    } else {
+        const locs = [...new Set(allSitesData.map(s => s.location?.town).filter(Boolean))].sort();
+        if (!locs.length) { alert('No location data'); return; }
+        rotateGroups = locs;
+    }
+    rotateIdx = 0;
+    document.getElementById('rotateBtn').classList.add('rotate-active');
+    document.getElementById('rotateBtn').textContent = '⏸ Rotate';
+    document.getElementById('rotateHeading').style.display = 'block';
+    doRotateStep();
+    rotateInterval = setInterval(doRotateStep, 15000);
+}
+function doRotateStep() {
+    if (!rotateGroups.length) return;
+    const rotateType = document.getElementById('rotateType').value;
+    const gName = rotateGroups[rotateIdx % rotateGroups.length]; rotateIdx++;
+    document.getElementById('rotateLabel').textContent = `${rotateType === 'client' ? 'Client Group' : 'Location'}: ${gName}`;
+    const grid = document.getElementById('sitesContainer');
+    grid.classList.add('fading');
+    setTimeout(() => {
+        if (rotateType === 'client') {
+            document.querySelectorAll('#groupMenu input[type=checkbox]').forEach(c => c.checked = false);
+            buildGroupMenu();
+            setTimeout(() => {
+                document.querySelectorAll('#groupMenu input[type=checkbox]').forEach(c => { if (c.value === gName) c.checked = true; });
+                applyFilters(); grid.classList.remove('fading'); window.scrollTo({top:0,behavior:'smooth'});
+            }, 50);
+        } else {
+            clearAllFilters();
+            allSitesData.forEach(s => {
+                const cid = `c-${s.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+                const card = document.querySelector(`[id="${CSS.escape(cid)}"]`)?.closest('.site-card');
+                if (card) card.classList.toggle('hidden', s.location?.town !== gName);
+            });
+            grid.classList.remove('fading'); window.scrollTo({top:0,behavior:'smooth'});
+        }
+    }, 300);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Dashboard render
+// ─────────────────────────────────────────────────────────────────────────
+function updateDashboard(silent = false) {
+    const scope = allSitesData.filter(s => siteInScope(s));
+    let tot = 0;
+    if (viewDate) {
+        scope.forEach(s => { const hist = getHistoryByDate(s); const hd = hist[viewDate]; if (hd) tot += hd.total_kwh || 0; });
+    } else {
+        tot = scope.filter(s => !siteIsStale(s)).reduce((s, d) => s + (d.energy?.today?.pv || 0), 0);
+    }
+    let yFull = 0, yByHour = 0;
+    scope.forEach(s => { const y = getYesterday(s); yFull += y.full; yByHour += y.byHour; });
+    document.getElementById('fleetTotal').innerHTML = `${fmt(tot, 1)} <span>kWh</span>`;
+    document.getElementById('yestVal').textContent = `${fmtI(yFull)} kWh`;
+    document.getElementById('yestByHourVal').textContent = `${fmtI(yByHour)} kWh`;
+    const genPct = yByHour > 0 ? Math.round((tot / yByHour) * 100) : 0;
+    const gEl = document.getElementById('genPct');
+    gEl.textContent = `${genPct}% vs yesterday`;
+    gEl.style.color = genPct >= 85 ? '#22c55e' : genPct >= 50 ? '#eab308' : '#fb923c';
+
+    let todayIrr = 0, yestIrr = 0;
+    const activeSites = viewDate ? scope : scope.filter(s => !siteIsStale(s));
+    activeSites.forEach(s => {
+        const lh = lastDataHour(s);
+        if (viewDate) {
+            const hd = getHistoryByDate(s)[viewDate];
+            if (hd) todayIrr += (hd.irradiation || []).reduce((a, b) => a + b, 0);
+        } else {
+            todayIrr += getIrradHourly(s).slice(0, lh + 1).reduce((a, b) => a + b, 0);
+        }
+        const hist = getHistoryByDate(s);
+        const dates = Object.keys(hist).sort();
+        if (dates.length >= 2) yestIrr += (hist[dates[dates.length - 2]]?.irradiation || []).slice(0, lh + 1).reduce((a, b) => a + b, 0);
+    });
+    const iP = yestIrr > 0 ? Math.round((todayIrr / yestIrr) * 100) : 0;
+    const iC = iP >= 85 ? '#22c55e' : iP >= 60 ? '#eab308' : '#fb923c';
+    document.getElementById('todayIrrVal').textContent = `${fmtI(todayIrr)} kWh/m²`;
+    document.getElementById('yestIrrVal').textContent = `${fmtI(yestIrr)} kWh/m²`;
+    document.getElementById('irrPctLabel').innerHTML = `Today / Yesterday irradiation · <span style="color:${iC};font-weight:700">${iP}%</span>`;
+
+    const ok = scope.filter(s => effectiveStatus(s) === 'ok').length;
+    const lo = scope.filter(s => effectiveStatus(s) === 'low').length;
+    const off = scope.filter(s => effectiveStatus(s) === 'offline').length;
+    let bh = '';
+    if (ok) bh += `<div class="fleet-badge ok-b${statusFilter==='ok'?' active':''}" onclick="toggleStatus('ok')"><div class="bd"></div><div class="bc">${ok} OK</div></div>`;
+    if (lo) bh += `<div class="fleet-badge low-b${statusFilter==='low'?' active':''}" onclick="toggleStatus('low')"><div class="bd"></div><div class="bc">${lo} Low</div></div>`;
+    if (off) bh += `<div class="fleet-badge off-b${statusFilter==='offline'?' active':''}" onclick="toggleStatus('offline')"><div class="bd"></div><div class="bc">${off} Offline</div></div>`;
+    document.getElementById('statusBadges').innerHTML = bh;
+    document.getElementById('lastUpdated').textContent = `Updated ${allSitesData.filter(s => s.updated_at).map(s => s.updated_at).sort().reverse()[0] || 'N/A'}`;
+
+    updateLegend();
+    const scrollY = silent ? window.scrollY : 0;
+    renderCards();
+    if (silent) window.scrollTo(0, scrollY);
+}
+
+function updateLegend() {
+    const lb = document.getElementById('legendBar');
+    if (currentMode === 'today') lb.innerHTML = `<div class="legend-item"><div class="legend-swatch" style="background:#22c55e"></div>PV Generation</div><div class="legend-item"><div class="legend-swatch" style="background:#eab308;height:0;border-top:2px dotted #eab308"></div>Today Irradiation</div><div class="legend-item"><div class="legend-swatch" style="background:rgba(96,165,250,0.6);height:0;border-top:2px dashed rgba(96,165,250,0.6)"></div>30-Day Avg PV</div>`;
+    else lb.innerHTML = `<div class="legend-item"><div class="legend-swatch" style="background:#22c55e;height:2px"></div>Today PV</div><div class="legend-item"><div class="legend-swatch" style="background:#60a5fa;height:0;border-top:2px dashed #60a5fa"></div>Median</div><div class="legend-item"><div class="legend-swatch" style="background:rgba(34,197,94,0.3)"></div>P25-P75</div><div class="legend-item"><div class="legend-swatch" style="background:rgba(180,140,60,0.7);height:0;border-top:1px solid rgba(180,140,60,0.7)"></div>Min</div><div class="legend-item"><div class="legend-swatch" style="background:rgba(150,100,220,0.7);height:0;border-top:1px solid rgba(150,100,220,0.7)"></div>Max</div>`;
+}
+
+function renderCards() {
+    const c = document.getElementById('sitesContainer');
+    c.innerHTML = '';
+    allSitesData.forEach(s => { const card = createCard(s); if (!siteVisible(s)) card.classList.add('hidden'); c.appendChild(card); });
+    setTimeout(() => { allSitesData.forEach(s => { if (siteVisible(s)) renderChart(s); }); }, 80);
+}
+
+function createCard(site) {
+    const card = document.createElement('div'); card.className = 'site-card';
+    const cid = `c-${site.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+    const eff = effectiveStatus(site);
+    const stale = siteIsStale(site);
+    const pl = { fusionsolar:'FusionSolar', soliscloud:'SolisCloud', sunsynk:'Sunsynk', goodwe:'GoodWe', solarman:'SolarmanPV' }[site.platform] || site.platform;
+    let kwh, statLabel, dateNote = '', cardPv, cardIr;
+    if (viewDate) {
+        const hd = getHistoryByDate(site)[viewDate];
+        kwh = hd ? hd.total_kwh || 0 : 0;
+        statLabel = hd ? '' : 'NO DATA';
+        cardPv = hd ? hd.hourly || new Array(24).fill(0) : new Array(24).fill(0);
+        cardIr = hd ? hd.irradiation || new Array(24).fill(0) : new Array(24).fill(0);
+    } else {
+        kwh = site.energy?.today?.pv || 0;
+        statLabel = stale ? 'STALE' : eff === 'offline' ? 'OFFLINE' : eff === 'low' ? 'LOW' : 'OK';
+        if (stale && site.updated_at) dateNote = `<span style="color:#ef4444;font-size:0.5rem;font-weight:700;margin-left:4px">${site.updated_at.slice(0,10)}</span>`;
+        cardPv = getPvHourly(site); cardIr = getIrradHourly(site);
+    }
+    const stats = site.stats_30day || emptyStats(); const ha = stats.hourly_avg || [];
+    // Prefer the authoritative performance % from data.json's performance block
+    // (computed against irradiation, properly comparable across cloudy/clear days).
+    // Fall back to JS-computed "% of 30-day avg" when performance isn't populated yet.
+    let ap = null, apMethod = null, apReason = '';
+    const perf = site.performance;
+    if (perf && perf.performance_pct !== null && perf.performance_pct !== undefined) {
+        ap = Math.round(perf.performance_pct);
+        apMethod = perf.method;
+        apReason = perf.reason || '';
+    } else if (!stale || viewDate) {
+        const lh = viewDate ? (() => { for (let i=23; i>=0; i--) if (cardPv[i] > 0) return i; return 0; })() : lastDataHour(site);
+        if (lh >= HOUR_START && ha.length) {
+            const exp = ha.slice(HOUR_START, lh + 1).reduce((a, b) => a + b, 0);
+            if (exp >= 1) {
+                ap = Math.round(cardPv.slice(HOUR_START, lh + 1).reduce((a, b) => a + b, 0) / exp * 100);
+                apMethod = 'fallback';
+                apReason = 'Fallback: today vs 30-day average for elapsed hours';
+            }
+        }
+    }
+    const apLabel = apMethod === 'fallback' ? 'of avg' : 'perf';
+    const apS = ap !== null ? ap + '%' : '--';
+    const apC = ap === null ? '' : ap >= 85 ? 'good' : ap >= 60 ? 'warn' : 'bad';
+    // Irradiation % stays as '--' for now - filled in when weather workflow lands data.
+    const ipS = '--';
+    const cardMode = cardOverrides[cid] || currentMode;
+    const toggleLabel = cardMode === 'today' ? '30D' : 'T';
+    let yestByHr = '';
+    if (!viewDate) {
+        const yd = getYesterday(site);
+        if (yd.byHour > 0) yestByHr = `<span style="color:#6b7280;font-size:0.55rem;margin-left:2px">/ ${fmt(yd.byHour, 0)} y</span>`;
+    }
+    // Tooltip for status with reason
+    const reasonTitle = (site.current?.status_reason) || '';
+    card.innerHTML = `<div class="site-topbar"><div class="site-row1"><div class="site-row1-left"><div class="sn">${site.name}</div><div class="si ${eff}" title="${reasonTitle}"></div><span class="sp ${site.platform}">${pl}</span></div><div class="site-badges"><div class="sb ${apC}" title="${apReason}">${apS} ${apLabel}</div><div class="sb irr">${ipS} irrad</div></div></div><div class="site-row2"><div style="display:flex;align-items:center;gap:5px"><div class="skwh">${fmt(kwh, 1)} <i>kWh</i>${yestByHr}</div><div class="sl ${eff}">${statLabel}</div>${dateNote}</div></div></div><div class="site-chart-wrapper"><button class="card-toggle" onclick="event.stopPropagation();toggleCard('${cid}')" title="Toggle view">${toggleLabel}</button><div class="site-chart-container"><canvas id="${cid}"></canvas></div></div>`;
+    card.onclick = (e) => { if (!e.target.closest('.card-toggle')) window.location.href = site.site_url; };
+    return card;
+}
+
+function toggleCard(cid) {
+    const cur = cardOverrides[cid] || currentMode;
+    cardOverrides[cid] = cur === 'today' ? 'average' : 'today';
+    const site = allSitesData.find(s => `c-${s.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}` === cid);
+    if (site) renderChart(site);
+    const wrap = document.getElementById(cid)?.closest('.site-chart-wrapper');
+    if (wrap) { const tb = wrap.querySelector('.card-toggle'); if (tb) tb.textContent = cardOverrides[cid] === 'today' ? '30D' : 'T'; }
+}
+
+function trunc(arr) { let l = 0; for (let i = arr.length - 1; i >= 0; i--) { if (arr[i] > 0) { l = i; break; } } return arr.map((v, i) => i <= l ? v : null); }
+
+function renderChart(site) {
+    const cid = `c-${site.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+    const canvas = document.getElementById(cid); if (!canvas) return;
+    const ctx = canvas.getContext('2d'); const stats = site.stats_30day || emptyStats();
+    if (siteCharts[cid]) siteCharts[cid].destroy();
+    let pv, ir;
+    if (viewDate) {
+        const hd = getHistoryByDate(site)[viewDate];
+        pv = slH(hd ? hd.hourly : new Array(24).fill(0));
+        ir = slH(hd ? hd.irradiation : new Array(24).fill(0));
+    } else { pv = slH(getPvHourly(site)); ir = slH(getIrradHourly(site)); }
+    const mode = cardOverrides[cid] || currentMode;
+    if (mode === 'today') {
+        const maxIr = Math.max(...ir, 1);
+        siteCharts[cid] = new Chart(ctx, { type:'bar', data:{ labels:CHART_LABELS, datasets:[
+            { type:'line', data:ir, borderColor:'#eab308', borderWidth:1.5, borderDash:[4,3], fill:false, yAxisID:'y1', pointRadius:0, tension:0.4, order:3 },
+            { type:'line', data:slH(stats.hourly_avg || new Array(24).fill(0)), borderColor:'rgba(96,165,250,0.6)', borderWidth:1, borderDash:[3,2], fill:false, pointRadius:0, tension:0.4, order:1 },
+            { type:'bar', data:pv, backgroundColor:'#22c55e', borderWidth:0, barPercentage:0.8, categoryPercentage:0.9, order:2 }
+        ]}, options:cOpts('y1', maxIr / 0.7) });
+    } else {
+        siteCharts[cid] = new Chart(ctx, { type:'bar', data:{ labels:CHART_LABELS, datasets:[
+            { type:'line', data:slH(stats.hourly_min || new Array(24).fill(0)), backgroundColor:'rgba(120,80,40,0.10)', borderColor:'rgba(180,140,60,0.7)', borderWidth:1, fill:'+1', pointRadius:0, tension:0.4, order:6 },
+            { type:'line', data:slH(stats.hourly_max || new Array(24).fill(0)), backgroundColor:'transparent', borderColor:'rgba(150,100,220,0.7)', borderWidth:1, pointRadius:0, tension:0.4, order:6 },
+            { type:'line', data:slH(stats.hourly_p25 || new Array(24).fill(0)), backgroundColor:'rgba(34,197,94,0.18)', borderColor:'rgba(34,197,94,0.4)', borderWidth:0.5, fill:'+1', pointRadius:0, tension:0.4, order:4 },
+            { type:'line', data:slH(stats.hourly_p75 || new Array(24).fill(0)), backgroundColor:'transparent', borderColor:'rgba(34,197,94,0.4)', borderWidth:0.5, pointRadius:0, tension:0.4, order:4 },
+            { type:'line', data:slH(stats.hourly_avg || new Array(24).fill(0)), borderColor:'#60a5fa', borderWidth:1.5, borderDash:[4,3], fill:false, pointRadius:0, tension:0.4, order:2 },
+            { type:'line', data:trunc(pv), borderColor:'#22c55e', borderWidth:2, fill:false, pointRadius:0, tension:0.4, order:1 }
+        ]}, options:cOpts() });
+    }
+}
+
+function cOpts(y1Id, y1Max) {
+    const o = { responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{enabled:false} },
+        scales:{
+            x:{ grid:{color:'rgba(148,163,184,0.06)', drawBorder:false}, ticks:{color:'#4b5563', font:{size:8}, maxTicksLimit:8} },
+            y:{ beginAtZero:true, grid:{color:'rgba(148,163,184,0.06)', drawBorder:false}, ticks:{color:'#4b5563', font:{size:8}, maxTicksLimit:4} }
+        }
+    };
+    if (y1Id) o.scales.y1 = { beginAtZero:true, position:'right', display:false, grid:{drawOnChartArea:false}, max:y1Max };
+    return o;
+}
+
+function switchMode(m) {
+    currentMode = m; cardOverrides = {};
+    document.getElementById('modeToday').classList.toggle('active', m === 'today');
+    document.getElementById('modeAvg').classList.toggle('active', m === 'average');
+    updateLegend(); renderCards();
+}
+function toggleDrop(id) {
+    document.querySelectorAll('.dropdown-menu').forEach(m => { if (m.id !== id) m.classList.remove('show'); });
+    document.getElementById(id).classList.toggle('show');
+    if (id === 'groupMenu') buildGroupMenu();
+}
+document.addEventListener('click', e => { if (!e.target.closest('.dropdown')) document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show')); });
+
+// ─────────────────────────────────────────────────────────────────────────
+// Map overlay (ported, identical UX)
+// ─────────────────────────────────────────────────────────────────────────
+let leafletMap = null, mapMarkers = [], alarmSlideIdx = 0, alarmSlideTimer = null;
+let mapCardMode = 'average', mapCardCharts = {}, trainTimer = null, mapRefreshTimer = null;
+
+function openMap() {
+    document.getElementById('mapOverlay').classList.add('show');
+    setTimeout(() => {
+        if (!leafletMap) {
+            leafletMap = L.map('leafletMap', {zoomControl:true, attributionControl:false}).setView([-30.5, 24.5], 6);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {maxZoom:13, minZoom:5}).addTo(leafletMap);
+        }
+        leafletMap.invalidateSize();
+        buildMapMarkers(); updateMapPanels(); renderMapCards(); startAlarmSlideshow(); startMapRefresh();
+    }, 100);
+}
+function closeMap() {
+    document.getElementById('mapOverlay').classList.remove('show');
+    if (alarmSlideTimer) { clearInterval(alarmSlideTimer); alarmSlideTimer = null; }
+    if (trainTimer) { clearInterval(trainTimer); trainTimer = null; document.getElementById('trainBtn').textContent = '▶ Auto'; document.getElementById('trainBtn').style.color = '#22c55e'; }
+    if (mapRefreshTimer) { clearInterval(mapRefreshTimer); mapRefreshTimer = null; }
+}
+
+function updateMapPanels() {
+    const scope = allSitesData, fresh = scope.filter(s => !siteIsStale(s));
+    const tot = fresh.reduce((s, d) => s + (d.energy?.today?.pv || 0), 0);
+    let yFull = 0, yByHour = 0;
+    scope.forEach(s => { const y = getYesterday(s); yFull += y.full; yByHour += y.byHour; });
+    document.getElementById('mapFleetTotal').textContent = fmt(tot, 1);
+    document.getElementById('mapYestVal').textContent = `${fmtI(yFull)} kWh`;
+    document.getElementById('mapYestSub').textContent = `${fmtI(yByHour)} kWh · ${yByHour > 0 ? Math.round((tot / yByHour) * 100) : 0}%`;
+    document.getElementById('mapUpdated').textContent = `Updated ${allSitesData.filter(s => s.updated_at).map(s => s.updated_at).sort().reverse()[0] || 'N/A'}`;
+    let todayIrr = 0, yestIrr = 0;
+    fresh.forEach(s => {
+        const lh = lastDataHour(s);
+        todayIrr += getIrradHourly(s).slice(0, lh + 1).reduce((a, b) => a + b, 0);
+        const hist = getHistoryByDate(s); const dates = Object.keys(hist).sort();
+        if (dates.length >= 2) yestIrr += (hist[dates[dates.length - 2]]?.irradiation || []).slice(0, lh + 1).reduce((a, b) => a + b, 0);
+    });
+    const iP = yestIrr > 0 ? Math.round((todayIrr / yestIrr) * 100) : 0;
+    document.getElementById('mapIrrVal').textContent = `${fmtI(todayIrr)} kWh/m²`;
+    document.getElementById('mapIrrSub').textContent = `${fmtI(yestIrr)} kWh/m² · ${iP}%`;
+    const ok = fresh.filter(s => effectiveStatus(s) === 'ok').length;
+    const lo = fresh.filter(s => effectiveStatus(s) === 'low').length;
+    const off = scope.filter(s => effectiveStatus(s) === 'offline').length;
+    document.getElementById('mapStationCount').textContent = scope.length;
+    document.getElementById('mapOkCount').textContent = ok;
+    document.getElementById('mapLowCount').textContent = lo;
+    document.getElementById('mapOffCount').textContent = off;
+    document.getElementById('envCoal').textContent = fmt(tot * 0.4 / 1000, 1) + ' Tons';
+    document.getElementById('envTrees').textContent = fmtI(tot * 0.9 / 22 * 365 / 1000) + ' kTrees';
+    document.getElementById('envCo2').textContent = fmt(tot * 0.9 / 1000, 1) + ' Tons';
+    const total = ok + lo + off, circ = 2 * Math.PI * 42;
+    const okA = (ok / Math.max(total, 1)) * circ, loA = (lo / Math.max(total, 1)) * circ, offA = (off / Math.max(total, 1)) * circ;
+    document.getElementById('ringOk').setAttribute('stroke-dasharray', `${okA} ${circ}`);
+    document.getElementById('ringLow').setAttribute('stroke-dasharray', `${loA} ${circ}`); document.getElementById('ringLow').setAttribute('stroke-dashoffset', `${-okA}`);
+    document.getElementById('ringOffline').setAttribute('stroke-dasharray', `${offA} ${circ}`); document.getElementById('ringOffline').setAttribute('stroke-dashoffset', `${-(okA + loA)}`);
+    document.getElementById('alarmTotal').textContent = lo + off;
+    document.getElementById('alarmOffN').textContent = off; document.getElementById('alarmLowN').textContent = lo; document.getElementById('alarmOkN').textContent = ok;
+    const problems = scope.filter(s => effectiveStatus(s) !== 'ok');
+    const ac = document.getElementById('alarmCards');
+    if (!problems.length) { ac.innerHTML = '<div style="padding:12px;text-align:center;color:#22c55e;font-size:0.7rem">All sites OK</div>'; return; }
+    ac.innerHTML = problems.map(s => {
+        const eff = effectiveStatus(s); const c = eff === 'low' ? '#fb923c' : '#6b7280';
+        return `<div class="alarm-card" style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer" onclick="window.location.href='${s.site_url}'">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div style="font-size:0.7rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px">${s.name}</div><span style="font-size:0.45rem;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,0.05);color:${c};font-weight:700">${s.platform.toUpperCase()}</span></div>
+        <div style="display:flex;justify-content:space-between"><div style="font-size:0.8rem;font-weight:700;color:#fff">${fmt(s.energy?.today?.pv || 0)} <span style="font-size:0.5rem;color:#9ca3af">kWh</span></div><div style="font-size:0.55rem;font-weight:700;color:${c}">${eff.toUpperCase()}</div></div></div>`;
+    }).join('');
+}
+
+function startAlarmSlideshow() {
+    if (alarmSlideTimer) clearInterval(alarmSlideTimer);
+    const ac = document.getElementById('alarmCards'); if (!ac) return;
+    alarmSlideIdx = 0;
+    alarmSlideTimer = setInterval(() => {
+        const cards = ac.querySelectorAll('.alarm-card');
+        if (cards.length <= 1) return;
+        alarmSlideIdx = (alarmSlideIdx + 1) % cards.length;
+        cards[alarmSlideIdx]?.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }, 4000);
+}
+
+function buildMapMarkers() {
+    mapMarkers.forEach(m => leafletMap.removeLayer(m)); mapMarkers = [];
+    const locs = {};
+    allSitesData.forEach(s => {
+        // Skip sites whose lat/lon haven't been populated yet (e.g. fresh
+        // VRM sites awaiting their first system-overview pull). 0,0 is in
+        // the Atlantic - we'd rather omit a site than put it there.
+        const lat = s.location?.lat;
+        const lon = s.location?.lon;
+        if (lat === null || lat === undefined || lon === null || lon === undefined) return;
+        const k = s.location?.town || 'Unknown';
+        if (!locs[k]) locs[k] = { sites:[], lat, lon };
+        locs[k].sites.push(s);
+    });
+    Object.entries(locs).forEach(([locName, data]) => {
+        const count = data.sites.length;
+        const anyOff = data.sites.some(s => effectiveStatus(s) === 'offline');
+        const anyLow = data.sites.some(s => effectiveStatus(s) === 'low');
+        const color = anyOff ? '#ef4444' : anyLow ? '#fb923c' : '#22c55e';
+        const totalKwh = data.sites.reduce((s, d) => s + (d.energy?.today?.pv || 0), 0);
+        const sz = count > 9 ? 40 : count > 1 ? 34 : 22;
+        const icon = L.divIcon({ className:'', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2],
+            html:`<div style="width:${sz}px;height:${sz}px;border-radius:50%;background:${color};box-shadow:0 0 12px ${color},0 0 24px ${color}60;display:flex;align-items:center;justify-content:center;cursor:pointer">${count>1?`<span style="color:#fff;font-size:${count>=10?11:12}px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.5)">${count}</span>`:''}</div>` });
+        const marker = L.marker([data.lat, data.lon], { icon }).addTo(leafletMap);
+        const popupHtml = `<div style="background:#1a2332;border-radius:10px;padding:10px 12px;min-width:180px;color:#e2e8f0;font-family:Segoe UI,sans-serif">
+            <div style="font-weight:700;font-size:13px;margin-bottom:2px;color:#fff">${locName}</div>
+            <div style="font-size:11px;color:#9ca3af;margin-bottom:8px">${count} site${count>1?'s':''} · ${fmt(totalKwh)} kWh total</div>
+            ${data.sites.map(s => { const eff = effectiveStatus(s); const c = eff === 'ok' ? '#22c55e' : eff === 'low' ? '#fb923c' : '#6b7280';
+                return `<a href="${s.site_url}" style="display:flex;align-items:center;gap:6px;padding:4px 0;color:#cbd5e1;text-decoration:none;font-size:11px;border-top:1px solid rgba(255,255,255,0.06)"><span style="width:7px;height:7px;border-radius:50%;background:${c};flex-shrink:0"></span><span style="flex:1">${s.name}</span><span style="color:#9ca3af;font-size:10px">${fmt(s.energy?.today?.pv || 0)}</span></a>`; }).join('')}</div>`;
+        marker.bindPopup(popupHtml, { className:'dark-popup', maxWidth:280 }); mapMarkers.push(marker);
+    });
+}
+
+function toggleMapCardMode() {
+    mapCardMode = mapCardMode === 'today' ? 'average' : 'today';
+    document.getElementById('mapCardModeBtn').textContent = mapCardMode === 'today' ? 'Bar Graph' : '30-Day Avg';
+    renderMapCards();
+}
+function renderMapCards() {
+    Object.values(mapCardCharts).forEach(c => c.destroy()); mapCardCharts = {};
+    const filter = document.getElementById('mapCardFilter').value;
+    const groupSel = document.getElementById('mapCardGroup');
+    let sites = allSitesData;
+    if (filter === 'location') {
+        const locs = [...new Set(allSitesData.map(s => s.location?.town).filter(Boolean))].sort();
+        groupSel.style.display = 'inline';
+        groupSel.innerHTML = `<option value="">All Locations</option>` + locs.map(l => `<option value="${l}">${l}</option>`).join('');
+        if (groupSel.value) sites = sites.filter(s => s.location?.town === groupSel.value);
+    } else if (filter === 'client') {
+        const gn = Object.keys(ldGrp());
+        groupSel.style.display = 'inline';
+        groupSel.innerHTML = `<option value="">All Groups</option>` + gn.map(g => `<option value="${g}">${g}</option>`).join('');
+        if (groupSel.value) sites = sites.filter(s => (ldGrp()[groupSel.value] || []).includes(s.name));
+    } else { groupSel.style.display = 'none'; }
+    const row = document.getElementById('mapCardsRow');
+    row.innerHTML = sites.map((s, i) => {
+        const eff = effectiveStatus(s); const c = eff === 'ok' ? '#22c55e' : eff === 'low' ? '#fb923c' : '#6b7280';
+        const kwh = s.energy?.today?.pv || 0;
+        const y = getYesterday(s), yBH = y.byHour;
+        const gP = yBH > 0 ? Math.round((kwh / yBH) * 100) + '%' : '--';
+        return `<div class="map-site-card" onclick="window.location.href='${s.site_url}'">
+            <div style="display:flex;align-items:center;gap:3px;margin-bottom:2px"><span style="width:6px;height:6px;border-radius:50%;background:${c}"></span><span style="font-size:0.58rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">${s.name}</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:0.75rem;font-weight:700;color:#fff">${fmt(kwh, 1)} <span style="font-size:0.45rem;color:#9ca3af">kWh</span></div><div style="font-size:0.45rem;color:${c};font-weight:700">${eff.toUpperCase()}</div></div>
+            <div style="display:flex;justify-content:space-between;font-size:0.45rem;color:#6b7280"><span>Yest: ${fmtI(yBH)} (${gP})</span></div>
+            <div class="map-card-chart"><canvas id="mc-${i}"></canvas></div>
+        </div>`;
+    }).join('');
+    setTimeout(() => {
+        sites.forEach((s, i) => {
+            const canvas = document.getElementById(`mc-${i}`); if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const stats = s.stats_30day || emptyStats();
+            const pv = slH(getPvHourly(s)), ir = slH(getIrradHourly(s));
+            let datasets;
+            if (mapCardMode === 'today') {
+                const maxIr = Math.max(...ir, 1);
+                datasets = [
+                    { type:'line', data:ir, borderColor:'#eab308', borderWidth:1, borderDash:[3,2], fill:false, yAxisID:'y1', pointRadius:0, tension:0.4, order:3 },
+                    { type:'line', data:slH(stats.hourly_avg || new Array(24).fill(0)), borderColor:'rgba(96,165,250,0.5)', borderWidth:0.8, borderDash:[2,2], fill:false, pointRadius:0, tension:0.4, order:1 },
+                    { type:'bar', data:pv, backgroundColor:'#22c55e', borderWidth:0, barPercentage:0.8, categoryPercentage:0.9, order:2 }
+                ];
+                mapCardCharts[`mc-${i}`] = new Chart(ctx, { type:'bar', data:{labels:CHART_LABELS, datasets}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{enabled:false}}, scales:{x:{display:false}, y:{display:false, beginAtZero:true}, y1:{display:false, beginAtZero:true, max:maxIr/0.7}}} });
+            } else {
+                datasets = [
+                    { type:'line', data:slH(stats.hourly_p25 || new Array(24).fill(0)), backgroundColor:'rgba(34,197,94,0.15)', borderColor:'rgba(34,197,94,0.3)', borderWidth:0.5, fill:'+1', pointRadius:0, tension:0.4, order:4 },
+                    { type:'line', data:slH(stats.hourly_p75 || new Array(24).fill(0)), backgroundColor:'transparent', borderColor:'rgba(34,197,94,0.3)', borderWidth:0.5, pointRadius:0, tension:0.4, order:4 },
+                    { type:'line', data:slH(stats.hourly_avg || new Array(24).fill(0)), borderColor:'#60a5fa', borderWidth:1, borderDash:[3,2], fill:false, pointRadius:0, tension:0.4, order:2 },
+                    { type:'line', data:trunc(pv), borderColor:'#22c55e', borderWidth:1.5, fill:false, pointRadius:0, tension:0.4, order:1 }
+                ];
+                mapCardCharts[`mc-${i}`] = new Chart(ctx, { type:'bar', data:{labels:CHART_LABELS, datasets}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{enabled:false}}, scales:{x:{display:false}, y:{display:false, beginAtZero:true}}} });
+            }
+        });
+    }, 100);
+}
+function mapCardsScroll(dir) { document.getElementById('mapCardsRow').scrollBy({left:dir*340, behavior:'smooth'}); }
+function toggleTrain() {
+    const btn = document.getElementById('trainBtn');
+    if (trainTimer) { clearInterval(trainTimer); trainTimer = null; btn.textContent = '▶ Auto'; btn.style.color = '#22c55e'; return; }
+    btn.textContent = '⏸ Auto'; btn.style.color = '#a855f7';
+    trainTimer = setInterval(() => {
+        const row = document.getElementById('mapCardsRow');
+        if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 50) row.scrollTo({left:0, behavior:'smooth'});
+        else row.scrollBy({left:320, behavior:'smooth'});
+    }, 4000);
+}
+function startMapRefresh() {
+    if (mapRefreshTimer) clearInterval(mapRefreshTimer);
+    mapRefreshTimer = setInterval(async () => {
+        if (!document.getElementById('mapOverlay').classList.contains('show')) return;
+        await loadAllSites(true);
+        buildMapMarkers(); updateMapPanels(); renderMapCards();
+    }, 300000);
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Bootstrap
+// ─────────────────────────────────────────────────────────────────────────
+(async () => {
+    if (await checkLogin()) loadAllSites();
+})();
+setInterval(() => { if (currentUser) loadAllSites(true); }, 300000);
+</script>
+</body>
+</html>

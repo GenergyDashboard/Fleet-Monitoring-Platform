@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading… — PV Monitoring Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f1419;color:#e2e8f0;min-height:100vh;padding:20px}
+.container{max-width:1600px;margin:0 auto}
+.header{text-align:center;margin-bottom:30px;position:relative}
+.header h1{font-size:2rem;margin-bottom:8px;color:#fff;font-weight:500}
+.last-updated{color:#64748b;font-size:0.85rem}
+.back-link{position:absolute;left:0;top:6px;color:#60a5fa;font-size:0.8rem;text-decoration:none;background:rgba(15,20,25,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 12px;transition:all 0.2s}
+.back-link:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#fff}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:30px}
+.stat-card{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:12px;padding:20px 25px;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.stat-label{color:#9ca3af;font-size:0.7rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:500}
+.stat-value{font-size:2.8rem;font-weight:700;margin-bottom:8px;line-height:1}
+.stat-value.ok{color:#22c55e}
+.stat-value.low,.stat-value.underperforming{color:#fb923c}
+.stat-value.fault{color:#ef4444}
+.stat-value.offline,.stat-value.no_data,.stat-value.unknown{color:#6b7280}
+.stat-sublabel{color:#6b7280;font-size:0.85rem}
+.chart-section{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:16px;padding:30px;margin-bottom:25px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:15px}
+.chart-title{font-size:1.3rem;font-weight:600;color:#fff}
+.chart-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.toggle-btn{padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#9ca3af;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.3s}
+.toggle-btn:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#60a5fa}
+.toggle-btn.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.chart-container{position:relative;height:400px}
+.export-btn{padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#60a5fa;cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.3s}
+.export-btn:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6}
+.history-section{background:linear-gradient(135deg,#1a2332,#1e2936);border-radius:16px;padding:30px;margin-bottom:25px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.date-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.date-nav button{background:rgba(15,20,25,0.4);border:1px solid rgba(255,255,255,0.1);color:#9ca3af;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+.date-nav button:hover{background:rgba(59,130,246,0.2);color:#60a5fa;border-color:#3b82f6}
+.date-nav select{background:rgba(15,20,25,0.8);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#e2e8f0;padding:6px 10px;font-size:0.85rem;cursor:pointer}
+.hourly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:20px}
+.hourly-day-card{background:rgba(10,15,26,0.4);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.06)}
+.hourly-day-title{font-size:0.75rem;color:#9ca3af;margin-bottom:8px;font-weight:600}
+.hourly-day-chart{height:180px;position:relative}
+/* Energy flow section (new — shows what new pipeline gives us) */
+.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
+.flow-tile{background:rgba(10,15,26,0.4);border-radius:8px;padding:12px;border:1px solid rgba(255,255,255,0.06)}
+.flow-tile-label{font-size:0.65rem;color:#9ca3af;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px}
+.flow-tile-value{font-size:1.3rem;font-weight:700;color:#fff;line-height:1}
+.flow-tile-sub{font-size:0.7rem;color:#6b7280;margin-top:4px}
+.flow-tile.pv .flow-tile-value{color:#22c55e}
+.flow-tile.import .flow-tile-value{color:#ef4444}
+.flow-tile.export .flow-tile-value{color:#a855f7}
+.flow-tile.charge .flow-tile-value{color:#60a5fa}
+.flow-tile.discharge .flow-tile-value{color:#fb923c}
+.flow-tile.consumption .flow-tile-value{color:#fff}
+.period-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.period-tab{padding:6px 14px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:rgba(15,20,25,0.4);color:#9ca3af;cursor:pointer;font-size:0.78rem;font-weight:500;transition:all 0.2s}
+.period-tab:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6;color:#60a5fa}
+.period-tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+.stub-note{background:rgba(168,85,247,0.08);border:1px dashed rgba(168,85,247,0.3);border-radius:8px;padding:10px 14px;color:#a855f7;font-size:0.75rem;text-align:center}
+.loading{text-align:center;padding:60px;font-size:1.2rem;color:#94a3b8}
+.error-msg{text-align:center;padding:40px;color:#ef4444;font-size:1.05rem}
+@media(max-width:768px){.chart-container{height:300px}.back-link{position:static;display:inline-block;margin-bottom:10px}}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="./index.html" class="back-link">← Fleet</a>
+        <h1 id="siteName">Loading…</h1>
+        <div class="last-updated" id="lastUpdated">—</div>
+    </div>
+
+    <!-- Top stats -->
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="stat-label">Total Generation Today</div><div class="stat-value" id="totalKwh">--</div><div class="stat-sublabel" id="statusLabel">Loading…</div></div>
+        <div class="stat-card"><div class="stat-label">Rolling Daily Average</div><div class="stat-value" id="avgKwh" style="color:#fff">--</div><div class="stat-sublabel" id="avgSublabel">—</div></div>
+        <div class="stat-card"><div class="stat-label">Performance Today</div><div class="stat-value" id="perfValue" style="color:#fff">--</div><div class="stat-sublabel" id="perfSublabel" title="">—</div></div>
+        <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value" id="status">--</div><div class="stat-sublabel" id="statusDetail">—</div></div>
+    </div>
+
+    <!-- Hourly chart -->
+    <div class="chart-section">
+        <div class="chart-header">
+            <div class="chart-title">Hourly Generation</div>
+            <div class="chart-controls">
+                <button class="toggle-btn active" id="mainTodayBtn" onclick="switchMain('today')">Today</button>
+                <button class="toggle-btn" id="mainAvgBtn" onclick="switchMain('average')">30-Day Average</button>
+                <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+            </div>
+        </div>
+        <div class="chart-container"><canvas id="mainChart"></canvas></div>
+    </div>
+
+    <!-- Energy flow (new — uses our pipeline's energy block) -->
+    <div class="chart-section">
+        <div class="chart-header">
+            <div class="chart-title">Energy Flow</div>
+            <div class="period-tabs" id="energyPeriodTabs">
+                <button class="period-tab active" data-period="today" onclick="switchEnergyPeriod('today')">Today</button>
+                <button class="period-tab" data-period="month" onclick="switchEnergyPeriod('month')">This Month</button>
+                <button class="period-tab" data-period="year" onclick="switchEnergyPeriod('year')">This Year</button>
+                <button class="period-tab" data-period="lifetime" onclick="switchEnergyPeriod('lifetime')">Lifetime</button>
+            </div>
+        </div>
+        <div class="flow-grid" id="flowGrid"></div>
+    </div>
+
+    <!-- Daily history -->
+    <div class="history-section">
+        <div class="chart-header">
+            <div class="chart-title">Daily History</div>
+            <div class="chart-controls">
+                <div class="date-nav">
+                    <button onclick="histBack()">◀</button>
+                    <select id="histDay"></select>
+                    <select id="histMonth"></select>
+                    <select id="histYear"></select>
+                    <button onclick="histForward()">▶</button>
+                    <button onclick="goToHistDate()" style="background:#3b82f6;color:#fff;border-color:#3b82f6">View</button>
+                </div>
+            </div>
+        </div>
+        <div class="chart-container" style="height:300px"><canvas id="historyChart"></canvas></div>
+        <div style="margin-top:20px">
+            <div class="chart-header">
+                <div class="chart-title" style="font-size:1rem">Hourly Breakdown by Day</div>
+                <div class="chart-controls">
+                    <button class="toggle-btn active" id="hourlyTodayBtn" onclick="switchHourlyMode('today')">Today View</button>
+                    <button class="toggle-btn" id="hourlyAvgBtn" onclick="switchHourlyMode('average')">30-Day Avg View</button>
+                </div>
+            </div>
+            <div class="hourly-grid" id="hourlyGrid"></div>
+        </div>
+    </div>
+
+    <!-- Financial stub (visible until tariff configs are populated) -->
+    <div class="chart-section" id="financialSection">
+        <div class="chart-header">
+            <div class="chart-title">Financial</div>
+        </div>
+        <div class="stub-note" id="financialStub">Populate this site's tariff in <code style="color:#cbd5e1">config.json</code> and re-run the workflow to enable financial figures.</div>
+    </div>
+
+    <div id="dataLoading" class="loading" style="display:none">Loading data…</div>
+    <div id="dataError" class="error-msg" style="display:none"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────
+// Configuration & helpers
+// ─────────────────────────────────────────────────────────────────────────
+const SITES_INDEX_URL = "./sites_index.json";
+
+// Parse ?site=<id> from URL
+const SITE_ID = new URLSearchParams(window.location.search).get('site');
+
+let SITE_META = null;       // entry from sites_index.json
+let D = null;               // data.json (with full energy/financial/current)
+let HIST = null;            // history.json (daily totals)
+let HHIST = null;           // hourly_history.json (per-hour series)
+let stats30 = null;         // computed in-browser from HHIST
+
+let mainChart = null, historyChart = null, hourlyCharts = {};
+let mainMode = 'today', hourlyGridMode = 'today', energyPeriod = 'today';
+Chart.defaults.devicePixelRatio = window.devicePixelRatio * 2 || 2;
+
+function fmt(n, d=1) {
+    if (n === null || n === undefined || isNaN(n)) return '--';
+    const f = Number(n).toFixed(d);
+    const [i, dec] = f.split('.');
+    return i.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (dec !== undefined ? '.' + dec : '');
+}
+function fmtI(n) { if (n === null || n === undefined || isNaN(n)) return '--'; return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Bootstrap
+// ─────────────────────────────────────────────────────────────────────────
+(async () => {
+    if (!SITE_ID) {
+        showError('No site specified. Use ?site=<site-id> in the URL.');
+        return;
+    }
+    try {
+        const indexR = await fetch(SITES_INDEX_URL);
+        if (!indexR.ok) throw new Error('sites_index.json not found');
+        const idx = await indexR.json();
+        SITE_META = (idx.sites || []).find(s => s.site_id === SITE_ID);
+        if (!SITE_META) throw new Error(`Site "${SITE_ID}" not found in sites_index.json`);
+        document.title = `${SITE_META.name} — PV Monitoring Dashboard`;
+        await loadData();
+        setInterval(loadData, 5 * 60 * 1000);
+    } catch (e) {
+        showError(`Failed to bootstrap: ${e.message}`);
+    }
+})();
+
+async function loadData() {
+    try {
+        const [dataR, histR, hhR] = await Promise.all([
+            fetch('./' + SITE_META.data_path + '?t=' + Date.now()),
+            fetch('./' + SITE_META.history_path + '?t=' + Date.now()),
+            fetch('./' + SITE_META.hourly_path + '?t=' + Date.now()),
+        ]);
+        if (!dataR.ok) throw new Error(`data.json not available (HTTP ${dataR.status})`);
+        D = await dataR.json();
+        HIST = histR.ok ? await histR.json() : { days: [] };
+        HHIST = hhR.ok ? await hhR.json() : { hours: [] };
+        stats30 = compute30DayStats();
+        renderAll();
+    } catch (e) {
+        showError(`Error loading site data: ${e.message}`);
+    }
+}
+
+function showError(msg) {
+    document.getElementById('dataError').style.display = 'block';
+    document.getElementById('dataError').textContent = msg;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Schema adapters — reach into the new schema for what each section needs
+// ─────────────────────────────────────────────────────────────────────────
+function getPvHourly() {
+    const arr = new Array(24).fill(0);
+    (D?.energy?.hourly?.pv || []).forEach(e => {
+        if (!e.time) return;
+        const h = parseInt(e.time.split(' ')[1].split(':')[0]);
+        if (h >= 0 && h < 24) arr[h] = e.value || 0;
+    });
+    return arr;
+}
+function getIrradHourly() {
+    const arr = new Array(24).fill(0);
+    (D?.irradiation?.today_hourly || []).forEach(e => {
+        if (!e.time) return;
+        const h = parseInt(e.time.split(' ')[1].split(':')[0]);
+        if (h >= 0 && h < 24) arr[h] = e.value || 0;
+    });
+    return arr;
+}
+function lastDataHour() {
+    const pv = getPvHourly();
+    for (let i = 23; i >= 0; i--) if (pv[i] > 0) return i;
+    return 0;
+}
+
+// Build date→daily map by merging history.json + hourly_history.json.
+// Hourly takes precedence where present (more accurate).
+function getHistoryByDate() {
+    const out = {};
+    (HIST?.days || []).forEach(d => {
+        if (d.date) out[d.date] = { total_kwh: d.pv_kwh || 0, hourly: new Array(24).fill(0), irradiation: new Array(24).fill(0) };
+    });
+    (HHIST?.hours || []).forEach(h => {
+        if (!h.time) return;
+        const [d, t] = h.time.split(' ');
+        const hr = parseInt(t.split(':')[0]);
+        if (!out[d]) out[d] = { total_kwh: 0, hourly: new Array(24).fill(0), irradiation: new Array(24).fill(0) };
+        out[d].hourly[hr] = h.pv || 0;
+    });
+    Object.keys(out).forEach(d => {
+        const sumHourly = out[d].hourly.reduce((a, b) => a + b, 0);
+        if (sumHourly > 0) out[d].total_kwh = Math.round(sumHourly * 100) / 100;
+    });
+    return out;
+}
+
+// Compute 30-day percentile bands from hourly_history.json.
+function compute30DayStats() {
+    if (!HHIST?.hours?.length) return emptyStats();
+    const todayStr = D?.updated_at ? D.updated_at.slice(0, 10) : new Date().toISOString().slice(0, 10);
+    const cutoffD = new Date(todayStr + 'T00:00:00');
+    cutoffD.setDate(cutoffD.getDate() - 30);
+    const cutoff = cutoffD.toISOString().slice(0, 10);
+
+    const buckets = Array.from({ length: 24 }, () => []);
+    const dailyTotals = {};
+    HHIST.hours.forEach(h => {
+        if (!h.time) return;
+        const [d, t] = h.time.split(' ');
+        if (d < cutoff || d >= todayStr) return;
+        const hr = parseInt(t.split(':')[0]);
+        const pv = h.pv || 0;
+        buckets[hr].push(pv);
+        dailyTotals[d] = (dailyTotals[d] || 0) + pv;
+    });
+    const hourly_avg = new Array(24).fill(0);
+    const hourly_min = new Array(24).fill(0);
+    const hourly_max = new Array(24).fill(0);
+    const hourly_p25 = new Array(24).fill(0);
+    const hourly_p75 = new Array(24).fill(0);
+    for (let h = 0; h < 24; h++) {
+        const arr = buckets[h];
+        if (!arr.length) continue;
+        const sorted = [...arr].sort((a, b) => a - b);
+        hourly_avg[h] = Math.round((arr.reduce((a, b) => a + b, 0) / arr.length) * 100) / 100;
+        hourly_min[h] = sorted[0];
+        hourly_max[h] = sorted[sorted.length - 1];
+        hourly_p25[h] = sorted[Math.floor(sorted.length * 0.25)];
+        hourly_p75[h] = sorted[Math.floor(sorted.length * 0.75)];
+    }
+    const dvals = Object.values(dailyTotals);
+    return {
+        hourly_avg, hourly_min, hourly_max, hourly_p25, hourly_p75,
+        daily_avg: dvals.length ? Math.round((dvals.reduce((a,b) => a+b, 0) / dvals.length) * 10) / 10 : 0,
+        daily_min: dvals.length ? Math.min(...dvals) : 0,
+        daily_max: dvals.length ? Math.max(...dvals) : 0,
+        sample_days: dvals.length,
+    };
+}
+function emptyStats() {
+    return { hourly_avg: new Array(24).fill(0), hourly_min: new Array(24).fill(0),
+             hourly_max: new Array(24).fill(0), hourly_p25: new Array(24).fill(0),
+             hourly_p75: new Array(24).fill(0),
+             daily_avg: 0, daily_min: 0, daily_max: 0, sample_days: 0 };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Render
+// ─────────────────────────────────────────────────────────────────────────
+function renderAll() {
+    document.getElementById('siteName').textContent = SITE_META.name;
+    document.getElementById('lastUpdated').textContent = `Updated ${D?.updated_at || 'N/A'}`;
+    renderStats();
+    renderMainChart();
+    renderEnergyFlow();
+    renderHistory();
+    renderFinancial();
+}
+
+function renderStats() {
+    const t = D?.energy?.today?.pv || 0;
+    const a = stats30?.daily_avg || 0;
+    const sd = stats30?.sample_days || 0;
+    const st = D?.current?.status || 'unknown';
+
+    document.getElementById('totalKwh').textContent = fmt(t) + ' kWh';
+    document.getElementById('totalKwh').className = `stat-value ${st}`;
+    document.getElementById('avgKwh').textContent = fmt(a) + ' kWh';
+    document.getElementById('avgSublabel').textContent = sd > 0 ? `Based on ${sd} days of data` : 'Collecting baseline…';
+
+    // Performance card - reads the performance block written by the processor.
+    const perf = D?.performance || {};
+    const perfEl = document.getElementById('perfValue');
+    const perfSubEl = document.getElementById('perfSublabel');
+    if (perf.performance_pct === null || perf.performance_pct === undefined) {
+        perfEl.textContent = '--';
+        perfEl.style.color = '#6b7280';
+        perfSubEl.textContent = perf.method === 'empirical' && perf.elapsed_hours_compared === 0
+            ? 'Calibrating from history…' : 'Waiting for daylight hours…';
+        perfSubEl.title = perf.reason || '';
+    } else {
+        const p = perf.performance_pct;
+        perfEl.textContent = p + '%';
+        perfEl.style.color = p >= 85 ? '#22c55e' : p >= 60 ? '#fb923c' : '#ef4444';
+        perfSubEl.textContent = `${fmt(perf.today_actual_total, 1)} actual / ${fmt(perf.today_expected_total, 1)} expected kWh` +
+                                  ` (${perf.method})`;
+        perfSubEl.title = perf.reason || '';
+    }
+
+    document.getElementById('status').textContent = st.toUpperCase();
+    document.getElementById('status').className = `stat-value ${st}`;
+    const pct = a > 0 ? ((t / a) * 100).toFixed(0) : 0;
+    document.getElementById('statusLabel').textContent = a > 0 ? `${pct}% of daily average` : 'Collecting baseline data…';
+    const reason = D?.current?.status_reason;
+    document.getElementById('statusDetail').textContent = reason || ({
+        'online': 'Generating normally',
+        'underperforming': 'Below expected generation',
+        'fault': 'Inverter fault — check system',
+        'offline': 'No recent data',
+        'no_data': 'No data from API',
+    }[st] || '—');
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Energy flow tiles (new section showing the pipeline's enriched data)
+// ─────────────────────────────────────────────────────────────────────────
+function renderEnergyFlow() {
+    const e = D?.energy?.[energyPeriod] || {};
+    document.querySelectorAll('.period-tab').forEach(t => t.classList.toggle('active', t.dataset.period === energyPeriod));
+    const tiles = [
+        { key: 'pv',          label: 'PV Generation',     value: e.pv,            cls: 'pv',          sub: 'Solar generated' },
+        { key: 'consumption', label: 'Site Consumption',  value: e.consumption,   cls: 'consumption', sub: 'Total load' },
+        { key: 'import',      label: 'Grid Import',       value: e.import,        cls: 'import',      sub: 'Bought from grid' },
+        { key: 'export',      label: 'Grid Export',       value: e.export,        cls: 'export',      sub: 'Sent to grid' },
+        { key: 'charge',      label: 'Battery Charged',   value: e.charge,        cls: 'charge',      sub: 'Into battery' },
+        { key: 'discharge',   label: 'Battery Discharged', value: e.discharge,    cls: 'discharge',   sub: 'From battery' },
+        { key: 'self_consumed', label: 'Self-Consumed',   value: e.self_consumed, cls: 'pv',          sub: 'PV + battery used on-site' },
+    ];
+    // Hide battery tiles when site has no battery activity in this period
+    const hasBatt = (e.charge || 0) > 0 || (e.discharge || 0) > 0;
+    const visible = tiles.filter(t => hasBatt || (t.key !== 'charge' && t.key !== 'discharge'));
+    document.getElementById('flowGrid').innerHTML = visible.map(t =>
+        `<div class="flow-tile ${t.cls}">
+            <div class="flow-tile-label">${t.label}</div>
+            <div class="flow-tile-value">${fmt(t.value)} <span style="font-size:0.7rem;color:#9ca3af">kWh</span></div>
+            <div class="flow-tile-sub">${t.sub}</div>
+        </div>`).join('');
+    if (!Object.keys(e).length) {
+        document.getElementById('flowGrid').innerHTML = `<div style="grid-column:1/-1" class="stub-note">No energy data yet for ${energyPeriod} — wait for next workflow run.</div>`;
+    }
+}
+
+function switchEnergyPeriod(p) { energyPeriod = p; renderEnergyFlow(); }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Main hourly chart (today vs 30-day average)
+// ─────────────────────────────────────────────────────────────────────────
+function trunc(arr) { let l = 0; for (let i = arr.length - 1; i >= 0; i--) { if (arr[i] > 0) { l = i; break; } } return arr.map((v, i) => i <= l ? v : null); }
+
+function renderMainChart() {
+    const labels = Array.from({length:24}, (_, i) => (i < 10 ? '0' : '') + i + ':00');
+    const hp = getPvHourly();
+    const ir = getIrradHourly();
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    if (mainChart) mainChart.destroy();
+    document.getElementById('mainTodayBtn').classList.toggle('active', mainMode === 'today');
+    document.getElementById('mainAvgBtn').classList.toggle('active', mainMode === 'average');
+    let data, opts;
+    if (mainMode === 'today') {
+        const hasIrrad = ir.some(v => v > 0);
+        // Expected PV from the performance block, hour-of-day aligned to the same labels
+        const expected = new Array(24).fill(0);
+        (D?.performance?.hourly_expected || []).forEach(e => {
+            if (!e.time) return;
+            const h = parseInt(e.time.split(' ')[1].split(':')[0]);
+            if (h >= 0 && h < 24) expected[h] = e.expected_kwh || 0;
+        });
+        const hasExpected = expected.some(v => v > 0);
+        data = { labels, datasets: [
+            ...(hasIrrad ? [{ type:'line', label:'Irradiation (kWh/m²)', data:ir, backgroundColor:'rgba(133,77,14,0.4)', borderColor:'rgba(202,138,4,0.8)', borderWidth:1, fill:true, yAxisID:'y1', pointRadius:0, tension:0.4, order:4 }] : []),
+            ...(hasExpected ? [{ type:'line', label:'Expected PV (kWh)', data:expected, borderColor:'#a855f7', borderWidth:2, borderDash:[4,3], fill:false, pointRadius:0, tension:0.4, order:3 }] : []),
+            { type:'line', label:'30-Day Average', data:stats30.hourly_avg, borderColor:'rgba(96,165,250,0.7)', borderWidth:2, borderDash:[6,4], fill:false, pointRadius:0, tension:0.4, order:2 },
+            { type:'bar', label:'PV Generation (kWh)', data:hp, backgroundColor:'#22c55e', borderWidth:0, barPercentage:0.9, categoryPercentage:0.95, order:1 },
+        ]};
+        opts = buildOpts(hasIrrad);
+    } else {
+        data = { labels, datasets: [
+            { type:'line', label:'Min', data:stats30.hourly_min, backgroundColor:'rgba(120,80,40,0.12)', borderColor:'rgba(180,140,60,0.8)', borderWidth:1.5, fill:'+1', pointRadius:0, tension:0.4, order:5 },
+            { type:'line', label:'Max', data:stats30.hourly_max, backgroundColor:'transparent', borderColor:'rgba(150,100,220,0.8)', borderWidth:1.5, pointRadius:0, tension:0.4, order:5 },
+            { type:'line', label:'P25–P75', data:stats30.hourly_p25, backgroundColor:'rgba(34,197,94,0.2)', borderColor:'rgba(34,197,94,0.5)', borderWidth:1.5, fill:'+1', pointRadius:0, tension:0.4, order:3 },
+            { type:'line', label:'', data:stats30.hourly_p75, backgroundColor:'transparent', borderColor:'rgba(34,197,94,0.5)', borderWidth:1.5, pointRadius:0, tension:0.4, order:3 },
+            { type:'line', label:'Average', data:stats30.hourly_avg, borderColor:'#60a5fa', borderWidth:2.5, borderDash:[8,4], fill:false, pointRadius:0, tension:0.4, order:2 },
+            { type:'line', label:'Today Actual', data:trunc(hp), borderColor:'#22c55e', borderWidth:2, fill:false, pointRadius:0, tension:0.4, order:1 },
+        ]};
+        opts = buildOpts(false);
+    }
+    mainChart = new Chart(ctx, { type:'bar', data, options:opts });
+}
+
+function buildOpts(showIrrad, isHist=false) {
+    const o = { responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+        plugins:{ legend:{display:true, position:'top', align:'center', labels:{color:'#9ca3af', font:{size:12}, usePointStyle:true, padding:12, filter: i => i.text !== ''}},
+            tooltip:{backgroundColor:'rgba(15,20,25,0.95)', titleColor:'#e2e8f0', bodyColor:'#cbd5e1', borderColor:'rgba(255,255,255,0.1)', borderWidth:1, padding:10, displayColors:true, filter: i => i.dataset.label !== ''}},
+        scales:{ x:{grid:{color:'rgba(255,255,255,0.05)', drawBorder:false}, ticks:{color:'#6b7280', font:{size:11}, maxRotation: isHist ? 45 : 0}},
+            y:{ beginAtZero:true, position:'left', grid:{color:'rgba(255,255,255,0.05)', drawBorder:false},
+                ticks:{color:'#6b7280', font:{size:11}, callback: v => v.toFixed(0) + ' kWh'},
+                title:{display:true, text:'Energy (kWh)', color:'#9ca3af', font:{size:10}} } } };
+    if (showIrrad) o.scales.y1 = { beginAtZero:true, position:'right', grid:{drawOnChartArea:false}, ticks:{color:'#ca8a04', font:{size:11}}, title:{display:true, text:'Irradiation (kWh/m²)', color:'#ca8a04', font:{size:10}} };
+    return o;
+}
+
+function switchMain(mode) { mainMode = mode; renderMainChart(); }
+
+// ─────────────────────────────────────────────────────────────────────────
+// History (daily totals + per-day hourly breakdown)
+// ─────────────────────────────────────────────────────────────────────────
+function renderHistory() {
+    const hist = getHistoryByDate();
+    const dates = Object.keys(hist).sort();
+    if (!dates.length) return;
+    populateDateSelectors(dates);
+    drawHistoryChart(dates, hist);
+    drawHourlyGrid(dates, hist);
+}
+
+function populateDateSelectors(dates) {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const latest = dates[dates.length - 1];
+    const ay = [...new Set(dates.map(d => d.slice(0, 4)))].sort();
+    const ys = document.getElementById('histYear');
+    const ms = document.getElementById('histMonth');
+    const ds = document.getElementById('histDay');
+    ys.innerHTML = ay.map(y => `<option value="${y}" ${y === latest.slice(0,4) ? 'selected' : ''}>${y}</option>`).join('');
+    function uM() {
+        const yr = ys.value;
+        const am = [...new Set(dates.filter(d => d.startsWith(yr)).map(d => parseInt(d.slice(5,7))))].sort((a, b) => a - b);
+        ms.innerHTML = am.map(m => `<option value="${m}" ${m === parseInt(latest.slice(5,7)) ? 'selected' : ''}>${months[m-1]}</option>`).join('');
+        uD();
+    }
+    function uD() {
+        const yr = ys.value, mo = String(ms.value).padStart(2, '0'), pf = yr + '-' + mo;
+        const ad = dates.filter(d => d.startsWith(pf)).map(d => parseInt(d.slice(8,10))).sort((a, b) => a - b);
+        const ld = parseInt(latest.slice(8,10));
+        ds.innerHTML = ad.map(d => `<option value="${d}" ${d === ld ? 'selected' : ''}>${d}</option>`).join('');
+    }
+    ys.onchange = uM; ms.onchange = uD; uM();
+}
+
+function getSelectedHistDate() {
+    return document.getElementById('histYear').value + '-'
+         + String(document.getElementById('histMonth').value).padStart(2, '0') + '-'
+         + String(document.getElementById('histDay').value).padStart(2, '0');
+}
+
+function goToHistDate() {
+    const ds = getSelectedHistDate();
+    const hist = getHistoryByDate();
+    if (!hist[ds]) { alert('No data for ' + ds); return; }
+    drawPastDay(ds);
+}
+
+function histBack() {
+    const hist = getHistoryByDate();
+    const dates = Object.keys(hist).sort();
+    const cur = getSelectedHistDate();
+    const idx = dates.indexOf(cur);
+    if (idx > 0) { setDateSelector(dates[idx - 1]); goToHistDate(); }
+}
+function histForward() {
+    const hist = getHistoryByDate();
+    const dates = Object.keys(hist).sort();
+    const cur = getSelectedHistDate();
+    const idx = dates.indexOf(cur);
+    if (idx < dates.length - 1) { setDateSelector(dates[idx + 1]); goToHistDate(); }
+}
+function setDateSelector(dateStr) {
+    document.getElementById('histYear').value = dateStr.slice(0, 4);
+    document.getElementById('histYear').onchange();
+    document.getElementById('histMonth').value = parseInt(dateStr.slice(5, 7));
+    document.getElementById('histMonth').onchange();
+    document.getElementById('histDay').value = parseInt(dateStr.slice(8, 10));
+}
+
+function drawPastDay(dateStr) {
+    const hist = getHistoryByDate();
+    const dd = hist[dateStr]; if (!dd) return;
+    const labels = Array.from({length:24}, (_, i) => (i<10?'0':'') + i + ':00');
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    if (mainChart) mainChart.destroy();
+    const dh = dd.hourly || new Array(24).fill(0);
+    const dl = new Date(dateStr+'T00:00:00').toLocaleDateString('en-ZA', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+    mainChart = new Chart(ctx, { type:'bar', data:{labels, datasets:[
+        { type:'line', label:'30-Day Avg', data:stats30.hourly_avg, borderColor:'rgba(96,165,250,0.7)', borderWidth:2, borderDash:[6,4], fill:false, pointRadius:0, tension:0.4, order:2 },
+        { type:'bar', label:dl+' (kWh)', data:dh, backgroundColor:'#22c55e', borderWidth:0, barPercentage:0.9, categoryPercentage:0.95, order:1 },
+    ]}, options:buildOpts(false) });
+}
+
+function drawHistoryChart(dates, hist) {
+    const dailyAvg = stats30?.daily_avg || 0;
+    const totals = dates.map(d => hist[d].total_kwh || 0);
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    if (historyChart) historyChart.destroy();
+    historyChart = new Chart(ctx, { type:'bar', data:{
+        labels: dates.map(d => new Date(d+'T00:00:00').toLocaleDateString('en-ZA', {day:'numeric', month:'short'})),
+        datasets: [
+            { type:'line', label:'Rolling Avg', data:new Array(dates.length).fill(dailyAvg), borderColor:'rgba(96,165,250,0.6)', borderWidth:2, borderDash:[6,4], fill:false, pointRadius:0, order:2 },
+            { type:'bar', label:'Daily Total (kWh)', data:totals, backgroundColor: totals.map(v => v < dailyAvg * 0.5 ? '#fb923c' : '#22c55e'), borderWidth:0, barPercentage:0.8, categoryPercentage:0.9, order:3 },
+        ]
+    }, options: buildOpts(false, true) });
+}
+
+function switchHourlyMode(mode) {
+    hourlyGridMode = mode;
+    document.getElementById('hourlyTodayBtn').classList.toggle('active', mode === 'today');
+    document.getElementById('hourlyAvgBtn').classList.toggle('active', mode === 'average');
+    const hist = getHistoryByDate();
+    drawHourlyGrid(Object.keys(hist).sort(), hist);
+}
+
+function drawHourlyGrid(dates, hist) {
+    const grid = document.getElementById('hourlyGrid');
+    grid.innerHTML = '';
+    Object.values(hourlyCharts).forEach(c => c.destroy());
+    hourlyCharts = {};
+    const recent = dates.slice(-7).reverse();
+    recent.forEach(dateStr => {
+        const dd = hist[dateStr]; if (!dd) return;
+        const dt = new Date(dateStr+'T00:00:00');
+        const label = dt.toLocaleDateString('en-ZA', {weekday:'short', day:'numeric', month:'short'});
+        const total = dd.total_kwh || 0;
+        const cid = `hg-${dateStr}`;
+        const card = document.createElement('div');
+        card.className = 'hourly-day-card';
+        card.innerHTML = `<div class="hourly-day-title">${label} — ${fmt(total)} kWh</div><div class="hourly-day-chart"><canvas id="${cid}"></canvas></div>`;
+        grid.appendChild(card);
+        setTimeout(() => {
+            const canvas = document.getElementById(cid); if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const labels = Array.from({length:24}, (_, i) => (i<10?'0':'') + i + ':00');
+            const hp = dd.hourly || new Array(24).fill(0);
+            let datasets;
+            if (hourlyGridMode === 'today') {
+                datasets = [
+                    { type:'line', label:'Avg', data:stats30.hourly_avg, borderColor:'rgba(96,165,250,0.5)', borderWidth:1, borderDash:[3,2], fill:false, pointRadius:0, tension:0.4, order:2 },
+                    { type:'bar', label:'PV', data:hp, backgroundColor:'#22c55e', borderWidth:0, barPercentage:0.85, categoryPercentage:0.9, order:1 },
+                ];
+            } else {
+                datasets = [
+                    { type:'line', data:stats30.hourly_p25, backgroundColor:'rgba(34,197,94,0.15)', borderColor:'rgba(34,197,94,0.3)', borderWidth:0.5, fill:'+1', pointRadius:0, tension:0.4, order:4 },
+                    { type:'line', data:stats30.hourly_p75, backgroundColor:'transparent', borderColor:'rgba(34,197,94,0.3)', borderWidth:0.5, pointRadius:0, tension:0.4, order:4 },
+                    { type:'line', label:'Avg', data:stats30.hourly_avg, borderColor:'#60a5fa', borderWidth:1, borderDash:[3,2], fill:false, pointRadius:0, tension:0.4, order:2 },
+                    { type:'line', label:'PV', data:hp, borderColor:'#22c55e', borderWidth:1.5, fill:false, pointRadius:0, tension:0.4, order:1 },
+                ];
+            }
+            hourlyCharts[cid] = new Chart(ctx, { type:'bar', data:{labels, datasets}, options:{
+                responsive:true, maintainAspectRatio:false,
+                plugins:{legend:{display:false}, tooltip:{enabled:false}},
+                scales:{ x:{grid:{display:false}, ticks:{color:'#4b5563', font:{size:7}, maxTicksLimit:6}},
+                    y:{beginAtZero:true, grid:{color:'rgba(148,163,184,0.05)'}, ticks:{color:'#4b5563', font:{size:7}, maxTicksLimit:3}} }
+            }});
+        }, 50);
+    });
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Financial (stub now, real once tariff configs land)
+// ─────────────────────────────────────────────────────────────────────────
+function renderFinancial() {
+    const f = D?.financial;
+    const section = document.getElementById('financialSection');
+    if (!f || (f.today?.cost_import === null && f.today?.savings === null)) {
+        // No tariff configured — keep the stub
+        return;
+    }
+    // Tariff IS configured — replace stub with real tiles
+    const period = f[energyPeriod] || f.today || {};
+    const tiles = [
+        { label: 'Import Cost',   value: period.cost_import,    cls: 'import' },
+        { label: 'Export Revenue', value: period.revenue_export, cls: 'export' },
+        { label: 'PPA Cost',      value: period.ppa_cost,        cls: 'consumption' },
+        { label: 'Savings',       value: period.savings,         cls: 'pv' },
+        { label: 'Net Benefit',   value: period.net,             cls: 'pv' },
+    ].filter(t => t.value !== null && t.value !== undefined);
+    if (!tiles.length) return;
+    document.getElementById('financialStub').outerHTML = `<div class="flow-grid">${tiles.map(t => `
+        <div class="flow-tile ${t.cls}">
+            <div class="flow-tile-label">${t.label}</div>
+            <div class="flow-tile-value">R ${fmt(t.value, 2)}</div>
+            <div class="flow-tile-sub">${energyPeriod}</div>
+        </div>`).join('')}</div>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// CSV export — same shape as the original Bel Essex template
+// ─────────────────────────────────────────────────────────────────────────
+function exportCSV() {
+    const hist = getHistoryByDate();
+    const dates = Object.keys(hist).sort();
+    if (!dates.length) { alert('No history to export.'); return; }
+    let csv = 'Date,Hour,PV_kWh,30Day_Avg_kWh,Daily_Total_kWh\n';
+    const avg = stats30?.hourly_avg || [];
+    for (const dt of dates) {
+        const dd = hist[dt];
+        const hr = dd.hourly || [];
+        for (let i = 0; i < 24; i++) {
+            csv += `${dt},${String(i).padStart(2,'0')}:00,${(hr[i]||0).toFixed(2)},${(avg[i]||0).toFixed(2)},${i===0?(dd.total_kwh||0).toFixed(1):''}\n`;
+        }
+    }
+    const b = new Blob([csv], {type:'text/csv'}), u = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = u; a.download = `${SITE_META.site_id}_hourly_data.csv`; a.click();
+    URL.revokeObjectURL(u);
+}
+</script>
+</body>
+</html>
