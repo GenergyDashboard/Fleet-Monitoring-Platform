@@ -1,38 +1,38 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-05-25T16:08:44+02:00",
+  "updated_at": "2026-05-25T18:17:38+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 5.722923278808594,
+    "today_kwh": 5.796562194824219,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 5.722923278808594,
-      "consumption": 5.204109191894531,
-      "import": 7.8461151123046875,
+      "pv": 5.796562194824219,
+      "consumption": 5.712654113769531,
+      "import": 7.8825225830078125,
       "export": 0.34588623046875,
-      "discharge": 0.00235748291015625,
-      "charge": 0.0
+      "discharge": 1.1504135131835938,
+      "charge": 0.0182037353515625
     },
     "month": {
-      "pv": 119.56979005038738,
-      "consumption": 124.88235101103783,
-      "import": 310.96832275390625,
+      "pv": 119.64342896640301,
+      "consumption": 125.39089593291283,
+      "import": 311.0047302246094,
       "export": 23.84782314300537,
-      "discharge": 46.5662562251091,
-      "charge": 0.3731565475463867
+      "discharge": 47.71431225538254,
+      "charge": 0.3913602828979492
     },
     "year": {
-      "pv": 1027.188180193305,
-      "consumption": 861.2382048517466,
-      "import": 1277.7153472807258,
+      "pv": 1027.2618191093206,
+      "consumption": 861.7467497736216,
+      "import": 1277.751754751429,
       "export": 93.22495746612549,
-      "discharge": 395.1575390845537,
-      "charge": 7.7210504952818155
+      "discharge": 396.30559511482716,
+      "charge": 7.739254230633378
     },
     "lifetime": {
       "pv": 0.0,
@@ -82,7 +82,7 @@
         },
         {
           "time": "2026-05-25 16:00:00",
-          "value": 0.0471038818359375
+          "value": 0.1207427978515625
         }
       ],
       "consumption": [
@@ -120,7 +120,11 @@
         },
         {
           "time": "2026-05-25 16:00:00",
-          "value": 0.0910186767578125
+          "value": 0.5800323486328125
+        },
+        {
+          "time": "2026-05-25 17:00:00",
+          "value": 0.01953125
         }
       ],
       "import": [
@@ -171,6 +175,14 @@
         {
           "time": "2026-05-25 11:00:00",
           "value": 0.0182037353515625
+        },
+        {
+          "time": "2026-05-25 16:00:00",
+          "value": 0.0182037353515625
+        },
+        {
+          "time": "2026-05-25 18:00:00",
+          "value": 0.0182037353515625
         }
       ],
       "export": [
@@ -215,11 +227,28 @@
           "value": 0.018205642700195312
         }
       ],
-      "charge": [],
+      "charge": [
+        {
+          "time": "2026-05-25 17:00:00",
+          "value": 0.0182037353515625
+        }
+      ],
       "discharge": [
         {
           "time": "2026-05-25 10:00:00",
           "value": 0.00235748291015625
+        },
+        {
+          "time": "2026-05-25 16:00:00",
+          "value": 0.093536376953125
+        },
+        {
+          "time": "2026-05-25 17:00:00",
+          "value": 0.81787109375
+        },
+        {
+          "time": "2026-05-25 18:00:00",
+          "value": 0.2366485595703125
         }
       ]
     }
@@ -435,16 +464,42 @@
     },
     {
       "time": "2026-05-25 16:00:00",
-      "pv_to_load": 0.0471,
+      "pv_to_load": 0.1207,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0935,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0182,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.2143,
+      "self_sufficient": 0.9686,
+      "balance_error": -0.3475
+    },
+    {
+      "time": "2026-05-25 17:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0195,
+      "batt_to_grid": 0.7983,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0182,
+      "self_consumed": 0.0195,
+      "self_sufficient": 1.0,
+      "balance_error": 0.7801
+    },
+    {
+      "time": "2026-05-25 18:00:00",
+      "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
+      "batt_to_grid": 0.2366,
+      "grid_to_load": 0.0182,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0471,
-      "self_sufficient": 1.0,
-      "balance_error": -0.0439
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.2549
     }
   ],
   "irradiation": null,
