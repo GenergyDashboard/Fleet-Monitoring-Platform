@@ -26,6 +26,7 @@ Output shape:
 }
 """
 import json
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -65,6 +66,23 @@ def main() -> None:
     OUT.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
                     encoding="utf-8")
     print(f"Wrote {OUT.relative_to(REPO)} with {len(sites)} site(s).")
+
+    # Also regenerate SITES.md so new sites auto-appear as checkboxes
+    # (defaulted to checked = visible). Preserves existing tick states.
+    try:
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(REPO / "regenerate_sites_md.py")],
+            capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            for line in result.stdout.splitlines():
+                print(f"  [SITES.md] {line}")
+        else:
+            print(f"  WARNING: SITES.md regen failed: {result.stderr.strip()[:200]}")
+    except Exception as e:
+        # Non-fatal - the dashboard's other hide sources (hidden_sites.json,
+        # per-config flag) still work even if SITES.md gets stale.
+        print(f"  WARNING: could not regenerate SITES.md: {e}")
 
 
 if __name__ == "__main__":

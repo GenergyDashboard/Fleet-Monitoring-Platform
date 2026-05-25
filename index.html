@@ -393,6 +393,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f1419;
 // ─────────────────────────────────────────────────────────────────────────
 const SITES_INDEX_URL = "./sites_index.json";
 const HIDDEN_SITES_URL = "./data/hidden_sites.json";
+const SITES_MD_URL     = "./data/SITES.md";
 const AUTH_URL = "./data/auth.json";
 const REPO_OWNER = "GenergyDashboard";
 const REPO_NAME = "Fleet-Monitoring-Platform";
@@ -943,22 +944,42 @@ let cardOverrides = {}, rotateInterval = null, rotateGroups = [], rotateIdx = 0;
 Chart.defaults.devicePixelRatio = window.devicePixelRatio * 2 || 2;
 
 async function loadSitesIndex() {
-    // Fetch the manifest and the hide list in parallel; both are tiny.
-    // Hidden sites are dropped from ALL_SITES here, BEFORE anything else
-    // reads it - so the grid, map, dropdowns, status counts, auto-rotate
-    // and alarm list all see the filtered array automatically.
+    // Fetch the manifest plus both hide sources in parallel; all are tiny.
+    // Three independent hide sources, all additive (union):
+    //   1. SITES.md task list - the primary, GitHub-friendly checkbox UI
+    //      (unchecked = hidden). Easiest to edit on github.com directly.
+    //   2. data/hidden_sites.json - legacy/programmatic list (still works,
+    //      Manage Sites modal still writes here).
+    //   3. config.json "hidden": true on individual sites - per-site override.
+    // A site is hidden if ANY source says so.
     let idx = { sites: [] };
     let hiddenIds = new Set();
     try {
-        const [idxR, hidR] = await Promise.all([
+        const [idxR, hidR, mdR] = await Promise.all([
             fetch(SITES_INDEX_URL),
             fetch(HIDDEN_SITES_URL).catch(() => null),
+            fetch(SITES_MD_URL).catch(() => null),
         ]);
         if (!idxR.ok) throw new Error('sites_index.json not found');
         idx = await idxR.json();
+
+        // Parse hidden_sites.json (legacy source)
         if (hidR && hidR.ok) {
             const hidData = await hidR.json();
             (hidData.hidden_site_ids || []).forEach(id => hiddenIds.add(id));
+        }
+
+        // Parse SITES.md task list - unchecked lines are hidden
+        if (mdR && mdR.ok) {
+            const md = await mdR.text();
+            // Match unchecked task list items: '- [ ] `site-slug`' or '- [ ] site-slug'
+            // (GitHub-rendered checkboxes work with [x]/[X]/[ ]). Slugs may
+            // optionally be wrapped in backticks for monospace rendering.
+            const re = /^\s*-\s*\[\s\]\s*`?([a-z0-9_-]+)`?/gmi;
+            let m;
+            while ((m = re.exec(md)) !== null) {
+                hiddenIds.add(m[1]);
+            }
         }
     } catch (e) {
         console.error('Failed to load sites index:', e);
