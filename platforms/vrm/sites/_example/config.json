@@ -1,0 +1,30 @@
+{
+  "site_id": "example-vrm-site",
+  "name": "Example VRM Site",
+  "platform": "vrm",
+  "hidden": false,
+  "id_site": 123456,
+  "location": {
+    "lat": -33.9,
+    "lon": 18.5,
+    "town": "Cape Town",
+    "address": ""
+  },
+  "capacity_kwp": 10.0,
+  "system": {
+    "panel_groups": [
+      {
+        "panel_count": 24,
+        "panel_model": "",
+        "panel_rated_w": 415,
+        "panel_area_m2": 2.0,
+        "panel_efficiency": 0.21,
+        "group_area_m2": 48.0
+      }
+    ],
+    "area_total_m2": 48.0,
+    "effective_area_m2": 46.5
+  },
+  "tariff": null,
+  "_NOTE": "Copy this folder per site, edit site_id/name/id_site/location/capacity/system to match. id_site is the multi-digit number in the VRM portal URL: vrm.victronenergy.com/installation/<id_site>/dashboard. Get it from `python fetch.py --discover`."
+}

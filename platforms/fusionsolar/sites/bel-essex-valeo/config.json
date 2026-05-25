@@ -1,0 +1,98 @@
+{
+  "site_id": "bel-essex-valeo",
+  "name": "Bel Essex (Valeo)",
+  "platform": "fusionsolar",
+  "hidden": false,
+  "station_code": "NE=56006848",
+  "capacity_kwp": 921.2,
+  "commissioned": null,
+  "location": {
+    "lat": -33.7575,
+    "lon": 25.397,
+    "town": "Kariega",
+    "address": "South AfricaEastern CapeKariegaAlexander Park IndustrialAlgoa Road116 Algoa Road"
+  },
+  "modules": {
+    "tou": false,
+    "environmental": true,
+    "warranty": true
+  },
+  "system": {
+    "panel_groups": [
+      {
+        "panel_count": 1645,
+        "panel_model": "Canadian Solar CS6W-560MS",
+        "panel_rated_w": 560,
+        "panel_area_m2": 2.5833,
+        "panel_efficiency": 0.2168,
+        "group_area_m2": 4249.53
+      }
+    ],
+    "area_total_m2": 4249.53,
+    "effective_area_m2": 921.3
+  },
+  "tariff": {
+    "type": "tou",
+    "vat_included": true,
+    "export": {
+      "mode": "none",
+      "rate_periods": []
+    },
+    "rate_periods": [
+      {
+        "from": "2024-06-01",
+        "to": "2024-06-30",
+        "tou": {
+          "peak": 5.501,
+          "standard": 1.375,
+          "off_peak": 0.917
+        }
+      },
+      {
+        "from": "2024-07-01",
+        "to": "2024-08-31",
+        "tou": {
+          "peak": 6.5287,
+          "standard": 1.6321,
+          "off_peak": 1.0882
+        }
+      },
+      {
+        "from": "2024-09-01",
+        "to": "2025-05-31",
+        "tou": {
+          "peak": 2.7094,
+          "standard": 1.5233,
+          "off_peak": 1.0882
+        }
+      },
+      {
+        "from": "2025-06-01",
+        "to": "2025-06-30",
+        "tou": {
+          "peak": 6.53,
+          "standard": 1.63,
+          "off_peak": 1.09
+        }
+      },
+      {
+        "from": "2025-07-01",
+        "to": "2025-08-31",
+        "tou": {
+          "peak": 6.87,
+          "standard": 1.72,
+          "off_peak": 1.14
+        }
+      },
+      {
+        "from": "2025-09-01",
+        "to": "2026-05-31",
+        "tou": {
+          "peak": 2.85,
+          "standard": 1.6,
+          "off_peak": 1.14
+        }
+      }
+    ]
+  }
+}
