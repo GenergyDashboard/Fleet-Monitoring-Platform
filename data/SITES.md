@@ -1,25 +1,8 @@
 # Sites visible in the fleet dashboard
 
-Tick a box to **show** that site. Untick to **hide** it.
-Changes take effect on next dashboard load - no workflow run needed.
+T
 
-> **HOW THIS FILE WORKS**
-> 
-> This file IS the hide list. The dashboard reads it directly on every load.
-> Unchecked sites disappear from the fleet view (grid, map, status counts, dropdowns)
-> but their workflows keep running and data files keep updating - direct URLs like
-> `site.html?site=<id>` continue to work.
-> 
-> Two ways to edit:
-> 1. **On github.com**: open this file in your browser, click the checkboxes directly,
->    GitHub auto-commits each click. Easiest.
-> 2. **Locally**: open in any text editor, change `[x]` to `[ ]` or vice versa,
->    save, commit, push.
-> 
-> Each line MUST be exactly: `- [x] site-slug` or `- [ ] site-slug` (slug optionally
-> wrapped in backticks). Don't change the indentation or the parser breaks.
-> 
-> New sites are auto-added by `regenerate_sites_md.py` as checked (visible by default).
+
 
 ## FusionSolar (Huawei) — 25 of 25 visible
 
