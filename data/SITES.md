@@ -21,13 +21,13 @@ T
 - [x] `mountain-view-gordons-bay` — Mountain View SC
 - [x] `mp-the-pines` — MP The Pines
 - [x] `nautica-shopping-centre` — Nautica Shopping Centre
-- [x] `nautica-spar` — Nautica Spar
+- [ ] `nautica-spar` — Nautica Spar
 - [x] `pe-cold-storage` — PE Cold Storage
-- [x] `pecs-2` — PECS 2
-- [x] `petrefuel` — Petrefuel
+- [ ] `pecs-2` — PECS 2
+- [ ] `petrefuel` — Petrefuel
 - [x] `rdm-somerset-west-5mw` — RDM Somerset West 5MW
-- [x] `rdm-somerset-west-6mwh-bess` — RDM Somerset West 6MWh BESS
-- [x] `richard-sharwood-best-drive` — Richard Sharwood Best Drive
+- [ ] `rdm-somerset-west-6mwh-bess` — RDM Somerset West 6MWh BESS
+- [ ] `richard-sharwood-best-drive` — Richard Sharwood Best Drive
 - [x] `shoprite-parklands` — Shoprite Parklands
 - [x] `wg-group-mdantsane-superspar` — WG Mdantsane SuperSpar
 - [x] `wg-group-nurture-health` — WG Nurture Health
@@ -39,21 +39,21 @@ T
 - [ ] `beyond-buds-auxiliary-supply` — Beyond Buds Auxiliary Supply
 - [x] `ecdoh-un-kanyayo-clinic` — ECDOH UN Kanyayo Clinic
 - [x] `ecdoh-un-malangeni-clinic` — ECDOH UN Malangeni Clinic
-- [x] `gavin-macaulay` — Gavin Macaulay
-- [x] `house-efstratiou` — House Efstratiou
+- [ ] `gavin-macaulay` — Gavin Macaulay
+- [ ] `house-efstratiou` — House Efstratiou
 - [ ] `house-pitsiladi` — House Pitsiladi
-- [x] `house-richards` — House Richards
-- [x] `house-richards-new` — House Richards NEW
+- [ ] `house-richards` — House Richards
+- [ ] `house-richards-new` — House Richards NEW
 - [x] `hula-hula` — Hula Hula
-- [x] `kerzner-cerbogx` — Kerzner CerboGX
-- [x] `rdm-container` — RDM Container
-- [x] `sharwoods` — Sharwoods
+- [ ] `kerzner-cerbogx` — Kerzner CerboGX
+- [ ] `rdm-container` — RDM Container
+- [ ] `sharwoods` — Sharwoods
 - [x] `slabbert-st-francis` — Slabbert St Francis
-- [x] `valeo-vrm` — Valeo (VRM)
+- [ ] `valeo-vrm` — Valeo (VRM)
 
 ## Sunsynk — 10 of 50 visible
 
-- [x] `jbayjohan-janse-van-rensburg` — (JBay)Johan Janse Van Rensburg
+- [ ] `jbayjohan-janse-van-rensburg` — (JBay)Johan Janse Van Rensburg
 - [ ] `13-water-rd-dave-martin` — 13 Water Rd - Dave Martin
 - [ ] `2-calais-place-brian-lurie` — 2 Calais Place Brian Lurie
 - [ ] `2-jaegar-place` — 2 Jaegar Place
@@ -62,7 +62,7 @@ T
 - [ ] `46-alcock-road-james-de-jager` — 46 Alcock Road - James De Jager
 - [ ] `80-longwy-avenue` — 80 Longwy Avenue
 - [ ] `92-short-rd` — 92 Short Rd
-- [x] `alan-harf-12-stavenisse` — Alan Harf 12 stavenisse
+- [ ] `alan-harf-12-stavenisse` — Alan Harf 12 stavenisse
 - [x] `axxess-port-elizabeth` — AXXESS Port Elizabeth
 - [ ] `b-kranzle` — B Kranzle
 - [ ] `c-brink` — C Brink
@@ -73,7 +73,7 @@ T
 - [ ] `frans-meyer` — Frans Meyer
 - [ ] `g-thompson` — G Thompson
 - [ ] `genergy-test` — genergy test
-- [x] `gerald-ehlers-4-camelia-sun-park` — Gerald Ehlers 4 Camelia Sun Park
+- [ ] `gerald-ehlers-4-camelia-sun-park` — Gerald Ehlers 4 Camelia Sun Park
 - [ ] `graeme-gill` — Graeme Gill
 - [ ] `house-danie-oosthuysen` — House Danie Oosthuysen
 - [ ] `house-garside` — House Garside
@@ -86,22 +86,22 @@ T
 - [ ] `house-wayne-brown` — House wayne brown
 - [ ] `j-koen` — J. Koen
 - [ ] `john-hallam` — John Hallam
-- [x] `la-rochelle-st-georges` — la rochelle st georges
+- [ ] `la-rochelle-st-georges` — la rochelle st georges
 - [ ] `lynch-hampton-rd` — Lynch Hampton Rd
 - [ ] `martin-slabbert` — Martin Slabbert
 - [ ] `mcwilliams-shore-rd` — McWilliams Shore Rd
 - [ ] `michelle-gauna` — Michelle Gauna
 - [ ] `n-gomes` — N Gomes
-- [x] `osprey-6` — Osprey  6
-- [x] `paul-and-carole-lynch` — Paul and Carole Lynch
+- [ ] `osprey-6` — Osprey  6
+- [ ] `paul-and-carole-lynch` — Paul and Carole Lynch
 - [ ] `pitsiladi-st-francis` — Pitsiladi St Francis
 - [ ] `pote-main` — Pote  Main
 - [ ] `pote-cottages` — Pote Cottages
 - [ ] `pw-buys` — PW Buys
 - [ ] `roy-ingle` — Roy Ingle
 - [ ] `salie` — Salie
-- [x] `sasol-malelane` — Sasol Malelane
-- [x] `somerson-9` — Somerson 9
+- [ ] `sasol-malelane` — Sasol Malelane
+- [ ] `somerson-9` — Somerson 9
 - [ ] `terry-bilson-links` — Terry Bilson links
 
 ---
