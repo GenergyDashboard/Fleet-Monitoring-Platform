@@ -1,0 +1,68 @@
+name: SolarmanPV fetch
+
+# Pulls every configured SolarmanPV site via the OpenAPI at
+# globalapi.solarmanpv.com. Runs on a free cloud runner - the SolarmanPV API
+# resolves and accepts connections from anywhere (no DNS games like
+# FusionSolar).
+
+on:
+  schedule:
+    # Every 5 min during daylight, offset to land in less-loaded GitHub
+    # scheduler slots. FusionSolar uses 2-59/5, VRM uses 3-58/5,
+    # SolarmanPV uses 4-59/5 - different offsets so the three workflows
+    # don't all wake at exactly the same minute.
+    - cron: "4-59/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: solarmanpv-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: write
+
+    defaults:
+      run:
+        working-directory: platforms/solarmanpv
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch all SolarmanPV sites
+        env:
+          SOLARMAN_APPID:     ${{ secrets.SOLARMAN_APPID }}
+          SOLARMAN_APPSECRET: ${{ secrets.SOLARMAN_APPSECRET }}
+          SOLARMAN_EMAIL:     ${{ secrets.SOLARMAN_EMAIL }}
+          SOLARMAN_PASSWORD:  ${{ secrets.SOLARMAN_PASSWORD }}
+        run: python fetch.py
+
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/solarmanpv/sites/*/data.json \
+                  platforms/solarmanpv/sites/*/history.json \
+                  platforms/solarmanpv/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "SolarmanPV refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

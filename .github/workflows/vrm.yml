@@ -1,0 +1,62 @@
+name: VRM fetch
+
+# Pulls every configured Victron VRM site and commits refreshed data files.
+# Unlike FusionSolar, VRM's API resolves and accepts connections from
+# anywhere - no DNS workaround, no self-hosted runner needed.
+
+on:
+  schedule:
+    # Every 5 min during daylight, offset slots (see FusionSolar workflow).
+    # 04:00-16:00 UTC = 06:00-18:00 SAST.
+    - cron: "3-58/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: vrm-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: write
+
+    defaults:
+      run:
+        working-directory: platforms/vrm
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch all VRM sites
+        env:
+          VRM_TOKEN: ${{ secrets.VRM_TOKEN }}
+        run: python fetch.py
+
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/vrm/sites/*/data.json \
+                  platforms/vrm/sites/*/history.json \
+                  platforms/vrm/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "VRM refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

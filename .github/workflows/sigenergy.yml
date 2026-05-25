@@ -1,0 +1,50 @@
+name: Sigenergy fetch
+
+on:
+  schedule:
+    - cron: "7-58/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: sigenergy-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: platforms/sigenergy
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Fetch all Sigenergy sites
+        env:
+          SIGEN_APPKEY:    ${{ secrets.SIGEN_APPKEY }}
+          SIGEN_APPSECRET: ${{ secrets.SIGEN_APPSECRET }}
+        run: python fetch.py
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/sigenergy/sites/*/data.json \
+                  platforms/sigenergy/sites/*/history.json \
+                  platforms/sigenergy/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Sigenergy refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

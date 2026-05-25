@@ -1,0 +1,57 @@
+name: Weather refresh (Open-Meteo)
+
+# Pulls GHI hourly + daily + 24h forecast for every site with lat/lon. Runs
+# on a free cloud runner since Open-Meteo resolves fine from anywhere (unlike
+# Huawei's FusionSolar host, which needs the office runner).
+#
+# Independent of platform fetches - this is the canonical source of weather
+# data for ALL sites, regardless of which inverter platform they're on.
+
+on:
+  schedule:
+    # Every 30 minutes between 04:00-17:00 UTC = 06:00-19:00 SAST.
+    # No point pulling weather overnight - sun is down, no PV to compare.
+    - cron: "5,35 4-17 * * *"
+  workflow_dispatch: {}        # allow manual runs from the Actions tab
+
+# Stop overlapping runs - the most recent run cancels older queued ones.
+concurrency:
+  group: weather-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: write          # needed for the auto-commit step
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run weather refresh
+        run: python weather/refresh_irradiation.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only stage files the weather module owns - never platform data.
+          git add platforms/*/sites/*/data.json platforms/*/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No weather changes to commit."
+          else
+            git commit -m "Weather refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

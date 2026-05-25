@@ -1,0 +1,53 @@
+name: Sungrow iSolarCloud fetch
+
+on:
+  schedule:
+    - cron: "8-58/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: sungrow-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: platforms/sungrow
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Fetch all Sungrow sites
+        env:
+          SUNGROW_APPKEY:     ${{ secrets.SUNGROW_APPKEY }}
+          SUNGROW_SECRETKEY:  ${{ secrets.SUNGROW_SECRETKEY }}
+          SUNGROW_ACCESS_KEY: ${{ secrets.SUNGROW_ACCESS_KEY }}
+          SUNGROW_USERNAME:   ${{ secrets.SUNGROW_USERNAME }}
+          SUNGROW_PASSWORD:   ${{ secrets.SUNGROW_PASSWORD }}
+        run: python fetch.py
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/sungrow/sites/*/data.json \
+                  platforms/sungrow/sites/*/history.json \
+                  platforms/sungrow/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Sungrow refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi

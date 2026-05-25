@@ -1,0 +1,50 @@
+name: Sunsynk fetch
+
+on:
+  schedule:
+    - cron: "5-59/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: sunsynk-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: platforms/sunsynk
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Fetch all Sunsynk sites
+        env:
+          SUNSYNK_USERNAME: ${{ secrets.SUNSYNK_USERNAME }}
+          SUNSYNK_PASSWORD: ${{ secrets.SUNSYNK_PASSWORD }}
+        run: python fetch.py
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/sunsynk/sites/*/data.json \
+                  platforms/sunsynk/sites/*/history.json \
+                  platforms/sunsynk/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Sunsynk refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi
