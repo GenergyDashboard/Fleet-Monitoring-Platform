@@ -329,6 +329,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0f1419;
                 <label class="dropdown-item"><input type="checkbox" value="sunsynk" onchange="applyFilters()" checked> Sunsynk</label>
                 <label class="dropdown-item"><input type="checkbox" value="sigenergy" onchange="applyFilters()" checked> Sigenergy</label>
                 <label class="dropdown-item"><input type="checkbox" value="sungrow" onchange="applyFilters()" checked> Sungrow</label>
+                <label class="dropdown-item"><input type="checkbox" value="goodwe" onchange="applyFilters()" checked> GoodWe</label>
+                <label class="dropdown-item"><input type="checkbox" value="mypower24" onchange="applyFilters()" checked> MyPower24</label>
             </div>
         </div>
         <div class="dropdown" id="groupDrop">
@@ -595,10 +597,13 @@ let hiddenSitesAll = [];          // all sites (incl. currently-hidden) for the 
 const PLATFORM_LABELS = {
     fusionsolar: "FusionSolar (Huawei)",
     vrm:         "VRM (Victron)",
+    solarmanpv:  "SolarmanPV",
     soliscloud:  "SolisCloud",
     sunsynk:     "Sunsynk",
+    sigenergy:   "Sigenergy",
+    sungrow:     "Sungrow",
     goodwe:      "GoodWe",
-    solarman:    "SolarmanPV",
+    mypower24:   "MyPower24 (SolarMD)",
 };
 
 async function openHiddenSitesModal() {
