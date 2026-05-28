@@ -46,6 +46,74 @@ from performance import build_performance         # noqa: E402
 SAST = timezone(timedelta(hours=2))
 HISTORY_DAYS = 400
 
+_PREDICTIONS_DIR = Path(__file__).resolve().parent / "predictions"
+_BASELINE_CACHE: dict | None = None
+
+
+def _load_baseline() -> dict | None:
+    """Load the PVSyst hourly prediction baseline once and cache it."""
+    global _BASELINE_CACHE
+    if _BASELINE_CACHE is not None:
+        return _BASELINE_CACHE
+    path = _PREDICTIONS_DIR / "beyond_buds_baseline.json"
+    if not path.exists():
+        _BASELINE_CACHE = {}
+        return _BASELINE_CACHE
+    try:
+        _BASELINE_CACHE = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        _BASELINE_CACHE = {}
+    return _BASELINE_CACHE
+
+
+def _degradation_factor(config: dict, on_date: datetime) -> float:
+    """Cumulative output factor for the system-year `on_date` falls in.
+
+    Year 1 (first 12 months from commissioning): 1.0
+    Year 2: -2% -> 0.98
+    Year 3+: additional -0.5%/yr compounding from the year-2 figure.
+    """
+    commissioning = config.get("commissioning_date")
+    if not commissioning:
+        return 1.0
+    try:
+        start = datetime.strptime(commissioning, "%Y-%m-%d").replace(tzinfo=SAST)
+    except ValueError:
+        return 1.0
+    # Whole years elapsed since commissioning
+    years_elapsed = (on_date - start).days // 365
+    if years_elapsed <= 0:
+        return 1.0                       # still in year 1
+    factor = 1.0 - 0.02                  # year 1 -> 2 drop
+    if years_elapsed >= 2:
+        # additional 0.5% per year for each year beyond year 2
+        factor *= (1.0 - 0.005) ** (years_elapsed - 1)
+    return round(factor, 5)
+
+
+def _prediction_for_hours(config: dict, hour_keys: list[str]) -> dict:
+    """For a list of 'YYYY-MM-DD HH:00:00' keys, return predicted P50/P90/P95
+    (kWh) with degradation applied. Returns {p50:[...],p90:[...],p95:[...]}
+    aligned to hour_keys."""
+    baseline = _load_baseline()
+    if not baseline or not baseline.get("baseline_hourly"):
+        return {}
+    bh = baseline["baseline_hourly"]
+    out = {"p50": [], "p90": [], "p95": []}
+    for hk in hour_keys:
+        try:
+            dt = datetime.strptime(hk, "%Y-%m-%d %H:00:00").replace(tzinfo=SAST)
+        except ValueError:
+            for p in out: out[p].append({"time": hk, "value": None})
+            continue
+        factor = _degradation_factor(config, dt)
+        mmddhh = dt.strftime("%m-%d-%H")
+        base = bh.get(mmddhh)
+        for p in ("p50", "p90", "p95"):
+            val = round(base[p] * factor, 4) if base else None
+            out[p].append({"time": hk, "value": val})
+    return out
+
 
 def _read_json(p: Path) -> dict | None:
     if not p.exists(): return None
@@ -200,6 +268,20 @@ def build_data_json(config: dict, energy: list[dict],
     tariff = config.get("tariff")
     if tariff:
         data["financial"] = compute_financials(data, tariff)
+
+    # Attach PVSyst prediction (P50/P90/P95, degradation-adjusted) aligned to
+    # today's hourly buckets, so the dashboard can plot expected vs actual.
+    hour_keys = [e["time"] for e in hourly.get("pv", [])]
+    if hour_keys:
+        prediction = _prediction_for_hours(config, hour_keys)
+        if prediction:
+            data["prediction_hourly"] = prediction
+            # Daily predicted totals (sum of P50/P90/P95 across today's hours)
+            data["prediction_today"] = {
+                p: round(sum(e["value"] for e in prediction[p]
+                              if e["value"] is not None), 3)
+                for p in ("p50", "p90", "p95")
+            }
     return data
 
 
