@@ -1,0 +1,64 @@
+name: MyPower24 fetch
+
+# Pulls every configured SolarMD logger via the V3 REST API.
+# Clean bearer-token API on a public HTTPS endpoint - runs fine on free
+# cloud runners (no IP whitelist like GoodWe, no DNS hack like FusionSolar).
+
+on:
+  schedule:
+    # Every 5 min during daylight, offset slot to avoid stampede with the
+    # other platforms (FusionSolar 2, VRM 3, SolarmanPV 4, Sunsynk 5,
+    # SolisCloud 6, Sigenergy 7, Sungrow 8, GoodWe 9). MyPower24 takes 10.
+    - cron: "10-58/5 4-16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: mypower24-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      contents: write
+
+    defaults:
+      run:
+        working-directory: platforms/mypower24
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch all MyPower24 sites
+        env:
+          MYPOWER24_USERNAME: ${{ secrets.MYPOWER24_USERNAME }}
+          MYPOWER24_PASSWORD: ${{ secrets.MYPOWER24_PASSWORD }}
+        run: python fetch.py
+
+      - name: Commit refreshed data
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add platforms/mypower24/sites/*/data.json \
+                  platforms/mypower24/sites/*/history.json \
+                  platforms/mypower24/sites/*/hourly_history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "MyPower24 refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi
