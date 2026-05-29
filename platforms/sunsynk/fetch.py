@@ -61,6 +61,43 @@ SAST = timezone(timedelta(hours=2))
 TOKEN_CACHE = PLATFORM_DIR / ".ss_token.json"   # gitignored
 
 
+# Helpers for Sunsynk API response parsing
+def _safe_float(v, default=0.0):
+    """Convert string/number to float safely."""
+    try: return float(v)
+    except (TypeError, ValueError): return default
+
+
+def _aggregate_5min_to_hourly(records, unit="W"):
+    """Aggregate 5-minute Watt readings to hourly kWh records.
+    Input:  [{"time": "HH:MM", "value": "1234.5"}, ...]
+    Output: [{"time": "08:00", "pv": 5.2, "etoday": 5.2}, ...]
+    """
+    from collections import defaultdict
+    hourly = defaultdict(list)
+    for r in records:
+        t = r.get("time", "")
+        v = _safe_float(r.get("value", 0))
+        if ":" in str(t):
+            hour = str(t).split(":")[0].zfill(2)
+            hourly[hour].append(v)
+
+    result = []
+    for hour in sorted(hourly.keys()):
+        readings = hourly[hour]
+        if unit.upper() == "W":
+            # 5-min W readings → hourly kWh: sum(W) * (5/60) / 1000
+            kwh = sum(readings) * (5 / 60) / 1000
+        else:
+            kwh = sum(readings)
+        kwh = round(kwh, 3)
+        result.append({
+            "time": f"{hour}:00",
+            "pv": kwh, "etoday": kwh, "generation": kwh, "value": kwh,
+        })
+    return result
+
+
 class SunsynkError(RuntimeError):
     pass
 
@@ -294,14 +331,35 @@ class SunsynkClient:
             params["date"] = date_str
         body = self._get(f"/api/v1/plant/energy/{plant_id}/{period}",
                           params=params)
-        return body.get("data") or {}
+        raw = body.get("data") or {}
+
+        # Sunsynk nests records inside infos[0].records — flatten it
+        # Also: /day returns 5-min Watt readings, /month returns daily kWh
+        infos = raw.get("infos", [])
+        if infos and isinstance(infos, list) and isinstance(infos[0], dict):
+            unit = infos[0].get("unit", "")
+            nested_records = infos[0].get("records", [])
+            if nested_records:
+                if period == "day":
+                    # Aggregate 5-min W readings to hourly kWh
+                    raw["records"] = _aggregate_5min_to_hourly(nested_records, unit)
+                else:
+                    # Month/year: just flatten and convert values
+                    raw["records"] = [
+                        {"time": r.get("time", ""), "value": _safe_float(r.get("value", 0))}
+                        for r in nested_records
+                    ]
+        return raw
 
     def plant_inverters(self, plant_id: int) -> list:
         """Get inverter serial numbers for a plant."""
         try:
             body = self._get(f"/api/v1/plant/{plant_id}/inverters",
                               params={"page": 1, "limit": 10})
-            return body.get("data", {}).get("infos", [])
+            data = body.get("data") or {}
+            if isinstance(data, dict):
+                return data.get("infos", []) or []
+            return []
         except Exception:
             return []
 
@@ -401,11 +459,15 @@ def run_fetch() -> None:
         except requests.RequestException as exc:
             print(f"  FAIL {sid} (network): {exc}"); skipped += 1; continue
 
-        # ── Enrich: inject realtime etoday into today if missing ──
-        # The /day endpoint often returns empty records, but /realtime has etoday
+        # ── Enrich: inject realtime values into energy dicts if missing ──
+        # The /day, /month, /year endpoints return nested infos[] that the
+        # processor can't read directly. Realtime has flat etoday/emonth/etc.
         if realtime.get("etoday") and not today.get("etoday"):
             today["etoday"] = realtime["etoday"]
-        # Also inject month/year/total from realtime if missing
+        if realtime.get("emonth") and not month.get("emonth"):
+            month["emonth"] = realtime["emonth"]
+        if realtime.get("eyear") and not year.get("eyear"):
+            year["eyear"] = realtime["eyear"]
         if realtime.get("etotal") and not total.get("etotal"):
             total["etotal"] = realtime["etotal"]
 
