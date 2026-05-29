@@ -288,20 +288,40 @@ class SunsynkClient:
 
     def plant_energy(self, plant_id: int, period: str,
                        date_str: str) -> dict:
-        """period: 'day' | 'month' | 'year' | 'total'.
-
-        date_str format depends on period:
-          day   -> 'YYYY-MM-DD'
-          month -> 'YYYY-MM'
-          year  -> 'YYYY'
-          total -> '' (ignored)
-        """
+        """period: 'day' | 'month' | 'year' | 'total'."""
         params = {"lan": "en"}
         if period != "total":
             params["date"] = date_str
         body = self._get(f"/api/v1/plant/energy/{plant_id}/{period}",
                           params=params)
         return body.get("data") or {}
+
+    def plant_inverters(self, plant_id: int) -> list:
+        """Get inverter serial numbers for a plant."""
+        try:
+            body = self._get(f"/api/v1/plant/{plant_id}/inverters",
+                              params={"page": 1, "limit": 10})
+            return body.get("data", {}).get("infos", [])
+        except Exception:
+            return []
+
+    def inverter_output(self, sn: str, date_str: str) -> dict:
+        """Get inverter grid output for a date — hourly records."""
+        try:
+            body = self._get(f"/api/v1/inverter/grid/{sn}/output",
+                              params={"date": date_str})
+            return body.get("data") or {}
+        except Exception:
+            return {}
+
+    def inverter_input(self, sn: str, date_str: str) -> dict:
+        """Get inverter input (PV) for a date — hourly records."""
+        try:
+            body = self._get(f"/api/v1/inverter/{sn}/input",
+                              params={"date": date_str})
+            return body.get("data") or {}
+        except Exception:
+            return {}
 
 
 def load_site_configs() -> list[tuple[Path, dict]]:
@@ -380,6 +400,37 @@ def run_fetch() -> None:
             print(f"  FAIL {sid}: {exc}"); skipped += 1; continue
         except requests.RequestException as exc:
             print(f"  FAIL {sid} (network): {exc}"); skipped += 1; continue
+
+        # ── Enrich: inject realtime etoday into today if missing ──
+        # The /day endpoint often returns empty records, but /realtime has etoday
+        if realtime.get("etoday") and not today.get("etoday"):
+            today["etoday"] = realtime["etoday"]
+        # Also inject month/year/total from realtime if missing
+        if realtime.get("etotal") and not total.get("etotal"):
+            total["etotal"] = realtime["etotal"]
+
+        # ── Enrich: try inverter endpoint for hourly data if /day returned nothing ──
+        has_records = bool(today.get("records") or today.get("infos"))
+        if not has_records:
+            try:
+                inverters = client.plant_inverters(pid)
+                if inverters:
+                    sn = inverters[0].get("sn", "")
+                    if sn:
+                        inv_out = client.inverter_output(sn, today_str)
+                        inv_records = inv_out.get("records") or inv_out.get("infos") or []
+                        if inv_records:
+                            today["records"] = inv_records
+                            print(f"  ℹ️  {sid}: using inverter {sn} for hourly data ({len(inv_records)} records)")
+                        else:
+                            # Try input endpoint
+                            inv_in = client.inverter_input(sn, today_str)
+                            inv_in_records = inv_in.get("records") or inv_in.get("infos") or []
+                            if inv_in_records:
+                                today["records"] = inv_in_records
+                                print(f"  ℹ️  {sid}: using inverter input {sn} ({len(inv_in_records)} records)")
+            except Exception as e:
+                print(f"  ⚠️  {sid}: inverter fallback failed: {e}")
 
         try:
             processor.write_site(site_dir, config,
