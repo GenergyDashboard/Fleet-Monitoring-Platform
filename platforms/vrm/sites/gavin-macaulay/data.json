@@ -1,38 +1,38 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-05-30T18:47:40+02:00",
+  "updated_at": "2026-05-30T19:47:31+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 6.1597442626953125,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
       "pv": 6.1597442626953125,
       "consumption": 5.4068603515625,
-      "import": 6.9359130859375,
+      "import": 6.9541015625,
       "export": 0.4004974365234375,
-      "discharge": 1.2259674072265625,
-      "charge": 0.0182037353515625
+      "discharge": 1.917724609375,
+      "charge": 0.05462646484375
     },
     "month": {
       "pv": 148.7185022085905,
       "consumption": 155.72958001494408,
-      "import": 374.4290313720703,
+      "import": 374.4472198486328,
       "export": 26.83335018157959,
-      "discharge": 59.48338574171066,
-      "charge": 0.5916013717651367
+      "discharge": 60.1751429438591,
+      "charge": 0.6280241012573242
     },
     "year": {
       "pv": 1056.3368923515081,
       "consumption": 892.0854338556528,
-      "import": 1341.17605589889,
+      "import": 1341.1942443754524,
       "export": 96.2104845046997,
-      "discharge": 408.0746686011553,
-      "charge": 7.9394953195005655
+      "discharge": 408.7664258033037,
+      "charge": 7.975918048992753
     },
     "lifetime": {
       "pv": 0.0,
@@ -175,6 +175,10 @@
         {
           "time": "2026-05-30 17:00:00",
           "value": 0.018218994140625
+        },
+        {
+          "time": "2026-05-30 18:00:00",
+          "value": 0.0181884765625
         }
       ],
       "export": [
@@ -218,6 +222,10 @@
       "charge": [
         {
           "time": "2026-05-30 18:00:00",
+          "value": 0.0364227294921875
+        },
+        {
+          "time": "2026-05-30 19:00:00",
           "value": 0.0182037353515625
         }
       ],
@@ -232,7 +240,11 @@
         },
         {
           "time": "2026-05-30 18:00:00",
-          "value": 0.49151611328125
+          "value": 0.673553466796875
+        },
+        {
+          "time": "2026-05-30 19:00:00",
+          "value": 0.5097198486328125
         }
       ]
     }
@@ -478,12 +490,25 @@
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.4915,
+      "batt_to_grid": 0.6736,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0364,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.6553
+    },
+    {
+      "time": "2026-05-30 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.5097,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0182,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.4733
+      "balance_error": 0.4915
     }
   ],
   "irradiation": null,
