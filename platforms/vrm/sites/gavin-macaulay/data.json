@@ -1,7 +1,7 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-05-30T17:54:25+02:00",
+  "updated_at": "2026-05-30T18:47:40+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 6.1597442626953125,
@@ -15,24 +15,24 @@
       "consumption": 5.4068603515625,
       "import": 6.9359130859375,
       "export": 0.4004974365234375,
-      "discharge": 0.6070098876953125,
-      "charge": 0.0
+      "discharge": 1.2259674072265625,
+      "charge": 0.0182037353515625
     },
     "month": {
       "pv": 148.7185022085905,
       "consumption": 155.72958001494408,
       "import": 374.4290313720703,
       "export": 26.83335018157959,
-      "discharge": 58.86442822217941,
-      "charge": 0.5733976364135742
+      "discharge": 59.48338574171066,
+      "charge": 0.5916013717651367
     },
     "year": {
       "pv": 1056.3368923515081,
       "consumption": 892.0854338556528,
       "import": 1341.17605589889,
       "export": 96.2104845046997,
-      "discharge": 407.45571108162403,
-      "charge": 7.921291584149003
+      "discharge": 408.0746686011553,
+      "charge": 7.9394953195005655
     },
     "lifetime": {
       "pv": 0.0,
@@ -215,7 +215,12 @@
           "value": 0.05461311340332031
         }
       ],
-      "charge": [],
+      "charge": [
+        {
+          "time": "2026-05-30 18:00:00",
+          "value": 0.0182037353515625
+        }
+      ],
       "discharge": [
         {
           "time": "2026-05-30 16:00:00",
@@ -223,7 +228,11 @@
         },
         {
           "time": "2026-05-30 17:00:00",
-          "value": 0.5447998046875
+          "value": 0.6722412109375
+        },
+        {
+          "time": "2026-05-30 18:00:00",
+          "value": 0.49151611328125
         }
       ]
     }
@@ -456,12 +465,25 @@
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.5448,
+      "batt_to_grid": 0.6722,
       "grid_to_load": 0.0182,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": -12.7241,
-      "balance_error": 0.5617
+      "balance_error": 0.6891
+    },
+    {
+      "time": "2026-05-30 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.4915,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0182,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.4733
     }
   ],
   "irradiation": null,
