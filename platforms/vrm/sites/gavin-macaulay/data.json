@@ -1,36 +1,36 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-05-30T08:42:47+02:00",
+  "updated_at": "2026-05-30T11:03:52+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.98828125,
+    "today_kwh": 4.1180877685546875,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 0.98828125,
-      "consumption": 0.0,
-      "import": 6.662841796875,
-      "export": 0.382293701171875,
+      "pv": 4.1180877685546875,
+      "consumption": 1.419952392578125,
+      "import": 6.89947509765625,
+      "export": 0.4004974365234375,
       "discharge": 0.0,
       "charge": 0.0
     },
     "month": {
-      "pv": 143.5470391958952,
-      "consumption": 150.32271966338158,
-      "import": 374.1559600830078,
-      "export": 26.815146446228027,
+      "pv": 146.67684571444988,
+      "consumption": 151.7426720559597,
+      "import": 374.39259338378906,
+      "export": 26.83335018157959,
       "discharge": 58.2574183344841,
       "charge": 0.5733976364135742
     },
     "year": {
-      "pv": 1051.1654293388128,
-      "consumption": 886.6785735040903,
-      "import": 1340.9029846098274,
-      "export": 96.19228076934814,
+      "pv": 1054.2952358573675,
+      "consumption": 888.0985258966684,
+      "import": 1341.1396179106086,
+      "export": 96.2104845046997,
       "discharge": 406.8487011939287,
       "charge": 7.921291584149003
     },
@@ -50,10 +50,31 @@
         },
         {
           "time": "2026-05-30 08:00:00",
-          "value": 0.71875
+          "value": 1.291717529296875
+        },
+        {
+          "time": "2026-05-30 09:00:00",
+          "value": 1.954010009765625
+        },
+        {
+          "time": "2026-05-30 10:00:00",
+          "value": 0.6028289794921875
         }
       ],
-      "consumption": [],
+      "consumption": [
+        {
+          "time": "2026-05-30 08:00:00",
+          "value": 0.036407470703125
+        },
+        {
+          "time": "2026-05-30 09:00:00",
+          "value": 0.61895751953125
+        },
+        {
+          "time": "2026-05-30 10:00:00",
+          "value": 0.76458740234375
+        }
+      ],
       "import": [
         {
           "time": "2026-05-30 00:00:00",
@@ -89,7 +110,11 @@
         },
         {
           "time": "2026-05-30 08:00:00",
-          "value": 0.436920166015625
+          "value": 0.655364990234375
+        },
+        {
+          "time": "2026-05-30 09:00:00",
+          "value": 0.0181884765625
         }
       ],
       "export": [
@@ -127,7 +152,7 @@
         },
         {
           "time": "2026-05-30 08:00:00",
-          "value": 0.03640937805175781
+          "value": 0.05461311340332031
         }
       ],
       "charge": [],
@@ -241,16 +266,42 @@
     },
     {
       "time": "2026-05-30 08:00:00",
-      "pv_to_load": 0.0,
+      "pv_to_load": 0.0364,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0364,
+      "pv_to_grid": 0.0546,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 0.4369,
+      "grid_to_load": 0.6554,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 1.1193
+      "self_consumed": 0.0364,
+      "self_sufficient": -17.0008,
+      "balance_error": 1.8561
+    },
+    {
+      "time": "2026-05-30 09:00:00",
+      "pv_to_load": 0.619,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0182,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.619,
+      "self_sufficient": 0.9706,
+      "balance_error": 1.3532
+    },
+    {
+      "time": "2026-05-30 10:00:00",
+      "pv_to_load": 0.6028,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.6028,
+      "self_sufficient": 1.0,
+      "balance_error": -0.1618
     }
   ],
   "irradiation": null,
