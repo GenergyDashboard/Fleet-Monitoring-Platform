@@ -1,37 +1,37 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-06-04T16:12:45+02:00",
+  "updated_at": "2026-06-04T19:21:51+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 4.3743896484375,
-    "status": "unknown",
+    "today_kwh": 4.39569091796875,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 4.3743896484375,
-      "consumption": 8.2313232421875,
-      "import": 0.12743111327290535,
-      "export": 0.18204445391893387,
-      "discharge": 5.95172119140625,
+      "pv": 4.39569091796875,
+      "consumption": 8.58990478515625,
+      "import": 0.20024888589978218,
+      "export": 0.34588444977998734,
+      "discharge": 6.412353515625,
       "charge": 0.0
     },
     "month": {
-      "pv": 42.321624755859375,
-      "consumption": 41.69024658203125,
-      "import": 0.12743111327290535,
-      "export": 0.18204445391893387,
-      "discharge": 40.21038818359375,
+      "pv": 42.342926025390625,
+      "consumption": 42.048828125,
+      "import": 0.20024888589978218,
+      "export": 0.34588444977998734,
+      "discharge": 40.6710205078125,
       "charge": 0.0
     },
     "year": {
-      "pv": 2018.8764104675502,
-      "consumption": 2001.2407267354429,
-      "import": 981.6251680715941,
-      "export": 520.1752826329321,
-      "discharge": 1806.6354295015335,
+      "pv": 2018.8977117370814,
+      "consumption": 2001.5993082784116,
+      "import": 981.697985844221,
+      "export": 520.3391226287931,
+      "discharge": 1807.0960618257523,
       "charge": 4.630119271576405
     },
     "lifetime": {
@@ -82,7 +82,7 @@
         },
         {
           "time": "2026-06-04 16:00:00",
-          "value": 0.003631591796875
+          "value": 0.024932861328125
         }
       ],
       "consumption": [
@@ -124,7 +124,7 @@
         },
         {
           "time": "2026-06-04 16:00:00",
-          "value": 0.036407470703125
+          "value": 0.394989013671875
         }
       ],
       "import": [
@@ -139,6 +139,10 @@
         {
           "time": "2026-06-04 11:00:00",
           "value": 0.036408886313438416
+        },
+        {
+          "time": "2026-06-04 17:00:00",
+          "value": 0.07281777262687683
         }
       ],
       "export": [
@@ -153,6 +157,10 @@
         {
           "time": "2026-06-04 11:00:00",
           "value": 0.03640890121459961
+        },
+        {
+          "time": "2026-06-04 17:00:00",
+          "value": 0.16383999586105347
         }
       ],
       "charge": [],
@@ -212,6 +220,14 @@
         {
           "time": "2026-06-04 15:00:00",
           "value": 0.035797119140625
+        },
+        {
+          "time": "2026-06-04 16:00:00",
+          "value": 0.20574951171875
+        },
+        {
+          "time": "2026-06-04 17:00:00",
+          "value": 0.2548828125
         }
       ]
     }
@@ -427,16 +443,29 @@
     },
     {
       "time": "2026-06-04 16:00:00",
-      "pv_to_load": 0.0036,
+      "pv_to_load": 0.0249,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
+      "batt_to_load": 0.2057,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0036,
+      "self_consumed": 0.2307,
       "self_sufficient": 1.0,
-      "balance_error": -0.0328
+      "balance_error": -0.1643
+    },
+    {
+      "time": "2026-06-04 17:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.2549,
+      "grid_to_load": 0.0728,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.1639
     }
   ],
   "irradiation": null,
