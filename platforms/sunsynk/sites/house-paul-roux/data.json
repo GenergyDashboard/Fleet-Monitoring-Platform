@@ -1,13 +1,13 @@
 {
   "site_id": "house-paul-roux",
   "platform": "sunsynk",
-  "updated_at": "2026-06-06T18:51:53+02:00",
+  "updated_at": "2026-06-06T20:02:05+02:00",
   "current": {
-    "power_kw": 0.006,
+    "power_kw": 0.008,
     "today_kwh": 16.6,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -94,7 +94,11 @@
         },
         {
           "time": "2026-06-06 18:00:00",
-          "value": 0.005
+          "value": 0.006
+        },
+        {
+          "time": "2026-06-06 19:00:00",
+          "value": 0.007
         }
       ],
       "consumption": [
@@ -148,6 +152,10 @@
         },
         {
           "time": "2026-06-06 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 19:00:00",
           "value": 0.0
         }
       ],
@@ -203,6 +211,10 @@
         {
           "time": "2026-06-06 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-06 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -256,6 +268,10 @@
         },
         {
           "time": "2026-06-06 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 19:00:00",
           "value": 0.0
         }
       ],
@@ -311,6 +327,10 @@
         {
           "time": "2026-06-06 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-06 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -364,6 +384,10 @@
         },
         {
           "time": "2026-06-06 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 19:00:00",
           "value": 0.0
         }
       ]
@@ -537,7 +561,20 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.005
+      "balance_error": 0.006
+    },
+    {
+      "time": "2026-06-06 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.007
     }
   ],
   "irradiation": null,
