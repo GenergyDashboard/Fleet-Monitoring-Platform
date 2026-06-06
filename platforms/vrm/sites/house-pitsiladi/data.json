@@ -1,37 +1,37 @@
 {
   "site_id": "house-pitsiladi",
   "platform": "vrm",
-  "updated_at": "2026-06-06T14:05:26+02:00",
+  "updated_at": "2026-06-06T16:04:19+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 27.804705564049073,
+    "today_kwh": 34.002380628255196,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 27.804705564049073,
-      "consumption": 20.68312555551529,
-      "import": 11.951875202357769,
+      "pv": 34.002380628255196,
+      "consumption": 34.60987899452448,
+      "import": 12.051875203847885,
       "export": 2.1481246948242188,
-      "discharge": 10.443533562123775,
+      "discharge": 10.472796529531479,
       "charge": 0.018204450607299805
     },
     "month": {
-      "pv": 144.46030677075032,
-      "consumption": 161.4035898486618,
-      "import": 190.8796349093318,
+      "pv": 150.65798183495644,
+      "consumption": 175.33034328767098,
+      "import": 190.97963491082191,
       "export": 31.05678177252412,
-      "discharge": 127.76975779206259,
+      "discharge": 127.7990207594703,
       "charge": 0.036408841609954834
     },
     "year": {
-      "pv": 7577.587812726502,
-      "consumption": 7053.744899512269,
-      "import": 1969.5620215330273,
+      "pv": 7583.785487790708,
+      "consumption": 7067.671652951278,
+      "import": 1969.6620215345174,
       "export": 273.357941461727,
-      "discharge": 4666.964199446753,
+      "discharge": 4666.993462414161,
       "charge": 0.5181625969707966
     },
     "lifetime": {
@@ -74,7 +74,11 @@
         },
         {
           "time": "2026-06-06 14:00:00",
-          "value": 0.1872185617685318
+          "value": 4.841250896453857
+        },
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 1.5436427295207977
         }
       ],
       "consumption": [
@@ -108,7 +112,15 @@
         },
         {
           "time": "2026-06-06 14:00:00",
-          "value": 0.1092376708984375
+          "value": 7.8825225830078125
+        },
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 6.06208872795105
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0913797989487648
         }
       ],
       "import": [
@@ -150,6 +162,10 @@
         },
         {
           "time": "2026-06-06 13:00:00",
+          "value": 0.10000000149011612
+        },
+        {
+          "time": "2026-06-06 15:00:00",
           "value": 0.10000000149011612
         }
       ],
@@ -209,6 +225,14 @@
         {
           "time": "2026-06-06 09:00:00",
           "value": 0.4354451522231102
+        },
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.01142035610973835
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.01784261129796505
         }
       ]
     }
@@ -398,16 +422,42 @@
     },
     {
       "time": "2026-06-06 14:00:00",
-      "pv_to_load": 0.1092,
+      "pv_to_load": 4.8413,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.1092,
+      "self_consumed": 4.8413,
       "self_sufficient": 1.0,
-      "balance_error": 0.078
+      "balance_error": -3.0413
+    },
+    {
+      "time": "2026-06-06 15:00:00",
+      "pv_to_load": 1.5436,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0114,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.1,
+      "grid_to_batt": 0.0,
+      "self_consumed": 1.5551,
+      "self_sufficient": 0.9835,
+      "balance_error": -4.407
+    },
+    {
+      "time": "2026-06-06 16:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0178,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0178,
+      "self_sufficient": 1.0,
+      "balance_error": -0.0735
     }
   ],
   "irradiation": null,
