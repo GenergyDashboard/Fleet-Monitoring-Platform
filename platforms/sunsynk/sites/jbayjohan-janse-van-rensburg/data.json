@@ -1,17 +1,17 @@
 {
   "site_id": "jbayjohan-janse-van-rensburg",
   "platform": "sunsynk",
-  "updated_at": "2026-06-06T14:18:16+02:00",
+  "updated_at": "2026-06-06T16:13:50+02:00",
   "current": {
-    "power_kw": 0,
-    "today_kwh": 0.0,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "power_kw": 0.579,
+    "today_kwh": 0.1,
+    "status": "online",
+    "status_severity": "ok",
+    "status_reason": "Generating normally"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
+      "pv": 0.1,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 15.1,
+      "pv": 15.2,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 1119.4,
+      "pv": 1119.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,16 +35,104 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 8210.0,
+      "pv": 8210.1,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
-    "hourly": {}
+    "hourly": {
+      "pv": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.116
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.091
+        }
+      ],
+      "consumption": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0
+        }
+      ],
+      "import": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0
+        }
+      ],
+      "export": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0
+        }
+      ],
+      "charge": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0
+        }
+      ],
+      "discharge": [
+        {
+          "time": "2026-06-06 15:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-06 16:00:00",
+          "value": 0.0
+        }
+      ]
+    }
   },
-  "energy_powerflow_hourly": [],
+  "energy_powerflow_hourly": [
+    {
+      "time": "2026-06-06 15:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.116
+    },
+    {
+      "time": "2026-06-06 16:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.091
+    }
+  ],
   "irradiation": null,
   "irradiation_forecast": null,
   "financial": null,
