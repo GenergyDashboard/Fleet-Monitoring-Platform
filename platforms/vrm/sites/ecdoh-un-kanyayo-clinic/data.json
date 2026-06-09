@@ -1,13 +1,13 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-06-09T18:19:02+02:00",
+  "updated_at": "2026-06-09T20:23:52+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 15.472564697265625,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,7 +15,7 @@
       "consumption": 8.537200927734375,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 6.88494873046875,
+      "discharge": 8.2138671875,
       "charge": 0.0
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 81.06436157226562,
       "import": 0.273066658526659,
       "export": 0.40229329094290733,
-      "discharge": 79.46737670898438,
+      "discharge": 80.79629516601562,
       "charge": 0.0
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 2040.6148417256773,
       "import": 981.7708036168478,
       "export": 520.395531469956,
-      "discharge": 1845.8924180269241,
+      "discharge": 1847.2213364839554,
       "charge": 4.630119271576405
     },
     "lifetime": {
@@ -169,7 +169,15 @@
         },
         {
           "time": "2026-06-09 18:00:00",
-          "value": 0.20025634765625
+          "value": 0.800994873046875
+        },
+        {
+          "time": "2026-06-09 19:00:00",
+          "value": 0.582550048828125
+        },
+        {
+          "time": "2026-06-09 20:00:00",
+          "value": 0.1456298828125
         }
       ]
     }
@@ -415,218 +423,42 @@
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.2003,
+      "batt_to_grid": 0.801,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.2003
+      "balance_error": 0.801
+    },
+    {
+      "time": "2026-06-09 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.5826,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.5826
+    },
+    {
+      "time": "2026-06-09 20:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.1456,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.1456
     }
   ],
-  "irradiation": {
-    "source": "open-meteo",
-    "today_total": 2.833,
-    "today_hourly": [
-      {
-        "time": "2026-06-09 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 08:00:00",
-        "value": 58.0
-      },
-      {
-        "time": "2026-06-09 09:00:00",
-        "value": 214.0
-      },
-      {
-        "time": "2026-06-09 10:00:00",
-        "value": 336.0
-      },
-      {
-        "time": "2026-06-09 11:00:00",
-        "value": 396.0
-      },
-      {
-        "time": "2026-06-09 12:00:00",
-        "value": 459.0
-      },
-      {
-        "time": "2026-06-09 13:00:00",
-        "value": 434.0
-      },
-      {
-        "time": "2026-06-09 14:00:00",
-        "value": 445.0
-      },
-      {
-        "time": "2026-06-09 15:00:00",
-        "value": 292.0
-      },
-      {
-        "time": "2026-06-09 16:00:00",
-        "value": 154.0
-      },
-      {
-        "time": "2026-06-09 17:00:00",
-        "value": 45.0
-      },
-      {
-        "time": "2026-06-09 18:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-09 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
-  "irradiation_forecast": {
-    "date": "2026-06-10",
-    "total_forecast": 3.393,
-    "hourly": [
-      {
-        "time": "2026-06-10 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 08:00:00",
-        "value": 59.0
-      },
-      {
-        "time": "2026-06-10 09:00:00",
-        "value": 212.0
-      },
-      {
-        "time": "2026-06-10 10:00:00",
-        "value": 369.0
-      },
-      {
-        "time": "2026-06-10 11:00:00",
-        "value": 488.0
-      },
-      {
-        "time": "2026-06-10 12:00:00",
-        "value": 550.0
-      },
-      {
-        "time": "2026-06-10 13:00:00",
-        "value": 552.0
-      },
-      {
-        "time": "2026-06-10 14:00:00",
-        "value": 492.0
-      },
-      {
-        "time": "2026-06-10 15:00:00",
-        "value": 380.0
-      },
-      {
-        "time": "2026-06-10 16:00:00",
-        "value": 227.0
-      },
-      {
-        "time": "2026-06-10 17:00:00",
-        "value": 64.0
-      },
-      {
-        "time": "2026-06-10 18:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-06-10 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
+  "irradiation": null,
+  "irradiation_forecast": null,
   "financial": null,
   "performance": {
     "method": "empirical",
