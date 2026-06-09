@@ -3,15 +3,15 @@
   "name": "Embassy",
   "platform": "fusionsolar",
   "capacity_kwp": 41.6,
-  "updated_at": "2026-06-09T08:22:31+02:00",
+  "updated_at": "2026-06-09T09:41:23+02:00",
   "current": {
-    "power_kw": 0.28,
-    "today_kwh": 0.63,
-    "month_kwh": 625.8,
-    "total_kwh": 95261.64,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": null
+    "power_kw": 3.27,
+    "today_kwh": 3.55,
+    "month_kwh": 628.72,
+    "total_kwh": 95264.56,
+    "status": "fault",
+    "status_severity": "critical",
+    "status_reason": "Inverter reports fault state."
   },
   "today_hourly": [
     {
@@ -45,6 +45,10 @@
     {
       "time": "2026-06-09 07:00:00",
       "pv_kwh": 0.28
+    },
+    {
+      "time": "2026-06-09 08:00:00",
+      "pv_kwh": 3.27
     }
   ],
   "irradiation": {
@@ -54,23 +58,23 @@
   },
   "energy": {
     "today": {
-      "pv": 0.28,
+      "pv": 3.55,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 0.28,
-      "pv_to_load": 0.28,
+      "consumption": 3.55,
+      "pv_to_load": 3.55,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.28
+      "self_consumed": 3.55
     },
     "month": {
-      "pv": 625.17,
+      "pv": 628.72,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
@@ -86,7 +90,7 @@
       "self_consumed": 0.0
     },
     "year": {
-      "pv": 27010.75,
+      "pv": 27014.3,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
@@ -102,7 +106,7 @@
       "self_consumed": 0.0
     },
     "lifetime": {
-      "pv": 95261.01,
+      "pv": 95264.56,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
@@ -150,6 +154,10 @@
         {
           "time": "2026-06-09 07:00:00",
           "value": 0.28
+        },
+        {
+          "time": "2026-06-09 08:00:00",
+          "value": 3.27
         }
       ],
       "import": [
@@ -183,6 +191,10 @@
         },
         {
           "time": "2026-06-09 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-09 08:00:00",
           "value": 0.0
         }
       ],
@@ -218,6 +230,10 @@
         {
           "time": "2026-06-09 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-09 08:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -252,6 +268,10 @@
         {
           "time": "2026-06-09 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-09 08:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -285,6 +305,10 @@
         },
         {
           "time": "2026-06-09 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-09 08:00:00",
           "value": 0.0
         }
       ]
@@ -363,6 +387,16 @@
       {
         "time": "2026-06-09 07:00:00",
         "pv_to_load": 0.28,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-06-09 08:00:00",
+        "pv_to_load": 3.27,
         "pv_to_batt": 0.0,
         "pv_to_grid": 0.0,
         "batt_to_load": 0.0,
