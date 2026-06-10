@@ -1,13 +1,13 @@
 {
   "site_id": "pote-cottages",
   "platform": "sunsynk",
-  "updated_at": "2026-06-09T21:00:44+02:00",
+  "updated_at": "2026-06-10T10:15:42+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.0,
-    "status": "offline",
-    "status_severity": "info",
-    "status_reason": "Outside daylight hours"
+    "status": "underperforming",
+    "status_severity": "warning",
+    "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
@@ -42,60 +42,9 @@
       "charge": 0.0,
       "discharge": 0.0
     },
-    "hourly": {
-      "pv": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.186
-        }
-      ],
-      "consumption": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.0
-        }
-      ],
-      "import": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.0
-        }
-      ],
-      "export": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.0
-        }
-      ],
-      "charge": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.0
-        }
-      ],
-      "discharge": [
-        {
-          "time": "2026-06-09 12:00:00",
-          "value": 0.0
-        }
-      ]
-    }
+    "hourly": {}
   },
-  "energy_powerflow_hourly": [
-    {
-      "time": "2026-06-09 12:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 0.186
-    }
-  ],
+  "energy_powerflow_hourly": [],
   "irradiation": null,
   "irradiation_forecast": null,
   "financial": null,
