@@ -3,7 +3,7 @@
   "name": "BIMBO NRG",
   "platform": "fusionsolar",
   "capacity_kwp": 589.0,
-  "updated_at": "2026-06-12T08:55:21+02:00",
+  "updated_at": "2026-06-12T09:26:35+02:00",
   "current": {
     "power_kw": null,
     "today_kwh": 0.0,
@@ -45,12 +45,53 @@
     {
       "time": "2026-06-12 07:00:00",
       "pv_kwh": 0.0
+    },
+    {
+      "time": "2026-06-12 08:00:00",
+      "pv_kwh": 0.0
     }
   ],
   "irradiation": {
-    "source": null,
-    "today_total": null,
-    "today_hourly": []
+    "source": "fusionsolar",
+    "today_total": 0.03,
+    "today_hourly": [
+      {
+        "time": "2026-06-12 00:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 01:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 02:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 03:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 04:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 05:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 06:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 07:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-06-12 08:00:00",
+        "value": 0.028
+      }
+    ]
   },
   "energy": {
     "today": {
@@ -150,6 +191,10 @@
         {
           "time": "2026-06-12 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-12 08:00:00",
+          "value": 0.0
         }
       ],
       "import": [
@@ -183,6 +228,10 @@
         },
         {
           "time": "2026-06-12 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-12 08:00:00",
           "value": 0.0
         }
       ],
@@ -218,6 +267,10 @@
         {
           "time": "2026-06-12 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-12 08:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -252,6 +305,10 @@
         {
           "time": "2026-06-12 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-12 08:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -285,6 +342,10 @@
         },
         {
           "time": "2026-06-12 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-12 08:00:00",
           "value": 0.0
         }
       ]
@@ -369,13 +430,69 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-06-12 08:00:00",
+        "pv_to_load": 0.0,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
   "financial": null,
   "performance": {
     "method": "empirical",
-    "hourly_expected": [],
+    "hourly_expected": [
+      {
+        "time": "2026-06-12 00:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 01:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 02:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 03:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 04:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 05:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 06:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 07:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-12 08:00:00",
+        "ghi_w_m2": 0.0,
+        "expected_kwh": 0.0
+      }
+    ],
     "today_expected_total": 0.0,
     "today_actual_total": 0.0,
     "performance_pct": null,
