@@ -1,17 +1,17 @@
 {
   "site_id": "pote-main",
   "platform": "sunsynk",
-  "updated_at": "2026-06-12T08:56:30+02:00",
+  "updated_at": "2026-06-12T09:56:51+02:00",
   "current": {
-    "power_kw": 2.608,
-    "today_kwh": 1.3,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": "Generating normally"
+    "power_kw": 0,
+    "today_kwh": 3.8,
+    "status": "unknown",
+    "status_severity": "info",
+    "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 1.3,
+      "pv": 3.8,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 304.4,
+      "pv": 306.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 5270.1,
+      "pv": 5272.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 29657.4,
+      "pv": 29659.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -78,7 +78,11 @@
         },
         {
           "time": "2026-06-12 08:00:00",
-          "value": 0.65
+          "value": 0.885
+        },
+        {
+          "time": "2026-06-12 09:00:00",
+          "value": 2.334
         }
       ],
       "consumption": [
@@ -116,6 +120,10 @@
         },
         {
           "time": "2026-06-12 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-12 09:00:00",
           "value": 0.0
         }
       ],
@@ -155,6 +163,10 @@
         {
           "time": "2026-06-12 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-12 09:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -192,6 +204,10 @@
         },
         {
           "time": "2026-06-12 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-12 09:00:00",
           "value": 0.0
         }
       ],
@@ -231,6 +247,10 @@
         {
           "time": "2026-06-12 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-12 09:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -268,6 +288,10 @@
         },
         {
           "time": "2026-06-12 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-12 09:00:00",
           "value": 0.0
         }
       ]
@@ -389,7 +413,20 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.65
+      "balance_error": 0.885
+    },
+    {
+      "time": "2026-06-12 09:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 2.334
     }
   ],
   "irradiation": null,
