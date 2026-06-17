@@ -3,15 +3,15 @@
   "name": "BIMBO NRG",
   "platform": "fusionsolar",
   "capacity_kwp": 589.0,
-  "updated_at": "2026-06-17T10:17:56+02:00",
+  "updated_at": "2026-06-17T10:48:05+02:00",
   "current": {
     "power_kw": null,
     "today_kwh": 0.0,
     "month_kwh": 0.0,
     "total_kwh": 7549.35,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": null
+    "status": "underperforming",
+    "status_severity": "warn",
+    "status_reason": "Zero PV across daylight hours despite reporting."
   },
   "today_hourly": [
     {
@@ -49,11 +49,15 @@
     {
       "time": "2026-06-17 08:00:00",
       "pv_kwh": 0.0
+    },
+    {
+      "time": "2026-06-17 09:00:00",
+      "pv_kwh": 0.0
     }
   ],
   "irradiation": {
     "source": "fusionsolar",
-    "today_total": 0.07,
+    "today_total": 0.28,
     "today_hourly": [
       {
         "time": "2026-06-17 00:00:00",
@@ -90,6 +94,10 @@
       {
         "time": "2026-06-17 08:00:00",
         "value": 0.066
+      },
+      {
+        "time": "2026-06-17 09:00:00",
+        "value": 0.216
       }
     ]
   },
@@ -112,49 +120,49 @@
     },
     "month": {
       "pv": 0.0,
-      "import": 197347.97,
+      "import": 198003.97,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 197347.97,
+      "consumption": 198003.97,
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 197347.97,
+      "grid_to_load": 198003.97,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0
     },
     "year": {
       "pv": 7549.35,
-      "import": 1060119.88,
+      "import": 1060775.88,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 1067669.23,
+      "consumption": 1068325.23,
       "pv_to_load": 7549.35,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 1060119.88,
+      "grid_to_load": 1060775.88,
       "grid_to_batt": 0.0,
       "self_consumed": 7549.35
     },
     "lifetime": {
       "pv": 7549.35,
-      "import": 1060119.88,
+      "import": 1060775.88,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 1067669.23,
+      "consumption": 1068325.23,
       "pv_to_load": 7549.35,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 1060119.88,
+      "grid_to_load": 1060775.88,
       "grid_to_batt": 0.0,
       "self_consumed": 7549.35
     },
@@ -195,6 +203,10 @@
         {
           "time": "2026-06-17 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-17 09:00:00",
+          "value": 0.0
         }
       ],
       "import": [
@@ -232,6 +244,10 @@
         },
         {
           "time": "2026-06-17 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-17 09:00:00",
           "value": 0.0
         }
       ],
@@ -271,6 +287,10 @@
         {
           "time": "2026-06-17 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-17 09:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -309,6 +329,10 @@
         {
           "time": "2026-06-17 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-17 09:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -346,6 +370,10 @@
         },
         {
           "time": "2026-06-17 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-17 09:00:00",
           "value": 0.0
         }
       ]
@@ -440,6 +468,16 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-06-17 09:00:00",
+        "pv_to_load": 0.0,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
@@ -490,6 +528,11 @@
       {
         "time": "2026-06-17 08:00:00",
         "ghi_w_m2": 0.1,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-06-17 09:00:00",
+        "ghi_w_m2": 0.2,
         "expected_kwh": 0.0
       }
     ],
