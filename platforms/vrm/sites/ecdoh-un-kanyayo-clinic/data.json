@@ -1,7 +1,7 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-06-17T16:20:38+02:00",
+  "updated_at": "2026-06-17T18:30:13+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 20.067138671875,
@@ -12,26 +12,26 @@
   "energy": {
     "today": {
       "pv": 20.067138671875,
-      "consumption": 8.872314453125,
+      "consumption": 9.022705078125,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 5.00604248046875,
+      "discharge": 6.82171630859375,
       "charge": 0.0
     },
     "month": {
       "pv": 244.93539428710938,
-      "consumption": 147.36801147460938,
+      "consumption": 147.51840209960938,
       "import": 0.273066658526659,
       "export": 0.40229329094290733,
-      "discharge": 162.62313842773438,
+      "discharge": 164.43881225585938,
       "charge": 0.0
     },
     "year": {
       "pv": 2221.4901799988,
-      "consumption": 2106.918491628021,
+      "consumption": 2107.068882253021,
       "import": 981.7708036168478,
       "export": 520.395531469956,
-      "discharge": 1929.0481797456741,
+      "discharge": 1930.8638535737991,
       "charge": 4.630119271576405
     },
     "lifetime": {
@@ -124,7 +124,7 @@
         },
         {
           "time": "2026-06-17 16:00:00",
-          "value": 0.18206787109375
+          "value": 0.33245849609375
         }
       ],
       "import": [],
@@ -162,6 +162,18 @@
         {
           "time": "2026-06-17 07:00:00",
           "value": 0.1636962890625
+        },
+        {
+          "time": "2026-06-17 16:00:00",
+          "value": 0.48675537109375
+        },
+        {
+          "time": "2026-06-17 17:00:00",
+          "value": 0.9466552734375
+        },
+        {
+          "time": "2026-06-17 18:00:00",
+          "value": 0.38226318359375
         }
       ]
     }
@@ -377,16 +389,42 @@
     },
     {
       "time": "2026-06-17 16:00:00",
-      "pv_to_load": 0.0679,
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.3325,
+      "batt_to_grid": 0.1543,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.3325,
+      "self_sufficient": 1.0,
+      "balance_error": 0.2222
+    },
+    {
+      "time": "2026-06-17 17:00:00",
+      "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
+      "batt_to_grid": 0.9467,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0679,
-      "self_sufficient": 1.0,
-      "balance_error": -0.1141
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.9467
+    },
+    {
+      "time": "2026-06-17 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.3823,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.3823
     }
   ],
   "irradiation": null,
