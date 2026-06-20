@@ -1,37 +1,37 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-06-20T14:13:04+02:00",
+  "updated_at": "2026-06-20T16:29:10+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 8.58303689956665,
+    "today_kwh": 8.741361379623413,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 8.58303689956665,
-      "consumption": 2.10052490234375,
-      "import": 0.23665761947631836,
+      "pv": 8.741361379623413,
+      "consumption": 2.8457329273223877,
+      "import": 0.27306652069091797,
       "export": 0.0,
-      "discharge": 3.1469192504882812,
+      "discharge": 3.1662986278533936,
       "charge": 0.09102225303649902
     },
     "month": {
-      "pv": 119.36059531010687,
-      "consumption": 66.21285852044821,
-      "import": 12.979765892028809,
+      "pv": 119.51891979016364,
+      "consumption": 66.95806654542685,
+      "import": 13.016174793243408,
       "export": 1.1832888722419739,
-      "discharge": 78.3444732837379,
+      "discharge": 78.36385266110301,
       "charge": 2.0680510476231575
     },
     "year": {
-      "pv": 1144.4990556519479,
-      "consumption": 905.0848527774215,
-      "import": 108.64412212371826,
+      "pv": 1144.6573801320046,
+      "consumption": 905.8300608024001,
+      "import": 108.68053102493286,
       "export": 3.3678221106529236,
-      "discharge": 734.4135745745152,
+      "discharge": 734.4329539518803,
       "charge": 21.1454582773149
     },
     "lifetime": {
@@ -70,7 +70,15 @@
         },
         {
           "time": "2026-06-20 14:00:00",
-          "value": 0.033660888671875
+          "value": 0.09342193603515625
+        },
+        {
+          "time": "2026-06-20 15:00:00",
+          "value": 0.08428955078125
+        },
+        {
+          "time": "2026-06-20 16:00:00",
+          "value": 0.014273881912231445
         }
       ],
       "consumption": [
@@ -104,7 +112,15 @@
         },
         {
           "time": "2026-06-20 14:00:00",
-          "value": 0.036407470703125
+          "value": 0.30829548835754395
+        },
+        {
+          "time": "2026-06-20 15:00:00",
+          "value": 0.34588623046875
+        },
+        {
+          "time": "2026-06-20 16:00:00",
+          "value": 0.12743377685546875
         }
       ],
       "import": [
@@ -151,6 +167,10 @@
         {
           "time": "2026-06-20 13:00:00",
           "value": 0.018204212188720703
+        },
+        {
+          "time": "2026-06-20 15:00:00",
+          "value": 0.03640890121459961
         }
       ],
       "export": [],
@@ -212,6 +232,10 @@
         {
           "time": "2026-06-20 11:00:00",
           "value": 0.0045623779296875
+        },
+        {
+          "time": "2026-06-20 14:00:00",
+          "value": 0.019379377365112305
         }
       ]
     }
@@ -401,16 +425,42 @@
     },
     {
       "time": "2026-06-20 14:00:00",
-      "pv_to_load": 0.0337,
+      "pv_to_load": 0.0934,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0194,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1128,
+      "self_sufficient": 1.0,
+      "balance_error": -0.1955
+    },
+    {
+      "time": "2026-06-20 15:00:00",
+      "pv_to_load": 0.0843,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0364,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0843,
+      "self_sufficient": 0.8947,
+      "balance_error": -0.2252
+    },
+    {
+      "time": "2026-06-20 16:00:00",
+      "pv_to_load": 0.0143,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0337,
+      "self_consumed": 0.0143,
       "self_sufficient": 1.0,
-      "balance_error": -0.0027
+      "balance_error": -0.1132
     }
   ],
   "irradiation": null,
