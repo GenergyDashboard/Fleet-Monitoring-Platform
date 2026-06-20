@@ -1,17 +1,17 @@
 {
   "site_id": "paul-and-carole-lynch",
   "platform": "sunsynk",
-  "updated_at": "2026-06-20T18:06:56+02:00",
+  "updated_at": "2026-06-20T19:45:53+02:00",
   "current": {
     "power_kw": 0.002,
-    "today_kwh": 19.3,
-    "status": "unknown",
+    "today_kwh": 19.4,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 19.3,
+      "pv": 19.4,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 323.9,
+      "pv": 324.0,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 3310.4,
+      "pv": 3310.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 15751.4,
+      "pv": 15751.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -118,7 +118,11 @@
         },
         {
           "time": "2026-06-20 18:00:00",
-          "value": 0.0
+          "value": 0.002
+        },
+        {
+          "time": "2026-06-20 19:00:00",
+          "value": 0.002
         }
       ],
       "consumption": [
@@ -196,6 +200,10 @@
         },
         {
           "time": "2026-06-20 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-20 19:00:00",
           "value": 0.0
         }
       ],
@@ -275,6 +283,10 @@
         {
           "time": "2026-06-20 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-20 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -352,6 +364,10 @@
         },
         {
           "time": "2026-06-20 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-20 19:00:00",
           "value": 0.0
         }
       ],
@@ -431,6 +447,10 @@
         {
           "time": "2026-06-20 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-20 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -508,6 +528,10 @@
         },
         {
           "time": "2026-06-20 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-20 19:00:00",
           "value": 0.0
         }
       ]
@@ -759,7 +783,20 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.0
+      "balance_error": 0.002
+    },
+    {
+      "time": "2026-06-20 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.002
     }
   ],
   "irradiation": null,
