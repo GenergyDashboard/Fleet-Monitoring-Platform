@@ -1,37 +1,37 @@
 {
   "site_id": "house-richards",
   "platform": "vrm",
-  "updated_at": "2026-06-21T13:27:27+02:00",
+  "updated_at": "2026-06-21T15:20:50+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 1.602935791015625,
+    "today_kwh": 2.08441162109375,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 1.602935791015625,
-      "consumption": 7.376434326171875,
-      "import": 18.478515625,
+      "pv": 2.08441162109375,
+      "consumption": 8.905731201171875,
+      "import": 18.642578125,
       "export": 1.45654296875,
-      "discharge": 0.1845703125,
+      "discharge": 0.221954345703125,
       "charge": 0.0
     },
     "month": {
-      "pv": 49.39990234375,
-      "consumption": 233.86705017089844,
-      "import": 723.701171875,
+      "pv": 49.881378173828125,
+      "consumption": 235.39634704589844,
+      "import": 723.865234375,
       "export": 71.61669921875,
-      "discharge": 17.815170288085938,
+      "discharge": 17.852554321289062,
       "charge": 0.7832489013671875
     },
     "year": {
-      "pv": 781.2896983623505,
-      "consumption": 2642.3010551929474,
-      "import": 4503.2177734375,
+      "pv": 781.7711741924286,
+      "consumption": 2643.8303520679474,
+      "import": 4503.3818359375,
       "export": 700.4163818359375,
-      "discharge": 503.0229003429413,
+      "discharge": 503.0602843761444,
       "charge": 5.2129364013671875
     },
     "lifetime": {
@@ -70,7 +70,15 @@
         },
         {
           "time": "2026-06-21 13:00:00",
-          "value": 0.106903076171875
+          "value": 0.30462646484375
+        },
+        {
+          "time": "2026-06-21 14:00:00",
+          "value": 0.2130126953125
+        },
+        {
+          "time": "2026-06-21 15:00:00",
+          "value": 0.07073974609375
         }
       ],
       "consumption": [
@@ -100,7 +108,15 @@
         },
         {
           "time": "2026-06-21 13:00:00",
-          "value": 0.1640625
+          "value": 0.509765625
+        },
+        {
+          "time": "2026-06-21 14:00:00",
+          "value": 0.8916015625
+        },
+        {
+          "time": "2026-06-21 15:00:00",
+          "value": 0.2919921875
         }
       ],
       "import": [
@@ -143,6 +159,14 @@
         {
           "time": "2026-06-21 09:00:00",
           "value": 0.1640625
+        },
+        {
+          "time": "2026-06-21 14:00:00",
+          "value": 0.126953125
+        },
+        {
+          "time": "2026-06-21 15:00:00",
+          "value": 0.037109375
         }
       ],
       "export": [
@@ -216,6 +240,10 @@
         {
           "time": "2026-06-21 10:00:00",
           "value": 0.001556396484375
+        },
+        {
+          "time": "2026-06-21 14:00:00",
+          "value": 0.037384033203125
         }
       ]
     }
@@ -392,16 +420,42 @@
     },
     {
       "time": "2026-06-21 13:00:00",
-      "pv_to_load": 0.1069,
+      "pv_to_load": 0.3046,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.1069,
+      "self_consumed": 0.3046,
       "self_sufficient": 1.0,
-      "balance_error": -0.0572
+      "balance_error": -0.2051
+    },
+    {
+      "time": "2026-06-21 14:00:00",
+      "pv_to_load": 0.213,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0374,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.127,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.2504,
+      "self_sufficient": 0.8576,
+      "balance_error": -0.5143
+    },
+    {
+      "time": "2026-06-21 15:00:00",
+      "pv_to_load": 0.0707,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0371,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0707,
+      "self_sufficient": 0.8729,
+      "balance_error": -0.1841
     }
   ],
   "irradiation": null,
