@@ -1,17 +1,17 @@
 {
   "site_id": "osprey-6",
   "platform": "sunsynk",
-  "updated_at": "2026-06-25T17:45:27+02:00",
+  "updated_at": "2026-06-25T19:57:30+02:00",
   "current": {
-    "power_kw": 0.021,
-    "today_kwh": 3.8,
-    "status": "unknown",
+    "power_kw": 0.007,
+    "today_kwh": 3.9,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 3.8,
+      "pv": 3.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 220.9,
+      "pv": 221.0,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 1821.6,
+      "pv": 1821.7,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 9816.2,
+      "pv": 9816.3,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-06-25 17:00:00",
-          "value": 0.036
+          "value": 0.039
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.008
+        },
+        {
+          "time": "2026-06-25 19:00:00",
+          "value": 0.008
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-06-25 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-06-25 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-06-25 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-06-25 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-06-25 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-25 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.036
+      "balance_error": 0.039
+    },
+    {
+      "time": "2026-06-25 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.008
+    },
+    {
+      "time": "2026-06-25 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.008
     }
   ],
   "irradiation": null,
