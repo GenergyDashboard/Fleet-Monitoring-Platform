@@ -1,17 +1,17 @@
 {
   "site_id": "house-garside",
   "platform": "sunsynk",
-  "updated_at": "2026-06-26T17:38:31+02:00",
+  "updated_at": "2026-06-26T19:23:38+02:00",
   "current": {
-    "power_kw": 0.022,
-    "today_kwh": 8.3,
-    "status": "unknown",
+    "power_kw": 0.014,
+    "today_kwh": 8.4,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 8.3,
+      "pv": 8.4,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 320.8,
+      "pv": 320.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 2594.3,
+      "pv": 2594.4,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 16969.1,
+      "pv": 16969.2,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-06-26 17:00:00",
-          "value": 0.034
+          "value": 0.044
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.014
+        },
+        {
+          "time": "2026-06-26 19:00:00",
+          "value": 0.006
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-06-26 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-06-26 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-06-26 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-06-26 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-06-26 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-06-26 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.034
+      "balance_error": 0.044
+    },
+    {
+      "time": "2026-06-26 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.014
+    },
+    {
+      "time": "2026-06-26 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.006
     }
   ],
   "irradiation": null,
