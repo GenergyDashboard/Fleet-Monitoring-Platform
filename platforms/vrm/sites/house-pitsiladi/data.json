@@ -1,37 +1,37 @@
 {
   "site_id": "house-pitsiladi",
   "platform": "vrm",
-  "updated_at": "2026-07-02T14:21:56+02:00",
+  "updated_at": "2026-07-02T16:32:43+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 35.50373271107674,
+    "today_kwh": 43.49374157190323,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 35.50373271107674,
-      "consumption": 24.775876939296722,
-      "import": 27.531930595636368,
+      "pv": 43.49374157190323,
+      "consumption": 35.978631595149636,
+      "import": 27.631930597126484,
       "export": 3.5680694580078125,
-      "discharge": 1.8986763767898083,
+      "discharge": 1.9098661551252007,
       "charge": 0.0
     },
     "month": {
-      "pv": 44.4193281205371,
-      "consumption": 49.33162331581116,
-      "import": 96.9282122477889,
+      "pv": 52.409336981363595,
+      "consumption": 60.53437797166407,
+      "import": 97.02821224927902,
       "export": 13.871788024902344,
-      "discharge": 13.979534273967147,
+      "discharge": 13.99072405230254,
       "charge": 0.0
     },
     "year": {
-      "pv": 8261.79754946503,
-      "consumption": 8042.518047768506,
-      "import": 2929.594285639003,
+      "pv": 8269.787558325857,
+      "consumption": 8053.720802424359,
+      "import": 2929.694285640493,
       "export": 408.380306545645,
-      "discharge": 5183.613825580069,
+      "discharge": 5183.625015358404,
       "charge": 0.554571557790041
     },
     "lifetime": {
@@ -74,7 +74,15 @@
         },
         {
           "time": "2026-07-02 14:00:00",
-          "value": 1.4518049359321594
+          "value": 5.503440618515015
+        },
+        {
+          "time": "2026-07-02 15:00:00",
+          "value": 2.7808618247509003
+        },
+        {
+          "time": "2026-07-02 16:00:00",
+          "value": 1.1575113534927368
         }
       ],
       "consumption": [
@@ -104,7 +112,15 @@
         },
         {
           "time": "2026-07-02 14:00:00",
-          "value": 2.384781837463379
+          "value": 7.063309669494629
+        },
+        {
+          "time": "2026-07-02 15:00:00",
+          "value": 5.406754493713379
+        },
+        {
+          "time": "2026-07-02 16:00:00",
+          "value": 1.117472330108285
         }
       ],
       "import": [
@@ -159,6 +175,10 @@
         {
           "time": "2026-07-02 14:00:00",
           "value": 0.10000000149011612
+        },
+        {
+          "time": "2026-07-02 15:00:00",
+          "value": 0.10000000149011612
         }
       ],
       "export": [
@@ -212,6 +232,10 @@
         {
           "time": "2026-07-02 09:00:00",
           "value": 0.4612630009651184
+        },
+        {
+          "time": "2026-07-02 16:00:00",
+          "value": 0.011189778335392475
         }
       ]
     }
@@ -401,16 +425,42 @@
     },
     {
       "time": "2026-07-02 14:00:00",
-      "pv_to_load": 1.4518,
+      "pv_to_load": 5.5034,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.1,
       "grid_to_batt": 0.0,
-      "self_consumed": 1.4518,
-      "self_sufficient": 0.9581,
-      "balance_error": -0.833
+      "self_consumed": 5.5034,
+      "self_sufficient": 0.9858,
+      "balance_error": -1.4599
+    },
+    {
+      "time": "2026-07-02 15:00:00",
+      "pv_to_load": 2.7809,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.1,
+      "grid_to_batt": 0.0,
+      "self_consumed": 2.7809,
+      "self_sufficient": 0.9815,
+      "balance_error": -2.5259
+    },
+    {
+      "time": "2026-07-02 16:00:00",
+      "pv_to_load": 1.1063,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0112,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 1.1175,
+      "self_sufficient": 1.0,
+      "balance_error": 0.0512
     }
   ],
   "irradiation": null,
