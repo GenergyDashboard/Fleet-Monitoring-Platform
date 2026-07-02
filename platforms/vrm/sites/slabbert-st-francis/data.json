@@ -1,38 +1,38 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-07-02T16:32:53+02:00",
+  "updated_at": "2026-07-02T18:21:14+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 13.230047225952148,
+    "today_kwh": 13.277975082397461,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 13.230047225952148,
-      "consumption": 12.630398750305176,
-      "import": 4.041387557983398,
+      "pv": 13.277975082397461,
+      "consumption": 12.94138765335083,
+      "import": 4.096000671386719,
       "export": 0.2548621892929077,
-      "discharge": 0.40271472930908203,
-      "charge": 0.0
+      "discharge": 2.2034506797790527,
+      "charge": 0.03640890121459961
     },
     "month": {
-      "pv": 17.277315616607666,
-      "consumption": 18.68924903869629,
-      "import": 11.887502670288086,
+      "pv": 17.32524347305298,
+      "consumption": 19.000237941741943,
+      "import": 11.942115783691406,
       "export": 0.6917688846588135,
-      "discharge": 5.068443775177002,
-      "charge": 0.07281780242919922
+      "discharge": 6.869179725646973,
+      "charge": 0.10922670364379883
     },
     "year": {
-      "pv": 1253.205627946183,
-      "consumption": 983.0553685054183,
-      "import": 132.1824688911438,
+      "pv": 1253.2535558026284,
+      "consumption": 983.366357408464,
+      "import": 132.23708200454712,
       "export": 5.1882665157318115,
-      "discharge": 810.7816873770207,
-      "charge": 22.80844336375594
+      "discharge": 812.5824233274907,
+      "charge": 22.84485226497054
     },
     "lifetime": {
       "pv": 0.0,
@@ -82,7 +82,7 @@
         },
         {
           "time": "2026-07-02 16:00:00",
-          "value": 0.0943441390991211
+          "value": 0.1422719955444336
         }
       ],
       "consumption": [
@@ -120,7 +120,11 @@
         },
         {
           "time": "2026-07-02 16:00:00",
-          "value": 0.83740234375
+          "value": 1.116790771484375
+        },
+        {
+          "time": "2026-07-02 17:00:00",
+          "value": 0.0316004753112793
         }
       ],
       "import": [
@@ -187,6 +191,14 @@
         {
           "time": "2026-07-02 15:00:00",
           "value": 0.0182037353515625
+        },
+        {
+          "time": "2026-07-02 16:00:00",
+          "value": 0.036407470703125
+        },
+        {
+          "time": "2026-07-02 17:00:00",
+          "value": 0.018205642700195312
         }
       ],
       "export": [
@@ -227,7 +239,12 @@
           "value": 0.018204450607299805
         }
       ],
-      "charge": [],
+      "charge": [
+        {
+          "time": "2026-07-02 17:00:00",
+          "value": 0.03640890121459961
+        }
+      ],
       "discharge": [
         {
           "time": "2026-07-02 08:00:00",
@@ -251,7 +268,15 @@
         },
         {
           "time": "2026-07-02 16:00:00",
-          "value": 0.007554054260253906
+          "value": 0.1650705337524414
+        },
+        {
+          "time": "2026-07-02 17:00:00",
+          "value": 1.5521855354309082
+        },
+        {
+          "time": "2026-07-02 18:00:00",
+          "value": 0.091033935546875
         }
       ]
     }
@@ -467,16 +492,42 @@
     },
     {
       "time": "2026-07-02 16:00:00",
-      "pv_to_load": 0.0943,
+      "pv_to_load": 0.1423,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
-      "batt_to_load": 0.0076,
+      "batt_to_load": 0.1651,
       "batt_to_grid": 0.0,
+      "grid_to_load": 0.0364,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.3073,
+      "self_sufficient": 0.9674,
+      "balance_error": -0.773
+    },
+    {
+      "time": "2026-07-02 17:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0316,
+      "batt_to_grid": 1.5206,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0364,
+      "self_consumed": 0.0316,
+      "self_sufficient": 1.0,
+      "balance_error": 1.5024
+    },
+    {
+      "time": "2026-07-02 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.091,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.1019,
-      "self_sufficient": 1.0,
-      "balance_error": -0.7355
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.091
     }
   ],
   "irradiation": null,
