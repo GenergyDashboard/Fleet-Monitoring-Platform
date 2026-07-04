@@ -1,17 +1,17 @@
 {
   "site_id": "mcwilliams-shore-rd",
   "platform": "sunsynk",
-  "updated_at": "2026-07-04T18:30:24+02:00",
+  "updated_at": "2026-07-04T19:37:53+02:00",
   "current": {
     "power_kw": 0.006,
-    "today_kwh": 57.4,
-    "status": "unknown",
+    "today_kwh": 57.5,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 57.4,
+      "pv": 57.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 158.6,
+      "pv": 158.7,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 9036.5,
+      "pv": 9036.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 26048.0,
+      "pv": 26048.1,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -118,7 +118,11 @@
         },
         {
           "time": "2026-07-04 18:00:00",
-          "value": 0.003
+          "value": 0.006
+        },
+        {
+          "time": "2026-07-04 19:00:00",
+          "value": 0.004
         }
       ],
       "consumption": [
@@ -196,6 +200,10 @@
         },
         {
           "time": "2026-07-04 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-04 19:00:00",
           "value": 0.0
         }
       ],
@@ -275,6 +283,10 @@
         {
           "time": "2026-07-04 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-04 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -352,6 +364,10 @@
         },
         {
           "time": "2026-07-04 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-04 19:00:00",
           "value": 0.0
         }
       ],
@@ -431,6 +447,10 @@
         {
           "time": "2026-07-04 18:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-04 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -508,6 +528,10 @@
         },
         {
           "time": "2026-07-04 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-04 19:00:00",
           "value": 0.0
         }
       ]
@@ -759,7 +783,20 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.003
+      "balance_error": 0.006
+    },
+    {
+      "time": "2026-07-04 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.004
     }
   ],
   "irradiation": null,
