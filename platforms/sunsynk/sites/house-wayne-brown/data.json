@@ -1,17 +1,17 @@
 {
   "site_id": "house-wayne-brown",
   "platform": "sunsynk",
-  "updated_at": "2026-07-07T17:50:51+02:00",
+  "updated_at": "2026-07-07T19:51:11+02:00",
   "current": {
-    "power_kw": 0.016,
-    "today_kwh": 29.4,
-    "status": "unknown",
+    "power_kw": 0.004,
+    "today_kwh": 29.5,
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 29.4,
+      "pv": 29.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 166.9,
+      "pv": 167.0,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 2430.8,
+      "pv": 2430.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 9698.4,
+      "pv": 9698.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-07-07 17:00:00",
-          "value": 0.113
+          "value": 0.117
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.005
+        },
+        {
+          "time": "2026-07-07 19:00:00",
+          "value": 0.003
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-07-07 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-07-07 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-07-07 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-07-07 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-07-07 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-07 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.113
+      "balance_error": 0.117
+    },
+    {
+      "time": "2026-07-07 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.005
+    },
+    {
+      "time": "2026-07-07 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.003
     }
   ],
   "irradiation": null,
