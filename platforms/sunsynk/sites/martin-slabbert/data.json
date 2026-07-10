@@ -1,17 +1,17 @@
 {
   "site_id": "martin-slabbert",
   "platform": "sunsynk",
-  "updated_at": "2026-07-10T12:40:53+02:00",
+  "updated_at": "2026-07-10T14:58:52+02:00",
   "current": {
-    "power_kw": 0.062,
-    "today_kwh": 0.3,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "power_kw": 0.061,
+    "today_kwh": 0.6,
+    "status": "unknown",
+    "status_severity": "info",
+    "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 0.3,
+      "pv": 0.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 7.5,
+      "pv": 7.8,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 2656.7,
+      "pv": 2657.0,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 15930.2,
+      "pv": 15930.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -94,7 +94,15 @@
         },
         {
           "time": "2026-07-10 12:00:00",
-          "value": 0.042
+          "value": 0.184
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.064
+        },
+        {
+          "time": "2026-07-10 14:00:00",
+          "value": 0.058
         }
       ],
       "consumption": [
@@ -148,6 +156,14 @@
         },
         {
           "time": "2026-07-10 12:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 14:00:00",
           "value": 0.0
         }
       ],
@@ -203,6 +219,14 @@
         {
           "time": "2026-07-10 12:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 14:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -256,6 +280,14 @@
         },
         {
           "time": "2026-07-10 12:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 14:00:00",
           "value": 0.0
         }
       ],
@@ -311,6 +343,14 @@
         {
           "time": "2026-07-10 12:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 14:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -364,6 +404,14 @@
         },
         {
           "time": "2026-07-10 12:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 13:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 14:00:00",
           "value": 0.0
         }
       ]
@@ -537,7 +585,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.042
+      "balance_error": 0.184
+    },
+    {
+      "time": "2026-07-10 13:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.064
+    },
+    {
+      "time": "2026-07-10 14:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.058
     }
   ],
   "irradiation": null,
