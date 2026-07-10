@@ -1,17 +1,17 @@
 {
   "site_id": "sasol-malelane",
   "platform": "sunsynk",
-  "updated_at": "2026-07-10T17:39:21+02:00",
+  "updated_at": "2026-07-10T19:27:41+02:00",
   "current": {
-    "power_kw": 0.32,
-    "today_kwh": 303.8,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": "Generating normally"
+    "power_kw": 0,
+    "today_kwh": 303.9,
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 303.8,
+      "pv": 303.9,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 3158.6,
+      "pv": 3158.7,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 73875.9,
+      "pv": 73876.0,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 288623.6,
+      "pv": 288623.7,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-07-10 17:00:00",
-          "value": 0.403
+          "value": 0.438
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
+          "value": 0.0
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-07-10 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-07-10 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-07-10 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-07-10 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-07-10 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-10 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.403
+      "balance_error": 0.438
+    },
+    {
+      "time": "2026-07-10 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.0
+    },
+    {
+      "time": "2026-07-10 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.0
     }
   ],
   "irradiation": null,
