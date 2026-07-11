@@ -1,13 +1,13 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-07-11T18:02:06+02:00",
+  "updated_at": "2026-07-11T19:03:03+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 11.64272689819336,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,7 +15,7 @@
       "consumption": 5.883620262145996,
       "import": 0.2730674743652344,
       "export": 0.0,
-      "discharge": 2.492569923400879,
+      "discharge": 2.911271095275879,
       "charge": 0.08125686645507812
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 68.44099569320679,
       "import": 15.000463485717773,
       "export": 0.6917688846588135,
-      "discharge": 63.0889368057251,
+      "discharge": 63.5076379776001,
       "charge": 1.5822153091430664
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 1032.8071151599288,
       "import": 135.2954297065735,
       "export": 5.1882665157318115,
-      "discharge": 868.8021804075688,
+      "discharge": 869.2208815794438,
       "charge": 24.31784087046981
     },
     "lifetime": {
@@ -260,6 +260,10 @@
         {
           "time": "2026-07-11 17:00:00",
           "value": 0.312225341796875
+        },
+        {
+          "time": "2026-07-11 18:00:00",
+          "value": 0.418701171875
         }
       ]
     }
@@ -498,6 +502,19 @@
       "self_consumed": 0.0657,
       "self_sufficient": 0.6008,
       "balance_error": 0.2938
+    },
+    {
+      "time": "2026-07-11 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.4187,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.4187
     }
   ],
   "irradiation": null,
