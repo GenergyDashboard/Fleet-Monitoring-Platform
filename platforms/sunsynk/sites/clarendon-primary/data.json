@@ -1,17 +1,17 @@
 {
   "site_id": "clarendon-primary",
   "platform": "sunsynk",
-  "updated_at": "2026-07-13T17:50:50+02:00",
+  "updated_at": "2026-07-13T19:48:15+02:00",
   "current": {
-    "power_kw": 0.41,
-    "today_kwh": 418.5,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": "Generating normally"
+    "power_kw": 0,
+    "today_kwh": 418.6,
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 418.5,
+      "pv": 418.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 4687.0,
+      "pv": 4687.1,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 76539.1,
+      "pv": 76539.2,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 309215.7,
+      "pv": 309215.8,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-07-13 17:00:00",
-          "value": 1.396
+          "value": 1.421
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.012
+        },
+        {
+          "time": "2026-07-13 19:00:00",
+          "value": 0.0
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-07-13 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-07-13 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-07-13 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-07-13 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-07-13 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 1.396
+      "balance_error": 1.421
+    },
+    {
+      "time": "2026-07-13 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.012
+    },
+    {
+      "time": "2026-07-13 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.0
     }
   ],
   "irradiation": null,
