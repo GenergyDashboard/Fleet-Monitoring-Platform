@@ -3,12 +3,12 @@
   "name": "Kirkwood FNB",
   "platform": "fusionsolar",
   "capacity_kwp": 44.63,
-  "updated_at": "2026-07-13T08:47:37+02:00",
+  "updated_at": "2026-07-13T12:00:50+02:00",
   "current": {
-    "power_kw": 0.12,
-    "today_kwh": 1.27,
-    "month_kwh": 1010.56,
-    "total_kwh": 97219.32,
+    "power_kw": 11.48,
+    "today_kwh": 34.3,
+    "month_kwh": 1043.59,
+    "total_kwh": 97252.35,
     "status": "online",
     "status_severity": "ok",
     "status_reason": null
@@ -45,174 +45,89 @@
     {
       "time": "2026-07-13 07:00:00",
       "pv_kwh": 0.12
+    },
+    {
+      "time": "2026-07-13 08:00:00",
+      "pv_kwh": 2.11
+    },
+    {
+      "time": "2026-07-13 09:00:00",
+      "pv_kwh": 5.15
+    },
+    {
+      "time": "2026-07-13 10:00:00",
+      "pv_kwh": 11.48
     }
   ],
   "irradiation": {
-    "source": "open-meteo",
-    "today_total": 3.061,
-    "today_hourly": [
-      {
-        "time": "2026-07-13 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 08:00:00",
-        "value": 13.0
-      },
-      {
-        "time": "2026-07-13 09:00:00",
-        "value": 119.0
-      },
-      {
-        "time": "2026-07-13 10:00:00",
-        "value": 248.0
-      },
-      {
-        "time": "2026-07-13 11:00:00",
-        "value": 375.0
-      },
-      {
-        "time": "2026-07-13 12:00:00",
-        "value": 496.0
-      },
-      {
-        "time": "2026-07-13 13:00:00",
-        "value": 523.0
-      },
-      {
-        "time": "2026-07-13 14:00:00",
-        "value": 490.0
-      },
-      {
-        "time": "2026-07-13 15:00:00",
-        "value": 404.0
-      },
-      {
-        "time": "2026-07-13 16:00:00",
-        "value": 271.0
-      },
-      {
-        "time": "2026-07-13 17:00:00",
-        "value": 115.0
-      },
-      {
-        "time": "2026-07-13 18:00:00",
-        "value": 7.0
-      },
-      {
-        "time": "2026-07-13 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-13 23:00:00",
-        "value": 0.0
-      }
-    ]
+    "source": null,
+    "today_total": null,
+    "today_hourly": []
   },
   "energy": {
     "today": {
-      "pv": 0.12,
+      "pv": 18.86,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 0.12,
-      "pv_to_load": 0.12,
+      "consumption": 18.86,
+      "pv_to_load": 18.86,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.12
+      "self_consumed": 18.86
     },
     "month": {
-      "pv": 1009.51,
-      "import": 3502.11,
+      "pv": 1030.77,
+      "import": 3560.0,
       "export": 97.4,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 4414.22,
-      "pv_to_load": 912.11,
+      "consumption": 4493.37,
+      "pv_to_load": 933.37,
       "pv_to_batt": 0.0,
       "pv_to_grid": 97.4,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 3502.11,
+      "grid_to_load": 3560.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 912.11
+      "self_consumed": 933.37
     },
     "year": {
-      "pv": 28512.06,
-      "import": 54394.4,
+      "pv": 28533.32,
+      "import": 54452.29,
       "export": 2817.2,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 80089.26,
-      "pv_to_load": 25694.86,
+      "consumption": 80168.41,
+      "pv_to_load": 25716.12,
       "pv_to_batt": 0.0,
       "pv_to_grid": 2817.2,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 54394.4,
+      "grid_to_load": 54452.29,
       "grid_to_batt": 0.0,
-      "self_consumed": 25694.86
+      "self_consumed": 25716.12
     },
     "lifetime": {
-      "pv": 97218.27,
-      "import": 198748.8,
+      "pv": 97239.53,
+      "import": 198806.69,
       "export": 5068.5,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 290898.57,
-      "pv_to_load": 92149.77,
+      "consumption": 290977.72,
+      "pv_to_load": 92171.03,
       "pv_to_batt": 0.0,
       "pv_to_grid": 5068.5,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 198748.8,
+      "grid_to_load": 198806.69,
       "grid_to_batt": 0.0,
-      "self_consumed": 92149.77
+      "self_consumed": 92171.03
     },
     "hourly": {
       "pv": [
@@ -247,6 +162,18 @@
         {
           "time": "2026-07-13 07:00:00",
           "value": 0.12
+        },
+        {
+          "time": "2026-07-13 08:00:00",
+          "value": 2.11
+        },
+        {
+          "time": "2026-07-13 09:00:00",
+          "value": 5.15
+        },
+        {
+          "time": "2026-07-13 10:00:00",
+          "value": 11.48
         }
       ],
       "import": [
@@ -280,6 +207,18 @@
         },
         {
           "time": "2026-07-13 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 09:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 10:00:00",
           "value": 0.0
         }
       ],
@@ -315,6 +254,18 @@
         {
           "time": "2026-07-13 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-13 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 09:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 10:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -349,6 +300,18 @@
         {
           "time": "2026-07-13 07:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-07-13 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 09:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 10:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -382,6 +345,18 @@
         },
         {
           "time": "2026-07-13 07:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 09:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-07-13 10:00:00",
           "value": 0.0
         }
       ]
@@ -466,6 +441,36 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-07-13 08:00:00",
+        "pv_to_load": 2.11,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-07-13 09:00:00",
+        "pv_to_load": 5.15,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-07-13 10:00:00",
+        "pv_to_load": 11.48,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
@@ -478,107 +483,5 @@
     "performance_pct": null,
     "elapsed_hours_compared": 0,
     "reason": "Expected = site's own 30-day average for this hour-of-day"
-  },
-  "irradiation_forecast": {
-    "date": "2026-07-14",
-    "total_forecast": 3.314,
-    "hourly": [
-      {
-        "time": "2026-07-14 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 08:00:00",
-        "value": 18.0
-      },
-      {
-        "time": "2026-07-14 09:00:00",
-        "value": 152.0
-      },
-      {
-        "time": "2026-07-14 10:00:00",
-        "value": 309.0
-      },
-      {
-        "time": "2026-07-14 11:00:00",
-        "value": 433.0
-      },
-      {
-        "time": "2026-07-14 12:00:00",
-        "value": 515.0
-      },
-      {
-        "time": "2026-07-14 13:00:00",
-        "value": 544.0
-      },
-      {
-        "time": "2026-07-14 14:00:00",
-        "value": 513.0
-      },
-      {
-        "time": "2026-07-14 15:00:00",
-        "value": 420.0
-      },
-      {
-        "time": "2026-07-14 16:00:00",
-        "value": 283.0
-      },
-      {
-        "time": "2026-07-14 17:00:00",
-        "value": 120.0
-      },
-      {
-        "time": "2026-07-14 18:00:00",
-        "value": 7.0
-      },
-      {
-        "time": "2026-07-14 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-14 23:00:00",
-        "value": 0.0
-      }
-    ]
   }
 }
