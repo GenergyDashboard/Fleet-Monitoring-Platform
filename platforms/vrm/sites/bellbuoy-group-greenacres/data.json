@@ -1,37 +1,37 @@
 {
   "site_id": "bellbuoy-group-greenacres",
   "platform": "vrm",
-  "updated_at": "2026-07-14T17:57:11+02:00",
+  "updated_at": "2026-07-14T19:05:53+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 5.2032928466796875,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
       "pv": 5.2032928466796875,
       "consumption": 8.126372575759888,
-      "import": 36.75482177734375,
-      "export": 0.382293701171875,
-      "discharge": 3.5417945086956024,
+      "import": 38.86651611328125,
+      "export": 0.418701171875,
+      "discharge": 3.5600135028362274,
       "charge": 0.0
     },
     "month": {
       "pv": 69.51299837231636,
       "consumption": 93.20087766647339,
-      "import": 538.1962280273438,
-      "export": 8.173795700073242,
-      "discharge": 43.276486560702324,
+      "import": 540.3079223632812,
+      "export": 8.210203170776367,
+      "discharge": 43.29470555484295,
       "charge": 0.0
     },
     "year": {
       "pv": 845.981173267588,
       "consumption": 2303.394366696477,
-      "import": 6807.5158691536635,
-      "export": 149.7133564632386,
-      "discharge": 416.53324469923973,
+      "import": 6809.627563489601,
+      "export": 149.74976393394172,
+      "discharge": 416.55146369338036,
       "charge": 0.0
     },
     "lifetime": {
@@ -186,7 +186,11 @@
         },
         {
           "time": "2026-07-14 17:00:00",
-          "value": 2.093505859375
+          "value": 2.4029541015625
+        },
+        {
+          "time": "2026-07-14 18:00:00",
+          "value": 1.80224609375
         }
       ],
       "export": [
@@ -245,6 +249,10 @@
         {
           "time": "2026-07-14 17:00:00",
           "value": 0.0546112060546875
+        },
+        {
+          "time": "2026-07-14 18:00:00",
+          "value": 0.036407470703125
         }
       ],
       "charge": [],
@@ -280,6 +288,10 @@
         {
           "time": "2026-07-14 17:00:00",
           "value": 0.1143798828125
+        },
+        {
+          "time": "2026-07-14 18:00:00",
+          "value": 0.018218994140625
         }
       ]
     }
@@ -513,11 +525,24 @@
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.1144,
-      "grid_to_load": 2.0935,
+      "grid_to_load": 2.403,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
-      "self_sufficient": -65.9922,
-      "balance_error": 2.122
+      "self_sufficient": -75.8945,
+      "balance_error": 2.4315
+    },
+    {
+      "time": "2026-07-14 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0182,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0182,
+      "grid_to_load": 1.8022,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 1.7841
     }
   ],
   "irradiation": null,

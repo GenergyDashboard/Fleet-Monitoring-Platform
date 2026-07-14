@@ -1,36 +1,36 @@
 {
   "site_id": "hula-hula",
   "platform": "vrm",
-  "updated_at": "2026-07-14T17:57:24+02:00",
+  "updated_at": "2026-07-14T19:06:08+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.4187021255493164,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
       "pv": 0.4187021255493164,
       "consumption": 41.67246137559414,
-      "import": 101.326171875,
-      "export": 3.7501220703125,
+      "import": 113.705078125,
+      "export": 4.023193359375,
       "discharge": 0.018207550048828125,
       "charge": 0.0
     },
     "month": {
       "pv": 3.203981399536133,
       "consumption": 487.22876517288387,
-      "import": 2251.99951171875,
-      "export": 80.93695068359375,
+      "import": 2264.37841796875,
+      "export": 81.21002197265625,
       "discharge": 3.2585983276367188,
       "charge": 0.0
     },
     "year": {
       "pv": 395.00004242919385,
       "consumption": 7958.510448427056,
-      "import": 25154.15506374091,
-      "export": 2634.9294256996363,
+      "import": 25166.53396999091,
+      "export": 2635.202496988699,
       "discharge": 1683.055528299883,
       "charge": 0.0
     },
@@ -182,7 +182,15 @@
         },
         {
           "time": "2026-07-14 17:00:00",
-          "value": 8.7744140625
+          "value": 9.41162109375
+        },
+        {
+          "time": "2026-07-14 18:00:00",
+          "value": 10.8134765625
+        },
+        {
+          "time": "2026-07-14 19:00:00",
+          "value": 0.92822265625
         }
       ],
       "export": [
@@ -256,7 +264,15 @@
         },
         {
           "time": "2026-07-14 17:00:00",
-          "value": 0.182037353515625
+          "value": 0.20025634765625
+        },
+        {
+          "time": "2026-07-14 18:00:00",
+          "value": 0.236663818359375
+        },
+        {
+          "time": "2026-07-14 19:00:00",
+          "value": 0.0181884765625
         }
       ],
       "charge": [],
@@ -494,14 +510,40 @@
       "time": "2026-07-14 17:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.182,
+      "pv_to_grid": 0.2003,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 8.7744,
+      "grid_to_load": 9.4116,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
-      "self_sufficient": -364.6006,
-      "balance_error": 8.5684
+      "self_sufficient": -391.1509,
+      "balance_error": 9.1874
+    },
+    {
+      "time": "2026-07-14 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.2367,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 10.8135,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 10.5768
+    },
+    {
+      "time": "2026-07-14 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0182,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.9282,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.91
     }
   ],
   "irradiation": null,
