@@ -1,36 +1,36 @@
 {
   "site_id": "house-efstratiou",
   "platform": "vrm",
-  "updated_at": "2026-07-15T18:09:57+02:00",
+  "updated_at": "2026-07-15T19:35:23+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 7.536834716796875,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
       "pv": 7.536834716796875,
       "consumption": 10.835540771484375,
-      "import": 34.49737548828125,
-      "export": 0.9830398559570312,
+      "import": 38.8482666015625,
+      "export": 1.1286735534667969,
       "discharge": 2.5629425048828125,
       "charge": 0.0830078125
     },
     "month": {
       "pv": 120.79437637329102,
       "consumption": 167.4926414489746,
-      "import": 727.5588073730469,
-      "export": 23.574755668640137,
+      "import": 731.9096984863281,
+      "export": 23.720389366149902,
       "discharge": 45.756675720214844,
       "charge": 1.930084228515625
     },
     "year": {
       "pv": 2424.7853824049234,
       "consumption": 3067.4812922198325,
-      "import": 8878.143372379243,
-      "export": 369.6958499830216,
+      "import": 8882.494263492525,
+      "export": 369.8414836805314,
       "discharge": 1153.888993896544,
       "charge": 122.35697024688125
     },
@@ -187,6 +187,14 @@
         {
           "time": "2026-07-15 17:00:00",
           "value": 3.5863037109375
+        },
+        {
+          "time": "2026-07-15 18:00:00",
+          "value": 3.13116455078125
+        },
+        {
+          "time": "2026-07-15 19:00:00",
+          "value": 1.2197265625
         }
       ],
       "export": [
@@ -241,6 +249,14 @@
         {
           "time": "2026-07-15 17:00:00",
           "value": 0.07281875610351562
+        },
+        {
+          "time": "2026-07-15 18:00:00",
+          "value": 0.09102249145507812
+        },
+        {
+          "time": "2026-07-15 19:00:00",
+          "value": 0.0546112060546875
         }
       ],
       "charge": [
@@ -515,6 +531,32 @@
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
       "balance_error": 3.5447
+    },
+    {
+      "time": "2026-07-15 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.091,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 3.1312,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 3.0401
+    },
+    {
+      "time": "2026-07-15 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0546,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 1.2197,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 1.1651
     }
   ],
   "irradiation": null,
