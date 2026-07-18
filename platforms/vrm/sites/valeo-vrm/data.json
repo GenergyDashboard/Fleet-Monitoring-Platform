@@ -1,36 +1,36 @@
 {
   "site_id": "valeo-vrm",
   "platform": "vrm",
-  "updated_at": "2026-07-18T18:32:00+02:00",
+  "updated_at": "2026-07-18T19:31:56+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.0,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
       "pv": 0.0,
       "consumption": 0.0,
-      "import": 1.60198974609375,
-      "export": 0.5097198486328125,
+      "import": 1.693023681640625,
+      "export": 0.5461273193359375,
       "discharge": 0.09102201461791992,
       "charge": 0.0
     },
     "month": {
       "pv": 0.0,
       "consumption": 0.0,
-      "import": 15.164276123046875,
-      "export": 6.5900115966796875,
+      "import": 15.25531005859375,
+      "export": 6.6264190673828125,
       "discharge": 2.0571017265319824,
       "charge": 0.0
     },
     "year": {
       "pv": 0.0,
       "consumption": 0.0,
-      "import": 364.67137145996094,
-      "export": 106.45959663391113,
+      "import": 364.7624053955078,
+      "export": 106.49600410461426,
       "discharge": 2.6578478813171387,
       "charge": 0.0
     },
@@ -120,7 +120,11 @@
         },
         {
           "time": "2026-07-18 18:00:00",
-          "value": 0.054595947265625
+          "value": 0.109222412109375
+        },
+        {
+          "time": "2026-07-18 19:00:00",
+          "value": 0.036407470703125
         }
       ],
       "export": [
@@ -191,6 +195,10 @@
         {
           "time": "2026-07-18 17:00:00",
           "value": 0.109222412109375
+        },
+        {
+          "time": "2026-07-18 18:00:00",
+          "value": 0.036407470703125
         }
       ],
       "charge": [],
@@ -445,14 +453,27 @@
       "time": "2026-07-18 18:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
+      "pv_to_grid": 0.0364,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 0.0546,
+      "grid_to_load": 0.1092,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.0546
+      "balance_error": 0.0728
+    },
+    {
+      "time": "2026-07-18 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0364,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.0364
     }
   ],
   "irradiation": null,
