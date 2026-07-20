@@ -1,13 +1,13 @@
 {
   "site_id": "valeo-vrm",
   "platform": "vrm",
-  "updated_at": "2026-07-20T18:06:52+02:00",
+  "updated_at": "2026-07-20T20:13:00+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.0,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,7 +15,7 @@
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 1.729421615600586,
+      "discharge": 1.929671287536621,
       "charge": 0.0
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 0.0,
       "import": 17.039337158203125,
       "export": 7.1179351806640625,
-      "discharge": 4.7877678871154785,
+      "discharge": 4.988017559051514,
       "charge": 0.0
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 0.0,
       "import": 366.5464324951172,
       "export": 106.98752021789551,
-      "discharge": 5.388514041900635,
+      "discharge": 5.58876371383667,
       "charge": 0.0
     },
     "lifetime": {
@@ -123,7 +123,15 @@
         },
         {
           "time": "2026-07-20 18:00:00",
-          "value": 0.0182037353515625
+          "value": 0.10922622680664062
+        },
+        {
+          "time": "2026-07-20 19:00:00",
+          "value": 0.09102153778076172
+        },
+        {
+          "time": "2026-07-20 20:00:00",
+          "value": 0.018205642700195312
         }
       ]
     }
@@ -369,6 +377,32 @@
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
+      "batt_to_grid": 0.1092,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.1092
+    },
+    {
+      "time": "2026-07-20 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.091,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.091
+    },
+    {
+      "time": "2026-07-20 20:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
       "batt_to_grid": 0.0182,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
@@ -377,210 +411,8 @@
       "balance_error": 0.0182
     }
   ],
-  "irradiation": {
-    "source": "open-meteo",
-    "today_total": 3.469,
-    "today_hourly": [
-      {
-        "time": "2026-07-20 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 08:00:00",
-        "value": 21.0
-      },
-      {
-        "time": "2026-07-20 09:00:00",
-        "value": 160.0
-      },
-      {
-        "time": "2026-07-20 10:00:00",
-        "value": 324.0
-      },
-      {
-        "time": "2026-07-20 11:00:00",
-        "value": 455.0
-      },
-      {
-        "time": "2026-07-20 12:00:00",
-        "value": 539.0
-      },
-      {
-        "time": "2026-07-20 13:00:00",
-        "value": 565.0
-      },
-      {
-        "time": "2026-07-20 14:00:00",
-        "value": 530.0
-      },
-      {
-        "time": "2026-07-20 15:00:00",
-        "value": 437.0
-      },
-      {
-        "time": "2026-07-20 16:00:00",
-        "value": 297.0
-      },
-      {
-        "time": "2026-07-20 17:00:00",
-        "value": 131.0
-      },
-      {
-        "time": "2026-07-20 18:00:00",
-        "value": 10.0
-      },
-      {
-        "time": "2026-07-20 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-20 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
-  "irradiation_forecast": {
-    "date": "2026-07-21",
-    "total_forecast": 3.316,
-    "hourly": [
-      {
-        "time": "2026-07-21 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 08:00:00",
-        "value": 21.0
-      },
-      {
-        "time": "2026-07-21 09:00:00",
-        "value": 150.0
-      },
-      {
-        "time": "2026-07-21 10:00:00",
-        "value": 312.0
-      },
-      {
-        "time": "2026-07-21 11:00:00",
-        "value": 439.0
-      },
-      {
-        "time": "2026-07-21 12:00:00",
-        "value": 523.0
-      },
-      {
-        "time": "2026-07-21 13:00:00",
-        "value": 541.0
-      },
-      {
-        "time": "2026-07-21 14:00:00",
-        "value": 506.0
-      },
-      {
-        "time": "2026-07-21 15:00:00",
-        "value": 405.0
-      },
-      {
-        "time": "2026-07-21 16:00:00",
-        "value": 280.0
-      },
-      {
-        "time": "2026-07-21 17:00:00",
-        "value": 129.0
-      },
-      {
-        "time": "2026-07-21 18:00:00",
-        "value": 10.0
-      },
-      {
-        "time": "2026-07-21 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-07-21 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
+  "irradiation": null,
+  "irradiation_forecast": null,
   "financial": null,
   "performance": {
     "method": "empirical",
