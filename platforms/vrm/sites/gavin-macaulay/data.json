@@ -1,36 +1,36 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-07-22T08:24:13+02:00",
+  "updated_at": "2026-07-22T11:04:33+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.41796875,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "today_kwh": 3.787994384765625,
+    "status": "unknown",
+    "status_severity": "info",
+    "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 0.41796875,
-      "consumption": 0.0,
-      "import": 4.38726806640625,
-      "export": 0.309478759765625,
+      "pv": 3.787994384765625,
+      "consumption": 0.382293701171875,
+      "import": 4.76953125,
+      "export": 0.49152374267578125,
       "discharge": 0.0,
       "charge": 0.0
     },
     "month": {
-      "pv": 114.92514038085938,
-      "consumption": 70.29541015625,
-      "import": 162.1287841796875,
-      "export": 15.619415283203125,
+      "pv": 118.295166015625,
+      "consumption": 70.67770385742188,
+      "import": 162.51104736328125,
+      "export": 15.801460266113281,
       "discharge": 40.67864990234375,
       "charge": 4.645416259765625
     },
     "year": {
-      "pv": 1329.5873958915472,
-      "consumption": 1097.2379912286997,
-      "import": 1860.0937194731086,
-      "export": 134.45802402496338,
+      "pv": 1332.9574215263128,
+      "consumption": 1097.6202849298716,
+      "import": 1860.4759826567024,
+      "export": 134.64006900787354,
       "discharge": 509.5183484107256,
       "charge": 14.98109077848494
     },
@@ -50,10 +50,27 @@
         },
         {
           "time": "2026-07-22 08:00:00",
-          "value": 0.2578125
+          "value": 1.12890625
+        },
+        {
+          "time": "2026-07-22 09:00:00",
+          "value": 1.913299560546875
+        },
+        {
+          "time": "2026-07-22 10:00:00",
+          "value": 0.58563232421875
         }
       ],
-      "consumption": [],
+      "consumption": [
+        {
+          "time": "2026-07-22 09:00:00",
+          "value": 0.163848876953125
+        },
+        {
+          "time": "2026-07-22 10:00:00",
+          "value": 0.21844482421875
+        }
+      ],
       "import": [
         {
           "time": "2026-07-22 00:00:00",
@@ -89,7 +106,11 @@
         },
         {
           "time": "2026-07-22 08:00:00",
-          "value": 0.18206787109375
+          "value": 0.45513916015625
+        },
+        {
+          "time": "2026-07-22 09:00:00",
+          "value": 0.10919189453125
         }
       ],
       "export": [
@@ -127,7 +148,11 @@
         },
         {
           "time": "2026-07-22 08:00:00",
-          "value": 0.018207550048828125
+          "value": 0.054615020751953125
+        },
+        {
+          "time": "2026-07-22 09:00:00",
+          "value": 0.14563751220703125
         }
       ],
       "charge": [],
@@ -243,14 +268,40 @@
       "time": "2026-07-22 08:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0182,
+      "pv_to_grid": 0.0546,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 0.1821,
+      "grid_to_load": 0.4551,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.4217
+      "balance_error": 1.5294
+    },
+    {
+      "time": "2026-07-22 09:00:00",
+      "pv_to_load": 0.1638,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.1456,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.1092,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1638,
+      "self_sufficient": 0.3336,
+      "balance_error": 1.713
+    },
+    {
+      "time": "2026-07-22 10:00:00",
+      "pv_to_load": 0.2184,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.2184,
+      "self_sufficient": 1.0,
+      "balance_error": 0.3672
     }
   ],
   "irradiation": null,
