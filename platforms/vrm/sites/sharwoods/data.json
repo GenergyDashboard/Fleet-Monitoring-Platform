@@ -1,36 +1,36 @@
 {
   "site_id": "sharwoods",
   "platform": "vrm",
-  "updated_at": "2026-07-23T11:05:21+02:00",
+  "updated_at": "2026-07-23T13:17:46+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 1.3981761932373047,
+    "today_kwh": 2.1565475463867188,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 1.3981761932373047,
-      "consumption": 2.43939208984375,
-      "import": 22.73736572265625,
-      "export": 1.1104717254638672,
+      "pv": 2.1565475463867188,
+      "consumption": 2.8580970764160156,
+      "import": 41.014617919921875,
+      "export": 1.3289260864257812,
       "discharge": 0.03878593444824219,
       "charge": 0.008440017700195312
     },
     "month": {
-      "pv": 42.46488470956683,
-      "consumption": 80.59726496040821,
-      "import": 478.8679344058037,
-      "export": 41.16024827025831,
+      "pv": 43.223256062716246,
+      "consumption": 81.01596994698048,
+      "import": 497.1451866030693,
+      "export": 41.37870263122022,
       "discharge": 9.75527210906148,
       "charge": 2.434667397290468
     },
     "year": {
-      "pv": 54.425843477249146,
-      "consumption": 102.18328860029578,
-      "import": 564.4103927593678,
-      "export": 224.6065662447363,
+      "pv": 55.18421483039856,
+      "consumption": 102.60199358686805,
+      "import": 582.6876449566334,
+      "export": 224.82502060569823,
       "discharge": 24.377362897619605,
       "charge": 121.21541113033891
     },
@@ -62,7 +62,15 @@
         },
         {
           "time": "2026-07-23 11:00:00",
-          "value": 0.023260116577148438
+          "value": 0.4115142822265625
+        },
+        {
+          "time": "2026-07-23 12:00:00",
+          "value": 0.2900390625
+        },
+        {
+          "time": "2026-07-23 13:00:00",
+          "value": 0.080078125
         }
       ],
       "consumption": [
@@ -80,7 +88,7 @@
         },
         {
           "time": "2026-07-23 11:00:00",
-          "value": 0.18204116821289062
+          "value": 0.6007461547851562
         }
       ],
       "import": [
@@ -130,7 +138,15 @@
         },
         {
           "time": "2026-07-23 11:00:00",
-          "value": 0.400482177734375
+          "value": 7.88250732421875
+        },
+        {
+          "time": "2026-07-23 12:00:00",
+          "value": 8.446868896484375
+        },
+        {
+          "time": "2026-07-23 13:00:00",
+          "value": 2.348358154296875
         }
       ],
       "export": [
@@ -177,6 +193,14 @@
         {
           "time": "2026-07-23 10:00:00",
           "value": 0.09102249145507812
+        },
+        {
+          "time": "2026-07-23 11:00:00",
+          "value": 0.10922813415527344
+        },
+        {
+          "time": "2026-07-23 12:00:00",
+          "value": 0.10922622680664062
         }
       ],
       "charge": [
@@ -347,16 +371,42 @@
     },
     {
       "time": "2026-07-23 11:00:00",
-      "pv_to_load": 0.0233,
+      "pv_to_load": 0.3071,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.1044,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0049,
+      "grid_to_load": 7.8825,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.3071,
+      "self_sufficient": -12.1212,
+      "balance_error": 7.5889
+    },
+    {
+      "time": "2026-07-23 12:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.1092,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 8.4469,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 8.6277
+    },
+    {
+      "time": "2026-07-23 13:00:00",
+      "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.0049,
-      "grid_to_load": 0.4005,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 2.3484,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0233,
-      "self_sufficient": -1.2,
-      "balance_error": 0.2466
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 2.4284
     }
   ],
   "irradiation": null,
