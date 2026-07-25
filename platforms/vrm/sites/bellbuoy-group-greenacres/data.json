@@ -1,13 +1,13 @@
 {
   "site_id": "bellbuoy-group-greenacres",
   "platform": "vrm",
-  "updated_at": "2026-07-25T18:02:29+02:00",
+  "updated_at": "2026-07-25T19:07:54+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 4.855438232421875,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,7 +15,7 @@
       "consumption": 6.085968017578125,
       "import": 6.280517578125,
       "export": 0.23665618896484375,
-      "discharge": 0.98236083984375,
+      "discharge": 1.856170654296875,
       "charge": 0.0
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 169.23178911209106,
       "import": 901.7207641601562,
       "export": 14.108442306518555,
-      "discharge": 75.77905286848545,
+      "discharge": 76.65286268293858,
       "charge": 0.018204450607299805
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 2379.4252781420946,
       "import": 7171.040405286476,
       "export": 155.6480030696839,
-      "discharge": 449.03581100702286,
+      "discharge": 449.909620821476,
       "charge": 0.018204450607299805
     },
     "lifetime": {
@@ -224,6 +224,10 @@
         {
           "time": "2026-07-25 17:00:00",
           "value": 0.7371826171875
+        },
+        {
+          "time": "2026-07-25 18:00:00",
+          "value": 0.873809814453125
         }
       ]
     }
@@ -462,6 +466,19 @@
       "self_consumed": 0.082,
       "self_sufficient": 1.0,
       "balance_error": 0.6552
+    },
+    {
+      "time": "2026-07-25 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.8738,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.8738
     }
   ],
   "irradiation": null,

@@ -1,13 +1,13 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-07-25T18:02:49+02:00",
+  "updated_at": "2026-07-25T19:08:11+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 11.724029809236526,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,24 +15,24 @@
       "consumption": 6.2917640209198,
       "import": 1.256106659770012,
       "export": 0.07281778007745743,
-      "discharge": 4.177661418914795,
-      "charge": 0.07281777262687683
+      "discharge": 4.978658199310303,
+      "charge": 0.09102219343185425
     },
     "month": {
       "pv": 208.73104482889175,
       "consumption": 133.9228243585676,
       "import": 20.225138902664185,
       "export": 0.7645866647362709,
-      "discharge": 143.07476770319045,
-      "charge": 3.480043327435851
+      "discharge": 143.87576448358595,
+      "charge": 3.4982477482408285
     },
     "year": {
       "pv": 1444.6593571584672,
       "consumption": 1098.2889438252896,
       "import": 140.5201051235199,
       "export": 5.261084295809269,
-      "discharge": 948.7880113050342,
-      "charge": 26.215668888762593
+      "discharge": 949.5890080854297,
+      "charge": 26.23387330956757
     },
     "lifetime": {
       "pv": 0.0,
@@ -215,6 +215,10 @@
         {
           "time": "2026-07-25 04:00:00",
           "value": 0.036408886313438416
+        },
+        {
+          "time": "2026-07-25 18:00:00",
+          "value": 0.018204420804977417
         }
       ],
       "discharge": [
@@ -268,7 +272,7 @@
         },
         {
           "time": "2026-07-25 18:00:00",
-          "value": 0.036407470703125
+          "value": 0.8374042510986328
         }
       ]
     }
@@ -514,12 +518,12 @@
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.0364,
-      "grid_to_load": 0.0182,
-      "grid_to_batt": 0.0,
+      "batt_to_grid": 0.8374,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0182,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.0546
+      "balance_error": 0.8374
     }
   ],
   "irradiation": null,
