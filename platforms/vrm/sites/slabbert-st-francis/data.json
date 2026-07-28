@@ -1,37 +1,37 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-07-28T15:07:23+02:00",
+  "updated_at": "2026-07-28T17:29:21+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 9.775318503379822,
+    "today_kwh": 9.895775198936462,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 9.775318503379822,
-      "consumption": 5.639102220535278,
-      "import": 0.20024871826171875,
+      "pv": 9.895775198936462,
+      "consumption": 6.128752946853638,
+      "import": 0.23665761947631836,
       "export": 0.0,
-      "discharge": 3.423081159591675,
+      "discharge": 3.6616103649139404,
       "charge": 0.10922658443450928
     },
     "month": {
-      "pv": 238.7264767885208,
-      "consumption": 155.52409104071558,
-      "import": 21.135360956192017,
+      "pv": 238.84693348407745,
+      "consumption": 156.01374176703393,
+      "import": 21.171769857406616,
       "export": 0.7645866647362709,
-      "discharge": 162.98179488815367,
+      "discharge": 163.22032409347594,
       "charge": 4.0443810280412436
     },
     "year": {
-      "pv": 1474.6547891180962,
-      "consumption": 1119.8902105074376,
-      "import": 141.43032717704773,
+      "pv": 1474.7752458136529,
+      "consumption": 1120.379861233756,
+      "import": 141.46673607826233,
       "export": 5.261084295809269,
-      "discharge": 968.6950384899974,
+      "discharge": 968.9335676953197,
       "charge": 26.780006589367986
     },
     "lifetime": {
@@ -74,7 +74,11 @@
         },
         {
           "time": "2026-07-28 15:00:00",
-          "value": 0.0018157958984375
+          "value": 0.09224319458007812
+        },
+        {
+          "time": "2026-07-28 16:00:00",
+          "value": 0.030029296875
         }
       ],
       "consumption": [
@@ -112,7 +116,15 @@
         },
         {
           "time": "2026-07-28 15:00:00",
-          "value": 0.0182037353515625
+          "value": 0.3276786804199219
+        },
+        {
+          "time": "2026-07-28 16:00:00",
+          "value": 0.16015625
+        },
+        {
+          "time": "2026-07-28 17:00:00",
+          "value": 0.02001953125
         }
       ],
       "import": [
@@ -155,6 +167,10 @@
         {
           "time": "2026-07-28 14:00:00",
           "value": 0.03640866279602051
+        },
+        {
+          "time": "2026-07-28 16:00:00",
+          "value": 0.03640890121459961
         }
       ],
       "export": [],
@@ -228,6 +244,14 @@
         {
           "time": "2026-07-28 14:00:00",
           "value": 0.01551055908203125
+        },
+        {
+          "time": "2026-07-28 16:00:00",
+          "value": 0.16752243041992188
+        },
+        {
+          "time": "2026-07-28 17:00:00",
+          "value": 0.07100677490234375
         }
       ]
     }
@@ -430,16 +454,42 @@
     },
     {
       "time": "2026-07-28 15:00:00",
-      "pv_to_load": 0.0018,
+      "pv_to_load": 0.0922,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0018,
+      "self_consumed": 0.0922,
       "self_sufficient": 1.0,
-      "balance_error": -0.0164
+      "balance_error": -0.2354
+    },
+    {
+      "time": "2026-07-28 16:00:00",
+      "pv_to_load": 0.03,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.1237,
+      "batt_to_grid": 0.0438,
+      "grid_to_load": 0.0364,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1538,
+      "self_sufficient": 0.7727,
+      "balance_error": 0.0738
+    },
+    {
+      "time": "2026-07-28 17:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.02,
+      "batt_to_grid": 0.051,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.02,
+      "self_sufficient": 1.0,
+      "balance_error": 0.051
     }
   ],
   "irradiation": null,
