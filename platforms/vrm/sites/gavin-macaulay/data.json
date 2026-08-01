@@ -1,13 +1,13 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-08-01T18:11:59+02:00",
+  "updated_at": "2026-08-01T19:12:09+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 6.16424560546875,
-    "status": "unknown",
+    "status": "offline",
     "status_severity": "info",
-    "status_reason": "Insufficient data"
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
@@ -15,7 +15,7 @@
       "consumption": 2.91552734375,
       "import": 5.00628662109375,
       "export": 0.455108642578125,
-      "discharge": 0.58221435546875,
+      "discharge": 1.201171875,
       "charge": 0.03643798828125
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 2.91552734375,
       "import": 5.00628662109375,
       "export": 0.455108642578125,
-      "discharge": 0.58221435546875,
+      "discharge": 1.201171875,
       "charge": 0.03643798828125
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 1135.5923613458872,
       "import": 1932.7477111723274,
       "export": 140.62932682037354,
-      "discharge": 533.1028821021318,
+      "discharge": 533.7218396216631,
       "charge": 15.62733101285994
     },
     "lifetime": {
@@ -240,6 +240,10 @@
         },
         {
           "time": "2026-08-01 18:00:00",
+          "value": 0.61895751953125
+        },
+        {
+          "time": "2026-08-01 19:00:00",
           "value": 0.1092529296875
         }
       ]
@@ -482,6 +486,19 @@
     },
     {
       "time": "2026-08-01 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.619,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.619
+    },
+    {
+      "time": "2026-08-01 19:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
