@@ -1,37 +1,37 @@
 {
   "site_id": "slabbert-st-francis",
   "platform": "vrm",
-  "updated_at": "2026-08-02T14:39:34+02:00",
+  "updated_at": "2026-08-02T16:12:03+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 8.243763208389282,
+    "today_kwh": 8.393947839736938,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 8.243763208389282,
-      "consumption": 5.910643815994263,
-      "import": 0.20024919509887695,
+      "pv": 8.393947839736938,
+      "consumption": 6.4203712940216064,
+      "import": 0.23665761947631836,
       "export": 0.0,
-      "discharge": 2.988632917404175,
+      "discharge": 2.9968345165252686,
       "charge": 0.054613590240478516
     },
     "month": {
-      "pv": 16.97391366958618,
-      "consumption": 10.108550310134888,
-      "import": 0.5461335182189941,
+      "pv": 17.124098300933838,
+      "consumption": 10.618277788162231,
+      "import": 0.5825419425964355,
       "export": 0.0,
-      "discharge": 8.814125776290894,
+      "discharge": 8.822327375411987,
       "charge": 0.20024919509887695
     },
     "year": {
-      "pv": 1518.5226215403527,
-      "consumption": 1150.6303504686803,
-      "import": 143.10513639450073,
+      "pv": 1518.6728061717004,
+      "consumption": 1151.1400779467076,
+      "import": 143.14154481887817,
       "export": 5.261084295809269,
-      "discharge": 998.7144281193614,
+      "discharge": 998.7226297184825,
       "charge": 27.577371897175908
     },
     "lifetime": {
@@ -74,7 +74,15 @@
         },
         {
           "time": "2026-08-02 14:00:00",
-          "value": 0.06613922119140625
+          "value": 0.1022491455078125
+        },
+        {
+          "time": "2026-08-02 15:00:00",
+          "value": 0.10406494140625
+        },
+        {
+          "time": "2026-08-02 16:00:00",
+          "value": 0.010009765625
         }
       ],
       "consumption": [
@@ -108,7 +116,11 @@
         },
         {
           "time": "2026-08-02 14:00:00",
-          "value": 0.16384124755859375
+          "value": 0.3276824951171875
+        },
+        {
+          "time": "2026-08-02 15:00:00",
+          "value": 0.34588623046875
         }
       ],
       "import": [
@@ -151,6 +163,14 @@
         {
           "time": "2026-08-02 13:00:00",
           "value": 0.018204689025878906
+        },
+        {
+          "time": "2026-08-02 14:00:00",
+          "value": 0.018204212188720703
+        },
+        {
+          "time": "2026-08-02 15:00:00",
+          "value": 0.018204212188720703
         }
       ],
       "export": [],
@@ -211,7 +231,7 @@
         },
         {
           "time": "2026-08-02 14:00:00",
-          "value": 0.0081939697265625
+          "value": 0.01639556884765625
         }
       ]
     }
@@ -401,16 +421,42 @@
     },
     {
       "time": "2026-08-02 14:00:00",
-      "pv_to_load": 0.0661,
+      "pv_to_load": 0.1022,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
-      "batt_to_load": 0.0082,
+      "batt_to_load": 0.0164,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0182,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1186,
+      "self_sufficient": 0.9444,
+      "balance_error": -0.1908
+    },
+    {
+      "time": "2026-08-02 15:00:00",
+      "pv_to_load": 0.1041,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0182,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1041,
+      "self_sufficient": 0.9474,
+      "balance_error": -0.2236
+    },
+    {
+      "time": "2026-08-02 16:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0743,
-      "self_sufficient": 1.0,
-      "balance_error": -0.0895
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.01
     }
   ],
   "irradiation": null,
