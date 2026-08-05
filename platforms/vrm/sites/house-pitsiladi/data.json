@@ -1,37 +1,37 @@
 {
   "site_id": "house-pitsiladi",
   "platform": "vrm",
-  "updated_at": "2026-08-05T13:28:06+02:00",
+  "updated_at": "2026-08-05T15:09:21+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 25.33069606870413,
+    "today_kwh": 35.87269961088896,
     "status": "unknown",
     "status_severity": "info",
     "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 25.33069606870413,
-      "consumption": 34.06178289651871,
-      "import": 24.82220321893692,
+      "pv": 35.87269961088896,
+      "consumption": 48.734486162662506,
+      "import": 24.922203220427036,
       "export": 4.077796936035156,
-      "discharge": 3.154061609879136,
+      "discharge": 3.1592428162693977,
       "charge": 0.0
     },
     "month": {
-      "pv": 206.91572359669954,
-      "consumption": 238.40885554719716,
-      "import": 82.69628515839577,
+      "pv": 217.45772713888437,
+      "consumption": 253.08155881334096,
+      "import": 82.79628515988588,
       "export": 10.303714752197266,
-      "discharge": 153.50034518887696,
+      "discharge": 153.50552639526722,
       "charge": 0.0
     },
     "year": {
-      "pv": 9522.726059896406,
-      "consumption": 9474.692947331496,
-      "import": 3802.646675238386,
+      "pv": 9533.26806343859,
+      "consumption": 9489.36565059764,
+      "import": 3802.746675239876,
       "export": 512.6917762495577,
-      "discharge": 6147.884678037291,
+      "discharge": 6147.889859243682,
       "charge": 0.6820031888782978
     },
     "lifetime": {
@@ -70,7 +70,15 @@
         },
         {
           "time": "2026-08-05 13:00:00",
-          "value": 3.6981157064437866
+          "value": 8.536214590072632
+        },
+        {
+          "time": "2026-08-05 14:00:00",
+          "value": 5.44988077878952
+        },
+        {
+          "time": "2026-08-05 15:00:00",
+          "value": 0.25402387976646423
         }
       ],
       "consumption": [
@@ -100,7 +108,15 @@
         },
         {
           "time": "2026-08-05 13:00:00",
-          "value": 3.349625587463379
+          "value": 7.536547660827637
+        },
+        {
+          "time": "2026-08-05 14:00:00",
+          "value": 9.484560489654541
+        },
+        {
+          "time": "2026-08-05 15:00:00",
+          "value": 1.001220703125
         }
       ],
       "import": [
@@ -154,6 +170,10 @@
         },
         {
           "time": "2026-08-05 13:00:00",
+          "value": 0.10000000149011612
+        },
+        {
+          "time": "2026-08-05 14:00:00",
           "value": 0.10000000149011612
         }
       ],
@@ -212,6 +232,10 @@
         {
           "time": "2026-08-05 09:00:00",
           "value": 0.6375505719333887
+        },
+        {
+          "time": "2026-08-05 15:00:00",
+          "value": 0.00518120639026165
         }
       ]
     }
@@ -388,16 +412,42 @@
     },
     {
       "time": "2026-08-05 13:00:00",
-      "pv_to_load": 3.3496,
+      "pv_to_load": 7.5365,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.1,
       "grid_to_batt": 0.0,
-      "self_consumed": 3.3496,
-      "self_sufficient": 0.9701,
-      "balance_error": 0.4485
+      "self_consumed": 7.5365,
+      "self_sufficient": 0.9867,
+      "balance_error": 1.0997
+    },
+    {
+      "time": "2026-08-05 14:00:00",
+      "pv_to_load": 5.4499,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.1,
+      "grid_to_batt": 0.0,
+      "self_consumed": 5.4499,
+      "self_sufficient": 0.9895,
+      "balance_error": -3.9347
+    },
+    {
+      "time": "2026-08-05 15:00:00",
+      "pv_to_load": 0.254,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0052,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.2592,
+      "self_sufficient": 1.0,
+      "balance_error": -0.742
     }
   ],
   "irradiation": null,
