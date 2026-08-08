@@ -3,12 +3,12 @@
   "name": "BIMBO NRG",
   "platform": "fusionsolar",
   "capacity_kwp": 589.0,
-  "updated_at": "2026-08-08T09:55:43+02:00",
+  "updated_at": "2026-08-08T10:26:31+02:00",
   "current": {
-    "power_kw": 27.01,
-    "today_kwh": 88.36,
-    "month_kwh": 9198.38,
-    "total_kwh": 17825.98,
+    "power_kw": 73.98,
+    "today_kwh": 152.69,
+    "month_kwh": 9262.71,
+    "total_kwh": 17890.31,
     "status": "online",
     "status_severity": "ok",
     "status_reason": null
@@ -49,11 +49,15 @@
     {
       "time": "2026-08-08 08:00:00",
       "pv_kwh": 27.01
+    },
+    {
+      "time": "2026-08-08 09:00:00",
+      "pv_kwh": 73.98
     }
   ],
   "irradiation": {
     "source": "fusionsolar",
-    "today_total": 0.06,
+    "today_total": 0.2,
     "today_hourly": [
       {
         "time": "2026-08-08 00:00:00",
@@ -90,41 +94,45 @@
       {
         "time": "2026-08-08 08:00:00",
         "value": 0.053
+      },
+      {
+        "time": "2026-08-08 09:00:00",
+        "value": 0.14
       }
     ]
   },
   "energy": {
     "today": {
-      "pv": 31.38,
+      "pv": 105.36,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 31.38,
-      "pv_to_load": 31.38,
+      "consumption": 105.36,
+      "pv_to_load": 105.36,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 31.38
+      "self_consumed": 105.36
     },
     "month": {
-      "pv": 9147.72,
-      "import": 82048.0,
+      "pv": 9232.76,
+      "import": 82624.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 91195.72,
-      "pv_to_load": 9147.72,
+      "consumption": 91856.76,
+      "pv_to_load": 9232.76,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 82048.0,
+      "grid_to_load": 82624.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 9147.72
+      "self_consumed": 9232.76
     },
     "year": {
       "pv": 17775.32,
@@ -195,6 +203,10 @@
         {
           "time": "2026-08-08 08:00:00",
           "value": 27.01
+        },
+        {
+          "time": "2026-08-08 09:00:00",
+          "value": 73.98
         }
       ],
       "import": [
@@ -232,6 +244,10 @@
         },
         {
           "time": "2026-08-08 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-08 09:00:00",
           "value": 0.0
         }
       ],
@@ -271,6 +287,10 @@
         {
           "time": "2026-08-08 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-08 09:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -309,6 +329,10 @@
         {
           "time": "2026-08-08 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-08 09:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -346,6 +370,10 @@
         },
         {
           "time": "2026-08-08 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-08 09:00:00",
           "value": 0.0
         }
       ]
@@ -440,6 +468,16 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-08-08 09:00:00",
+        "pv_to_load": 73.98,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
@@ -491,12 +529,17 @@
         "time": "2026-08-08 08:00:00",
         "ghi_w_m2": 0.1,
         "expected_kwh": 8.409
+      },
+      {
+        "time": "2026-08-08 09:00:00",
+        "ghi_w_m2": 0.1,
+        "expected_kwh": 20.904
       }
     ],
-    "today_expected_total": 8.99,
-    "today_actual_total": 31.38,
-    "performance_pct": 349.0,
-    "elapsed_hours_compared": 2,
+    "today_expected_total": 29.9,
+    "today_actual_total": 105.36,
+    "performance_pct": 352.4,
+    "elapsed_hours_compared": 3,
     "reason": "Expected = site's own 30-day average for this hour-of-day"
   }
 }
