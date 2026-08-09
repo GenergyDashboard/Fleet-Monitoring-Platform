@@ -1,37 +1,37 @@
 {
   "site_id": "house-pitsiladi",
   "platform": "vrm",
-  "updated_at": "2026-08-09T07:45:09+02:00",
+  "updated_at": "2026-08-09T08:29:04+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.0,
+    "today_kwh": 0.359375,
     "status": "underperforming",
     "status_severity": "warning",
     "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
-      "consumption": 0.0,
-      "import": 0.4000000059604645,
-      "export": 0.0,
-      "discharge": 19.587953567504883,
+      "pv": 0.359375,
+      "consumption": 0.422049418091774,
+      "import": 2.6349190175533295,
+      "export": 1.1650810241699219,
+      "discharge": 22.278836369514465,
       "charge": 0.0
     },
     "month": {
-      "pv": 337.3719879970304,
-      "consumption": 417.856631876115,
-      "import": 157.58234971016645,
-      "export": 21.517650604248047,
-      "discharge": 262.9173392148077,
+      "pv": 337.7313629970304,
+      "consumption": 418.27868129420676,
+      "import": 159.81726872175932,
+      "export": 22.68273162841797,
+      "discharge": 265.6082220168173,
       "charge": 0.018204689025878906
     },
     "year": {
-      "pv": 9653.182324296737,
-      "consumption": 9654.140723660414,
-      "import": 3877.5327397901565,
-      "export": 523.9057121016085,
-      "discharge": 6257.301672063222,
+      "pv": 9653.541699296737,
+      "consumption": 9654.562773078505,
+      "import": 3879.7676588017493,
+      "export": 525.0707931257784,
+      "discharge": 6259.992554865232,
       "charge": 0.7002078779041767
     },
     "lifetime": {
@@ -43,8 +43,22 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [],
-      "consumption": [],
+      "pv": [
+        {
+          "time": "2026-08-09 08:00:00",
+          "value": 0.359375
+        }
+      ],
+      "consumption": [
+        {
+          "time": "2026-08-09 07:00:00",
+          "value": 0.1903076171875
+        },
+        {
+          "time": "2026-08-09 08:00:00",
+          "value": 0.231741800904274
+        }
+      ],
       "import": [
         {
           "time": "2026-08-09 01:00:00",
@@ -61,9 +75,18 @@
         {
           "time": "2026-08-09 07:00:00",
           "value": 0.10000000149011612
+        },
+        {
+          "time": "2026-08-09 08:00:00",
+          "value": 2.234919011592865
         }
       ],
-      "export": [],
+      "export": [
+        {
+          "time": "2026-08-09 08:00:00",
+          "value": 1.1650810241699219
+        }
+      ],
       "charge": [],
       "discharge": [
         {
@@ -96,7 +119,11 @@
         },
         {
           "time": "2026-08-09 07:00:00",
-          "value": 6.8084869384765625
+          "value": 9.039443969726562
+        },
+        {
+          "time": "2026-08-09 08:00:00",
+          "value": 0.4599257707595825
         }
       ]
     }
@@ -198,13 +225,26 @@
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 6.8085,
+      "batt_to_load": 0.0903,
+      "batt_to_grid": 8.9491,
       "grid_to_load": 0.1,
       "grid_to_batt": 0.0,
+      "self_consumed": 0.0903,
+      "self_sufficient": 0.4745,
+      "balance_error": 8.9491
+    },
+    {
+      "time": "2026-08-09 08:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.7052,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.4599,
+      "grid_to_load": 2.2349,
+      "grid_to_batt": 0.0,
       "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 6.9085
+      "self_sufficient": -8.644,
+      "balance_error": 1.6574
     }
   ],
   "irradiation": null,
