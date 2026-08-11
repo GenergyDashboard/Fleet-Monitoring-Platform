@@ -1,17 +1,17 @@
 {
   "site_id": "axxess-port-elizabeth",
   "platform": "sunsynk",
-  "updated_at": "2026-08-11T17:44:08+02:00",
+  "updated_at": "2026-08-11T19:42:03+02:00",
   "current": {
-    "power_kw": 0.92,
-    "today_kwh": 288.1,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": "Generating normally"
+    "power_kw": 0,
+    "today_kwh": 288.6,
+    "status": "offline",
+    "status_severity": "info",
+    "status_reason": "Outside daylight hours"
   },
   "energy": {
     "today": {
-      "pv": 288.1,
+      "pv": 288.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -19,7 +19,7 @@
       "discharge": 0.0
     },
     "month": {
-      "pv": 3187.1,
+      "pv": 3187.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -27,7 +27,7 @@
       "discharge": 0.0
     },
     "year": {
-      "pv": 78558.0,
+      "pv": 78558.5,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -35,7 +35,7 @@
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 480606.1,
+      "pv": 480606.6,
       "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
@@ -114,7 +114,15 @@
         },
         {
           "time": "2026-08-11 17:00:00",
-          "value": 2.717
+          "value": 2.873
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.147
+        },
+        {
+          "time": "2026-08-11 19:00:00",
+          "value": 0.0
         }
       ],
       "consumption": [
@@ -188,6 +196,14 @@
         },
         {
           "time": "2026-08-11 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 19:00:00",
           "value": 0.0
         }
       ],
@@ -263,6 +279,14 @@
         {
           "time": "2026-08-11 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 19:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -336,6 +360,14 @@
         },
         {
           "time": "2026-08-11 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 19:00:00",
           "value": 0.0
         }
       ],
@@ -411,6 +443,14 @@
         {
           "time": "2026-08-11 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 19:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -484,6 +524,14 @@
         },
         {
           "time": "2026-08-11 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 18:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-11 19:00:00",
           "value": 0.0
         }
       ]
@@ -722,7 +770,33 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 2.717
+      "balance_error": 2.873
+    },
+    {
+      "time": "2026-08-11 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.147
+    },
+    {
+      "time": "2026-08-11 19:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.0
     }
   ],
   "irradiation": null,
