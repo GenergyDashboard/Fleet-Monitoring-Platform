@@ -3,15 +3,15 @@
   "name": "MP The Pines",
   "platform": "fusionsolar",
   "capacity_kwp": 260.7,
-  "updated_at": "2026-08-12T15:23:42+02:00",
+  "updated_at": "2026-08-12T16:33:15+02:00",
   "current": {
-    "power_kw": 73.63,
-    "today_kwh": 452.66,
-    "month_kwh": 7060.65,
-    "total_kwh": 1210637.93,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": null
+    "power_kw": 57.42,
+    "today_kwh": 509.33,
+    "month_kwh": 7117.32,
+    "total_kwh": 1210694.6,
+    "status": "fault",
+    "status_severity": "critical",
+    "status_reason": "Inverter reports fault state."
   },
   "today_hourly": [
     {
@@ -73,174 +73,81 @@
     {
       "time": "2026-08-12 14:00:00",
       "pv_kwh": 73.63
+    },
+    {
+      "time": "2026-08-12 15:00:00",
+      "pv_kwh": 57.42
     }
   ],
   "irradiation": {
-    "source": "open-meteo",
-    "today_total": 4.246,
-    "today_hourly": [
-      {
-        "time": "2026-08-12 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 08:00:00",
-        "value": 13.0
-      },
-      {
-        "time": "2026-08-12 09:00:00",
-        "value": 151.0
-      },
-      {
-        "time": "2026-08-12 10:00:00",
-        "value": 335.0
-      },
-      {
-        "time": "2026-08-12 11:00:00",
-        "value": 495.0
-      },
-      {
-        "time": "2026-08-12 12:00:00",
-        "value": 605.0
-      },
-      {
-        "time": "2026-08-12 13:00:00",
-        "value": 657.0
-      },
-      {
-        "time": "2026-08-12 14:00:00",
-        "value": 641.0
-      },
-      {
-        "time": "2026-08-12 15:00:00",
-        "value": 563.0
-      },
-      {
-        "time": "2026-08-12 16:00:00",
-        "value": 434.0
-      },
-      {
-        "time": "2026-08-12 17:00:00",
-        "value": 263.0
-      },
-      {
-        "time": "2026-08-12 18:00:00",
-        "value": 88.0
-      },
-      {
-        "time": "2026-08-12 19:00:00",
-        "value": 1.0
-      },
-      {
-        "time": "2026-08-12 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-12 23:00:00",
-        "value": 0.0
-      }
-    ]
+    "source": null,
+    "today_total": null,
+    "today_hourly": []
   },
   "energy": {
     "today": {
-      "pv": 431.4,
+      "pv": 488.82,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 431.4,
-      "pv_to_load": 431.4,
+      "consumption": 488.82,
+      "pv_to_load": 488.82,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 431.4
+      "self_consumed": 488.82
     },
     "month": {
-      "pv": 6972.31,
-      "import": 27324.28,
+      "pv": 7100.64,
+      "import": 27565.44,
       "export": 17.25,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 34279.34,
-      "pv_to_load": 6955.06,
+      "consumption": 34648.83,
+      "pv_to_load": 7083.39,
       "pv_to_batt": 0.0,
       "pv_to_grid": 17.25,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 27324.28,
+      "grid_to_load": 27565.44,
       "grid_to_batt": 0.0,
-      "self_consumed": 6955.06
+      "self_consumed": 7083.39
     },
     "year": {
-      "pv": 214207.41,
-      "import": 523286.08,
+      "pv": 214335.74,
+      "import": 523527.24,
       "export": 2162.25,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 735331.24,
-      "pv_to_load": 212045.16,
+      "consumption": 735700.73,
+      "pv_to_load": 212173.49,
       "pv_to_batt": 0.0,
       "pv_to_grid": 2162.25,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 523286.08,
+      "grid_to_load": 523527.24,
       "grid_to_batt": 0.0,
-      "self_consumed": 212045.16
+      "self_consumed": 212173.49
     },
     "lifetime": {
-      "pv": 1210549.59,
-      "import": 1302757.78,
+      "pv": 1210677.92,
+      "import": 1302998.94,
       "export": 31945.75,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 2186540.97,
-      "pv_to_load": 949285.44,
+      "consumption": 2186910.46,
+      "pv_to_load": 949413.77,
       "pv_to_batt": 0.0,
       "pv_to_grid": 31945.75,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 1302757.78,
+      "grid_to_load": 1302998.94,
       "grid_to_batt": 0.0,
-      "self_consumed": 949285.44
+      "self_consumed": 949413.77
     },
     "hourly": {
       "pv": [
@@ -303,6 +210,10 @@
         {
           "time": "2026-08-12 14:00:00",
           "value": 73.63
+        },
+        {
+          "time": "2026-08-12 15:00:00",
+          "value": 57.42
         }
       ],
       "import": [
@@ -364,6 +275,10 @@
         },
         {
           "time": "2026-08-12 14:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-12 15:00:00",
           "value": 0.0
         }
       ],
@@ -427,6 +342,10 @@
         {
           "time": "2026-08-12 14:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-12 15:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -489,6 +408,10 @@
         {
           "time": "2026-08-12 14:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-12 15:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -550,6 +473,10 @@
         },
         {
           "time": "2026-08-12 14:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-12 15:00:00",
           "value": 0.0
         }
       ]
@@ -704,6 +631,16 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-08-12 15:00:00",
+        "pv_to_load": 57.42,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
@@ -716,107 +653,5 @@
     "performance_pct": null,
     "elapsed_hours_compared": 0,
     "reason": "Expected = site's own 30-day average for this hour-of-day"
-  },
-  "irradiation_forecast": {
-    "date": "2026-08-13",
-    "total_forecast": 4.266,
-    "hourly": [
-      {
-        "time": "2026-08-13 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 07:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 08:00:00",
-        "value": 14.0
-      },
-      {
-        "time": "2026-08-13 09:00:00",
-        "value": 153.0
-      },
-      {
-        "time": "2026-08-13 10:00:00",
-        "value": 335.0
-      },
-      {
-        "time": "2026-08-13 11:00:00",
-        "value": 492.0
-      },
-      {
-        "time": "2026-08-13 12:00:00",
-        "value": 602.0
-      },
-      {
-        "time": "2026-08-13 13:00:00",
-        "value": 653.0
-      },
-      {
-        "time": "2026-08-13 14:00:00",
-        "value": 643.0
-      },
-      {
-        "time": "2026-08-13 15:00:00",
-        "value": 567.0
-      },
-      {
-        "time": "2026-08-13 16:00:00",
-        "value": 440.0
-      },
-      {
-        "time": "2026-08-13 17:00:00",
-        "value": 274.0
-      },
-      {
-        "time": "2026-08-13 18:00:00",
-        "value": 92.0
-      },
-      {
-        "time": "2026-08-13 19:00:00",
-        "value": 1.0
-      },
-      {
-        "time": "2026-08-13 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-13 23:00:00",
-        "value": 0.0
-      }
-    ]
   }
 }
