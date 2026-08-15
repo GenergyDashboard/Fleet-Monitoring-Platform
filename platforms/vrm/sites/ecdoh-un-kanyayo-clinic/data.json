@@ -1,21 +1,21 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-08-14T19:15:56+02:00",
+  "updated_at": "2026-08-15T06:24:13+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 18.24420166015625,
-    "status": "offline",
-    "status_severity": "info",
-    "status_reason": "Outside daylight hours"
+    "today_kwh": 0.0,
+    "status": "underperforming",
+    "status_severity": "warning",
+    "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 18.24420166015625,
-      "consumption": 13.09613037109375,
+      "pv": 0.0,
+      "consumption": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 8.81658935546875,
+      "discharge": 6.025665283203125,
       "charge": 0.0
     },
     "month": {
@@ -23,7 +23,7 @@
       "consumption": 144.8560981452465,
       "import": 2.213537711650133,
       "export": 1.9222400151193142,
-      "discharge": 175.94672179222107,
+      "discharge": 186.41425108909607,
       "charge": 0.004184722900390625
     },
     "year": {
@@ -31,7 +31,7 @@
       "consumption": 2619.204505559057,
       "import": 985.1209724168293,
       "export": 524.7389626707882,
-      "discharge": 2575.266664996743,
+      "discharge": 2585.734194293618,
       "charge": 4.634303994476795
     },
     "lifetime": {
@@ -43,173 +43,111 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [
-        {
-          "time": "2026-08-14 07:00:00",
-          "value": 0.28033447265625
-        },
-        {
-          "time": "2026-08-14 08:00:00",
-          "value": 2.29620361328125
-        },
-        {
-          "time": "2026-08-14 09:00:00",
-          "value": 4.447021484375
-        },
-        {
-          "time": "2026-08-14 10:00:00",
-          "value": 6.026763916015625
-        },
-        {
-          "time": "2026-08-14 11:00:00",
-          "value": 3.953857421875
-        },
-        {
-          "time": "2026-08-14 12:00:00",
-          "value": 0.3536376953125
-        },
-        {
-          "time": "2026-08-14 13:00:00",
-          "value": 0.32452392578125
-        },
-        {
-          "time": "2026-08-14 14:00:00",
-          "value": 0.246978759765625
-        },
-        {
-          "time": "2026-08-14 15:00:00",
-          "value": 0.213623046875
-        },
-        {
-          "time": "2026-08-14 16:00:00",
-          "value": 0.10125732421875
-        }
-      ],
-      "consumption": [
-        {
-          "time": "2026-08-14 06:00:00",
-          "value": 0.0400390625
-        },
-        {
-          "time": "2026-08-14 07:00:00",
-          "value": 0.78997802734375
-        },
-        {
-          "time": "2026-08-14 08:00:00",
-          "value": 1.18328857421875
-        },
-        {
-          "time": "2026-08-14 09:00:00",
-          "value": 1.383544921875
-        },
-        {
-          "time": "2026-08-14 10:00:00",
-          "value": 1.492767333984375
-        },
-        {
-          "time": "2026-08-14 11:00:00",
-          "value": 1.256103515625
-        },
-        {
-          "time": "2026-08-14 12:00:00",
-          "value": 1.6566162109375
-        },
-        {
-          "time": "2026-08-14 13:00:00",
-          "value": 1.76580810546875
-        },
-        {
-          "time": "2026-08-14 14:00:00",
-          "value": 1.492767333984375
-        },
-        {
-          "time": "2026-08-14 15:00:00",
-          "value": 1.256103515625
-        },
-        {
-          "time": "2026-08-14 16:00:00",
-          "value": 0.69903564453125
-        },
-        {
-          "time": "2026-08-14 17:00:00",
-          "value": 0.080078125
-        }
-      ],
+      "pv": [],
+      "consumption": [],
       "import": [],
       "export": [],
       "charge": [],
       "discharge": [
         {
-          "time": "2026-08-14 00:00:00",
-          "value": 1.128692626953125
+          "time": "2026-08-15 00:00:00",
+          "value": 0.800994873046875
         },
         {
-          "time": "2026-08-14 01:00:00",
+          "time": "2026-08-15 01:00:00",
+          "value": 1.019439697265625
+        },
+        {
+          "time": "2026-08-15 02:00:00",
+          "value": 1.146881103515625
+        },
+        {
+          "time": "2026-08-15 03:00:00",
+          "value": 0.983062744140625
+        },
+        {
+          "time": "2026-08-15 04:00:00",
+          "value": 0.83740234375
+        },
+        {
+          "time": "2026-08-15 05:00:00",
           "value": 0.91021728515625
         },
         {
-          "time": "2026-08-14 02:00:00",
-          "value": 0.782806396484375
-        },
-        {
-          "time": "2026-08-14 03:00:00",
-          "value": 0.964813232421875
-        },
-        {
-          "time": "2026-08-14 04:00:00",
-          "value": 1.1104736328125
-        },
-        {
-          "time": "2026-08-14 05:00:00",
-          "value": 0.728179931640625
-        },
-        {
-          "time": "2026-08-14 06:00:00",
-          "value": 0.72454833984375
-        },
-        {
-          "time": "2026-08-14 07:00:00",
-          "value": 0.04742431640625
-        },
-        {
-          "time": "2026-08-14 14:00:00",
-          "value": 0.01275634765625
-        },
-        {
-          "time": "2026-08-14 16:00:00",
-          "value": 0.13836669921875
-        },
-        {
-          "time": "2026-08-14 17:00:00",
-          "value": 0.921173095703125
-        },
-        {
-          "time": "2026-08-14 18:00:00",
-          "value": 1.201507568359375
-        },
-        {
-          "time": "2026-08-14 19:00:00",
-          "value": 0.1456298828125
+          "time": "2026-08-15 06:00:00",
+          "value": 0.327667236328125
         }
       ]
     }
   },
   "energy_powerflow_hourly": [
     {
-      "time": "2026-08-14 00:00:00",
+      "time": "2026-08-15 00:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 1.1287,
+      "batt_to_grid": 0.801,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 1.1287
+      "balance_error": 0.801
     },
     {
-      "time": "2026-08-14 01:00:00",
+      "time": "2026-08-15 01:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 1.0194,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 1.0194
+    },
+    {
+      "time": "2026-08-15 02:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 1.1469,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 1.1469
+    },
+    {
+      "time": "2026-08-15 03:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.9831,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.9831
+    },
+    {
+      "time": "2026-08-15 04:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.8374,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.8374
+    },
+    {
+      "time": "2026-08-15 05:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
@@ -222,444 +160,21 @@
       "balance_error": 0.9102
     },
     {
-      "time": "2026-08-14 02:00:00",
+      "time": "2026-08-15 06:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.7828,
+      "batt_to_grid": 0.3277,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.7828
-    },
-    {
-      "time": "2026-08-14 03:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.9648,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 0.9648
-    },
-    {
-      "time": "2026-08-14 04:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 1.1105,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 1.1105
-    },
-    {
-      "time": "2026-08-14 05:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.7282,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 0.7282
-    },
-    {
-      "time": "2026-08-14 06:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.04,
-      "batt_to_grid": 0.6845,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.04,
-      "self_sufficient": 1.0,
-      "balance_error": 0.6845
-    },
-    {
-      "time": "2026-08-14 07:00:00",
-      "pv_to_load": 0.2803,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0474,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.3278,
-      "self_sufficient": 1.0,
-      "balance_error": -0.4622
-    },
-    {
-      "time": "2026-08-14 08:00:00",
-      "pv_to_load": 1.1833,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 1.1833,
-      "self_sufficient": 1.0,
-      "balance_error": 1.1129
-    },
-    {
-      "time": "2026-08-14 09:00:00",
-      "pv_to_load": 1.3835,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 1.3835,
-      "self_sufficient": 1.0,
-      "balance_error": 3.0635
-    },
-    {
-      "time": "2026-08-14 10:00:00",
-      "pv_to_load": 1.4928,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 1.4928,
-      "self_sufficient": 1.0,
-      "balance_error": 4.534
-    },
-    {
-      "time": "2026-08-14 11:00:00",
-      "pv_to_load": 1.2561,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 1.2561,
-      "self_sufficient": 1.0,
-      "balance_error": 2.6978
-    },
-    {
-      "time": "2026-08-14 12:00:00",
-      "pv_to_load": 0.3536,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.3536,
-      "self_sufficient": 1.0,
-      "balance_error": -1.303
-    },
-    {
-      "time": "2026-08-14 13:00:00",
-      "pv_to_load": 0.3245,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.3245,
-      "self_sufficient": 1.0,
-      "balance_error": -1.4413
-    },
-    {
-      "time": "2026-08-14 14:00:00",
-      "pv_to_load": 0.247,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0128,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.2597,
-      "self_sufficient": 1.0,
-      "balance_error": -1.233
-    },
-    {
-      "time": "2026-08-14 15:00:00",
-      "pv_to_load": 0.2136,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.2136,
-      "self_sufficient": 1.0,
-      "balance_error": -1.0425
-    },
-    {
-      "time": "2026-08-14 16:00:00",
-      "pv_to_load": 0.1013,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.1384,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.2396,
-      "self_sufficient": 1.0,
-      "balance_error": -0.4594
-    },
-    {
-      "time": "2026-08-14 17:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0801,
-      "batt_to_grid": 0.8411,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0801,
-      "self_sufficient": 1.0,
-      "balance_error": 0.8411
-    },
-    {
-      "time": "2026-08-14 18:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 1.2015,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 1.2015
-    },
-    {
-      "time": "2026-08-14 19:00:00",
-      "pv_to_load": 0.0,
-      "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.1456,
-      "grid_to_load": 0.0,
-      "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 0.1456
+      "balance_error": 0.3277
     }
   ],
-  "irradiation": {
-    "source": "open-meteo",
-    "today_total": 4.577,
-    "today_hourly": [
-      {
-        "time": "2026-08-14 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 07:00:00",
-        "value": 5.0
-      },
-      {
-        "time": "2026-08-14 08:00:00",
-        "value": 120.0
-      },
-      {
-        "time": "2026-08-14 09:00:00",
-        "value": 311.0
-      },
-      {
-        "time": "2026-08-14 10:00:00",
-        "value": 485.0
-      },
-      {
-        "time": "2026-08-14 11:00:00",
-        "value": 615.0
-      },
-      {
-        "time": "2026-08-14 12:00:00",
-        "value": 687.0
-      },
-      {
-        "time": "2026-08-14 13:00:00",
-        "value": 693.0
-      },
-      {
-        "time": "2026-08-14 14:00:00",
-        "value": 634.0
-      },
-      {
-        "time": "2026-08-14 15:00:00",
-        "value": 514.0
-      },
-      {
-        "time": "2026-08-14 16:00:00",
-        "value": 345.0
-      },
-      {
-        "time": "2026-08-14 17:00:00",
-        "value": 154.0
-      },
-      {
-        "time": "2026-08-14 18:00:00",
-        "value": 14.0
-      },
-      {
-        "time": "2026-08-14 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-14 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
-  "irradiation_forecast": {
-    "date": "2026-08-15",
-    "total_forecast": 4.5,
-    "hourly": [
-      {
-        "time": "2026-08-15 00:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 01:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 02:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 03:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 04:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 05:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 06:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 07:00:00",
-        "value": 5.0
-      },
-      {
-        "time": "2026-08-15 08:00:00",
-        "value": 100.0
-      },
-      {
-        "time": "2026-08-15 09:00:00",
-        "value": 258.0
-      },
-      {
-        "time": "2026-08-15 10:00:00",
-        "value": 456.0
-      },
-      {
-        "time": "2026-08-15 11:00:00",
-        "value": 616.0
-      },
-      {
-        "time": "2026-08-15 12:00:00",
-        "value": 693.0
-      },
-      {
-        "time": "2026-08-15 13:00:00",
-        "value": 696.0
-      },
-      {
-        "time": "2026-08-15 14:00:00",
-        "value": 637.0
-      },
-      {
-        "time": "2026-08-15 15:00:00",
-        "value": 516.0
-      },
-      {
-        "time": "2026-08-15 16:00:00",
-        "value": 349.0
-      },
-      {
-        "time": "2026-08-15 17:00:00",
-        "value": 159.0
-      },
-      {
-        "time": "2026-08-15 18:00:00",
-        "value": 15.0
-      },
-      {
-        "time": "2026-08-15 19:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 20:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 21:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 22:00:00",
-        "value": 0.0
-      },
-      {
-        "time": "2026-08-15 23:00:00",
-        "value": 0.0
-      }
-    ]
-  },
+  "irradiation": null,
+  "irradiation_forecast": null,
   "financial": null,
   "performance": {
     "method": "empirical",
