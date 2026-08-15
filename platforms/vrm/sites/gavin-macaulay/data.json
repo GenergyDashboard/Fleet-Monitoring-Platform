@@ -1,36 +1,36 @@
 {
   "site_id": "gavin-macaulay",
   "platform": "vrm",
-  "updated_at": "2026-08-15T07:11:20+02:00",
+  "updated_at": "2026-08-15T07:37:19+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.0,
+    "today_kwh": 0.04296875,
     "status": "underperforming",
     "status_severity": "warning",
     "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
+      "pv": 0.04296875,
       "consumption": 0.0,
-      "import": 4.55108642578125,
-      "export": 0.309478759765625,
+      "import": 4.64215087890625,
+      "export": 0.3276824951171875,
       "discharge": 0.0,
       "charge": 0.0
     },
     "month": {
-      "pv": 76.595703125,
+      "pv": 76.638671875,
       "consumption": 47.35821533203125,
-      "import": 102.9825439453125,
-      "export": 11.359573364257812,
+      "import": 103.0736083984375,
+      "export": 11.377777099609375,
       "discharge": 25.22296142578125,
       "charge": 1.57275390625
     },
     "year": {
-      "pv": 1465.6717464774847,
+      "pv": 1465.7147152274847,
       "consumption": 1180.0350493341684,
-      "import": 2030.7239684965461,
-      "export": 151.53379154205322,
+      "import": 2030.8150329496711,
+      "export": 151.55199527740479,
       "discharge": 557.7436291724443,
       "charge": 17.16364693082869
     },
@@ -43,7 +43,12 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [],
+      "pv": [
+        {
+          "time": "2026-08-15 07:00:00",
+          "value": 0.04296875
+        }
+      ],
       "consumption": [],
       "import": [
         {
@@ -76,7 +81,7 @@
         },
         {
           "time": "2026-08-15 07:00:00",
-          "value": 0.05462646484375
+          "value": 0.14569091796875
         }
       ],
       "export": [
@@ -107,6 +112,10 @@
         {
           "time": "2026-08-15 06:00:00",
           "value": 0.0546112060546875
+        },
+        {
+          "time": "2026-08-15 07:00:00",
+          "value": 0.0182037353515625
         }
       ],
       "charge": [],
@@ -209,14 +218,14 @@
       "time": "2026-08-15 07:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
+      "pv_to_grid": 0.0182,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 0.0546,
+      "grid_to_load": 0.1457,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.0546
+      "balance_error": 0.1705
     }
   ],
   "irradiation": null,

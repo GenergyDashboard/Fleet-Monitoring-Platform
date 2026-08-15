@@ -1,36 +1,36 @@
 {
   "site_id": "house-efstratiou",
   "platform": "vrm",
-  "updated_at": "2026-08-15T07:11:21+02:00",
+  "updated_at": "2026-08-15T07:37:20+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.0,
+    "today_kwh": 0.080078125,
     "status": "underperforming",
     "status_severity": "warning",
     "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
+      "pv": 0.080078125,
       "consumption": 0.0,
-      "import": 13.798828125,
-      "export": 2.5486297607421875,
+      "import": 14.69091796875,
+      "export": 2.603240966796875,
       "discharge": 0.49151611328125,
       "charge": 0.0
     },
     "month": {
-      "pv": 98.21066284179688,
+      "pv": 98.29074096679688,
       "consumption": 212.32492065429688,
-      "import": 585.6732177734375,
-      "export": 123.025634765625,
+      "import": 586.5653076171875,
+      "export": 123.08024597167969,
       "discharge": 97.0384521484375,
       "charge": 1.86724853515625
     },
     "year": {
-      "pv": 2659.2858706861734,
+      "pv": 2659.3659488111734,
       "consumption": 3463.423583479598,
-      "import": 10168.237549625337,
-      "export": 516.5875087659806,
+      "import": 10169.129639469087,
+      "export": 516.6421199720353,
       "discharge": 1298.3269516602159,
       "charge": 127.8880371414125
     },
@@ -43,7 +43,12 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [],
+      "pv": [
+        {
+          "time": "2026-08-15 07:00:00",
+          "value": 0.080078125
+        }
+      ],
       "consumption": [],
       "import": [
         {
@@ -76,7 +81,7 @@
         },
         {
           "time": "2026-08-15 07:00:00",
-          "value": 0.07275390625
+          "value": 0.96484375
         }
       ],
       "export": [
@@ -107,6 +112,10 @@
         {
           "time": "2026-08-15 06:00:00",
           "value": 0.0910186767578125
+        },
+        {
+          "time": "2026-08-15 07:00:00",
+          "value": 0.0546112060546875
         }
       ],
       "charge": [],
@@ -230,14 +239,14 @@
       "time": "2026-08-15 07:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0,
+      "pv_to_grid": 0.0546,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 0.0728,
+      "grid_to_load": 0.9648,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.0728
+      "balance_error": 0.9903
     }
   ],
   "irradiation": null,
