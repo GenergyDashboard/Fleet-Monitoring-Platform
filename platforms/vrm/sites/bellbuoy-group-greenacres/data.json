@@ -1,35 +1,35 @@
 {
   "site_id": "bellbuoy-group-greenacres",
   "platform": "vrm",
-  "updated_at": "2026-08-16T07:00:38+02:00",
+  "updated_at": "2026-08-16T07:29:26+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.0,
+    "today_kwh": 0.01171875,
     "status": "underperforming",
     "status_severity": "warning",
     "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
+      "pv": 0.01171875,
       "consumption": 0.0,
-      "import": 8.62890625,
+      "import": 8.974609375,
       "export": 0.20024871826171875,
       "discharge": 0.0,
       "charge": 0.0
     },
     "month": {
-      "pv": 77.17930394411087,
+      "pv": 77.19102269411087,
       "consumption": 122.94173622131348,
-      "import": 489.3355712890625,
+      "import": 489.6812744140625,
       "export": 8.93838119506836,
       "discharge": 44.6214656829834,
       "charge": 0.018204450607299805
     },
     "year": {
-      "pv": 1015.9532773997635,
+      "pv": 1015.9649961497635,
       "consumption": 2537.6935350745916,
-      "import": 7847.3173828255385,
+      "import": 7847.6630859505385,
       "export": 171.90457197837532,
       "discharge": 532.1630618870258,
       "charge": 0.03640890121459961
@@ -43,7 +43,12 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [],
+      "pv": [
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.01171875
+        }
+      ],
       "consumption": [],
       "import": [
         {
@@ -73,6 +78,10 @@
         {
           "time": "2026-08-16 06:00:00",
           "value": 1.2197265625
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.345703125
         }
       ],
       "export": [
@@ -200,6 +209,19 @@
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
       "balance_error": 1.1833
+    },
+    {
+      "time": "2026-08-16 07:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.3457,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.3574
     }
   ],
   "irradiation": null,

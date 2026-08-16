@@ -1,7 +1,7 @@
 {
   "site_id": "14-plane-street-j-bay",
   "platform": "vrm",
-  "updated_at": "2026-08-16T07:00:37+02:00",
+  "updated_at": "2026-08-16T07:29:24+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.0,
@@ -12,26 +12,26 @@
   "energy": {
     "today": {
       "pv": 0.0,
-      "consumption": 0.0,
-      "import": 12.124267578125,
-      "export": 1.856842041015625,
-      "discharge": 0.4552001953125,
+      "consumption": 0.030029296875,
+      "import": 12.961669921875,
+      "export": 2.00250244140625,
+      "discharge": 0.4615478515625,
       "charge": 0.0
     },
     "month": {
       "pv": 100.6220703125,
-      "consumption": 294.89874267578125,
-      "import": 546.9708251953125,
-      "export": 68.28485107421875,
-      "discharge": 21.140625,
+      "consumption": 294.92877197265625,
+      "import": 547.8082275390625,
+      "export": 68.43051147460938,
+      "discharge": 21.14697265625,
       "charge": 0.97265625
     },
     "year": {
       "pv": 3820.530486550182,
-      "consumption": 3415.0206976104528,
-      "import": 5391.010493122041,
-      "export": 592.9369249939919,
-      "discharge": 2201.1651982963085,
+      "consumption": 3415.0507269073278,
+      "import": 5391.847895465791,
+      "export": 593.0825853943825,
+      "discharge": 2201.1715459525585,
       "charge": 258.01733335852623
     },
     "lifetime": {
@@ -44,7 +44,12 @@
     },
     "hourly": {
       "pv": [],
-      "consumption": [],
+      "consumption": [
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.030029296875
+        }
+      ],
       "import": [
         {
           "time": "2026-08-16 00:00:00",
@@ -72,7 +77,11 @@
         },
         {
           "time": "2026-08-16 06:00:00",
-          "value": 1.2744140625
+          "value": 1.6748046875
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.43701171875
         }
       ],
       "export": [
@@ -102,7 +111,11 @@
         },
         {
           "time": "2026-08-16 06:00:00",
-          "value": 0.21844482421875
+          "value": 0.2730712890625
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.091033935546875
         }
       ],
       "charge": [],
@@ -134,6 +147,10 @@
         {
           "time": "2026-08-16 06:00:00",
           "value": 0.018310546875
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.00634765625
         }
       ]
     }
@@ -221,14 +238,27 @@
       "time": "2026-08-16 06:00:00",
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.2001,
+      "pv_to_grid": 0.2548,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0183,
-      "grid_to_load": 1.2744,
+      "grid_to_load": 1.6748,
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 1.0743
+      "balance_error": 1.42
+    },
+    {
+      "time": "2026-08-16 07:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0847,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0063,
+      "grid_to_load": 0.437,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": -13.5528,
+      "balance_error": 0.3223
     }
   ],
   "irradiation": null,

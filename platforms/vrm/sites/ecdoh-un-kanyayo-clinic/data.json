@@ -1,37 +1,37 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-08-16T07:00:41+02:00",
+  "updated_at": "2026-08-16T07:29:28+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.0,
+    "today_kwh": 0.0084228515625,
     "status": "underperforming",
     "status_severity": "warning",
     "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
-      "pv": 0.0,
-      "consumption": 0.0498046875,
+      "pv": 0.0084228515625,
+      "consumption": 0.3319091796875,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 6.740478515625,
+      "discharge": 6.84674072265625,
       "charge": 0.0
     },
     "month": {
-      "pv": 276.89299988746643,
-      "consumption": 154.544696778059,
+      "pv": 276.90142273902893,
+      "consumption": 154.8268012702465,
       "import": 2.213537711650133,
       "export": 1.9222400151193142,
-      "discharge": 201.0723626613617,
+      "discharge": 201.17862486839294,
       "charge": 0.004184722900390625
     },
     "year": {
-      "pv": 3148.8616250585765,
-      "consumption": 2628.8931041918695,
+      "pv": 3148.870047910139,
+      "consumption": 2629.175208684057,
       "import": 985.1209724168293,
       "export": 524.7389626707882,
-      "discharge": 2600.392305865884,
+      "discharge": 2600.498568072915,
       "charge": 4.634303994476795
     },
     "lifetime": {
@@ -43,11 +43,20 @@
       "charge": 0.0
     },
     "hourly": {
-      "pv": [],
+      "pv": [
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.0084228515625
+        }
+      ],
       "consumption": [
         {
           "time": "2026-08-16 06:00:00",
           "value": 0.0498046875
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.2821044921875
         }
       ],
       "import": [],
@@ -81,6 +90,10 @@
         {
           "time": "2026-08-16 06:00:00",
           "value": 0.9150390625
+        },
+        {
+          "time": "2026-08-16 07:00:00",
+          "value": 0.10626220703125
         }
       ]
     }
@@ -176,6 +189,19 @@
       "self_consumed": 0.0498,
       "self_sufficient": 1.0,
       "balance_error": 0.8652
+    },
+    {
+      "time": "2026-08-16 07:00:00",
+      "pv_to_load": 0.0084,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.1063,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1147,
+      "self_sufficient": 1.0,
+      "balance_error": -0.1674
     }
   ],
   "irradiation": null,
