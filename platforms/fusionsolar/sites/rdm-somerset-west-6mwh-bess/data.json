@@ -3,15 +3,15 @@
   "name": "RDM Somerset West 6MWh BESS",
   "platform": "fusionsolar",
   "capacity_kwp": null,
-  "updated_at": "2026-08-16T09:53:44+02:00",
+  "updated_at": "2026-08-16T10:44:44+02:00",
   "current": {
     "power_kw": null,
     "today_kwh": 0.0,
     "month_kwh": 0.0,
     "total_kwh": 0.0,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": null
+    "status": "underperforming",
+    "status_severity": "warn",
+    "status_reason": "Zero PV across daylight hours despite reporting."
   },
   "today_hourly": [
     {
@@ -49,6 +49,10 @@
     {
       "time": "2026-08-16 08:00:00",
       "pv_kwh": 0.0
+    },
+    {
+      "time": "2026-08-16 09:00:00",
+      "pv_kwh": 0.0
     }
   ],
   "irradiation": {
@@ -61,64 +65,64 @@
       "pv": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "charge": 82.74,
-      "discharge": 118.76,
+      "charge": 101.42,
+      "discharge": 135.04,
       "consumption": 40.94,
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 40.94,
-      "batt_to_grid": 77.82,
+      "batt_to_grid": 94.1,
       "grid_to_load": 0.0,
-      "grid_to_batt": 82.74,
+      "grid_to_batt": 101.42,
       "self_consumed": 40.94
     },
     "month": {
       "pv": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "charge": 94228.52,
-      "discharge": 84206.57,
+      "charge": 94247.67,
+      "discharge": 84222.49,
       "consumption": 0.0,
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 84206.57,
+      "batt_to_grid": 84222.49,
       "grid_to_load": 0.0,
-      "grid_to_batt": 94228.52,
+      "grid_to_batt": 94247.67,
       "self_consumed": 0.0
     },
     "year": {
       "pv": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "charge": 1196063.91,
-      "discharge": 1140317.8,
+      "charge": 1196083.06,
+      "discharge": 1140333.72,
       "consumption": 0.0,
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 1140317.8,
+      "batt_to_grid": 1140333.72,
       "grid_to_load": 0.0,
-      "grid_to_batt": 1196063.91,
+      "grid_to_batt": 1196083.06,
       "self_consumed": 0.0
     },
     "lifetime": {
       "pv": 0.0,
       "import": 0.0,
       "export": 0.0,
-      "charge": 2298437.74,
-      "discharge": 2188828.19,
+      "charge": 2298456.89,
+      "discharge": 2188844.11,
       "consumption": 0.0,
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 2188828.19,
+      "batt_to_grid": 2188844.11,
       "grid_to_load": 0.0,
-      "grid_to_batt": 2298437.74,
+      "grid_to_batt": 2298456.89,
       "self_consumed": 0.0
     },
     "hourly": {
@@ -158,6 +162,10 @@
         {
           "time": "2026-08-16 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-16 09:00:00",
+          "value": 0.0
         }
       ],
       "import": [
@@ -195,6 +203,10 @@
         },
         {
           "time": "2026-08-16 08:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-16 09:00:00",
           "value": 0.0
         }
       ],
@@ -234,6 +246,10 @@
         {
           "time": "2026-08-16 08:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-16 09:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -272,6 +288,10 @@
         {
           "time": "2026-08-16 08:00:00",
           "value": 2.96
+        },
+        {
+          "time": "2026-08-16 09:00:00",
+          "value": 18.68
         }
       ],
       "discharge": [
@@ -310,6 +330,10 @@
         {
           "time": "2026-08-16 08:00:00",
           "value": 17.56
+        },
+        {
+          "time": "2026-08-16 09:00:00",
+          "value": 16.28
         }
       ]
     },
@@ -403,6 +427,16 @@
         "batt_to_grid": 2.96,
         "grid_to_load": 0.0,
         "grid_to_batt": 2.96
+      },
+      {
+        "time": "2026-08-16 09:00:00",
+        "pv_to_load": 0.0,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 16.28,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 18.68
       }
     ]
   },
