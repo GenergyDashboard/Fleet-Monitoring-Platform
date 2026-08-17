@@ -1,7 +1,7 @@
 {
   "site_id": "ecdoh-un-kanyayo-clinic",
   "platform": "vrm",
-  "updated_at": "2026-08-17T06:35:41+02:00",
+  "updated_at": "2026-08-17T07:18:06+02:00",
   "current": {
     "power_kw": 0,
     "today_kwh": 0.0,
@@ -12,26 +12,26 @@
   "energy": {
     "today": {
       "pv": 0.0,
-      "consumption": 0.0,
+      "consumption": 0.1904296875,
       "import": 0.0,
       "export": 0.0,
-      "discharge": 5.570556640625,
+      "discharge": 5.9444580078125,
       "charge": 0.0
     },
     "month": {
       "pv": 295.8485052585602,
-      "consumption": 164.379901856184,
+      "consumption": 164.570331543684,
       "import": 2.213537711650133,
       "export": 1.9222400151193142,
-      "discharge": 213.69412779808044,
+      "discharge": 214.06802916526794,
       "charge": 0.004184722900390625
     },
     "year": {
       "pv": 3167.81713042967,
-      "consumption": 2638.7283092699945,
+      "consumption": 2638.9187389574945,
       "import": 985.1209724168293,
       "export": 524.7389626707882,
-      "discharge": 2613.0140710026026,
+      "discharge": 2613.38797236979,
       "charge": 4.634303994476795
     },
     "lifetime": {
@@ -44,7 +44,16 @@
     },
     "hourly": {
       "pv": [],
-      "consumption": [],
+      "consumption": [
+        {
+          "time": "2026-08-17 06:00:00",
+          "value": 0.06005859375
+        },
+        {
+          "time": "2026-08-17 07:00:00",
+          "value": 0.13037109375
+        }
+      ],
       "import": [],
       "export": [],
       "charge": [],
@@ -75,7 +84,11 @@
         },
         {
           "time": "2026-08-17 06:00:00",
-          "value": 0.47332763671875
+          "value": 0.77734375
+        },
+        {
+          "time": "2026-08-17 07:00:00",
+          "value": 0.06988525390625
         }
       ]
     }
@@ -164,13 +177,26 @@
       "pv_to_load": 0.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
-      "batt_to_load": 0.0,
-      "batt_to_grid": 0.4733,
+      "batt_to_load": 0.0601,
+      "batt_to_grid": 0.7173,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 0.4733
+      "self_consumed": 0.0601,
+      "self_sufficient": 1.0,
+      "balance_error": 0.7173
+    },
+    {
+      "time": "2026-08-17 07:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0699,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0699,
+      "self_sufficient": 1.0,
+      "balance_error": -0.0605
     }
   ],
   "irradiation": null,
