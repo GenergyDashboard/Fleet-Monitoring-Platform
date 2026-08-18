@@ -3,12 +3,12 @@
   "name": "BIMBO NRG",
   "platform": "fusionsolar",
   "capacity_kwp": 589.0,
-  "updated_at": "2026-08-18T07:57:10+02:00",
+  "updated_at": "2026-08-18T08:30:30+02:00",
   "current": {
-    "power_kw": null,
-    "today_kwh": 5.08,
-    "month_kwh": 24061.39,
-    "total_kwh": 32688.99,
+    "power_kw": 6.87,
+    "today_kwh": 22.37,
+    "month_kwh": 24078.68,
+    "total_kwh": 32706.28,
     "status": "online",
     "status_severity": "ok",
     "status_reason": null
@@ -41,61 +41,98 @@
     {
       "time": "2026-08-18 06:00:00",
       "pv_kwh": 0.0
+    },
+    {
+      "time": "2026-08-18 07:00:00",
+      "pv_kwh": 6.87
     }
   ],
   "irradiation": {
-    "source": null,
-    "today_total": null,
-    "today_hourly": []
+    "source": "fusionsolar",
+    "today_total": 0.02,
+    "today_hourly": [
+      {
+        "time": "2026-08-18 00:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 01:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 02:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 03:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 04:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 05:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 06:00:00",
+        "value": 0.0
+      },
+      {
+        "time": "2026-08-18 07:00:00",
+        "value": 0.02
+      }
+    ]
   },
   "energy": {
     "today": {
-      "pv": 0.0,
+      "pv": 6.87,
       "import": 0.0,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 0.0,
-      "pv_to_load": 0.0,
+      "consumption": 6.87,
+      "pv_to_load": 6.87,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
       "grid_to_load": 0.0,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0
+      "self_consumed": 6.87
     },
     "month": {
-      "pv": 24056.31,
-      "import": 185944.06,
+      "pv": 24065.41,
+      "import": 186563.97,
       "export": 28.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 209972.37,
-      "pv_to_load": 24028.31,
+      "consumption": 210601.38,
+      "pv_to_load": 24037.41,
       "pv_to_batt": 0.0,
       "pv_to_grid": 28.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 185944.06,
+      "grid_to_load": 186563.97,
       "grid_to_batt": 0.0,
-      "self_consumed": 24028.31
+      "self_consumed": 24037.41
     },
     "year": {
-      "pv": 32683.91,
-      "import": 1733940.03,
+      "pv": 32693.01,
+      "import": 1734559.94,
       "export": 28.0,
       "charge": 0.0,
       "discharge": 0.0,
-      "consumption": 1766595.94,
-      "pv_to_load": 32655.91,
+      "consumption": 1767224.95,
+      "pv_to_load": 32665.01,
       "pv_to_batt": 0.0,
       "pv_to_grid": 28.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 1733940.03,
+      "grid_to_load": 1734559.94,
       "grid_to_batt": 0.0,
-      "self_consumed": 32655.91
+      "self_consumed": 32665.01
     },
     "lifetime": {
       "pv": 32683.91,
@@ -142,6 +179,10 @@
         {
           "time": "2026-08-18 06:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-18 07:00:00",
+          "value": 6.87
         }
       ],
       "import": [
@@ -171,6 +212,10 @@
         },
         {
           "time": "2026-08-18 06:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-18 07:00:00",
           "value": 0.0
         }
       ],
@@ -202,6 +247,10 @@
         {
           "time": "2026-08-18 06:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-18 07:00:00",
+          "value": 0.0
         }
       ],
       "charge": [
@@ -232,6 +281,10 @@
         {
           "time": "2026-08-18 06:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-18 07:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -261,6 +314,10 @@
         },
         {
           "time": "2026-08-18 06:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-18 07:00:00",
           "value": 0.0
         }
       ]
@@ -335,17 +392,68 @@
         "batt_to_grid": 0.0,
         "grid_to_load": 0.0,
         "grid_to_batt": 0.0
+      },
+      {
+        "time": "2026-08-18 07:00:00",
+        "pv_to_load": 6.87,
+        "pv_to_batt": 0.0,
+        "pv_to_grid": 0.0,
+        "batt_to_load": 0.0,
+        "batt_to_grid": 0.0,
+        "grid_to_load": 0.0,
+        "grid_to_batt": 0.0
       }
     ]
   },
   "financial": null,
   "performance": {
     "method": "empirical",
-    "hourly_expected": [],
-    "today_expected_total": 0.0,
-    "today_actual_total": 0.0,
-    "performance_pct": null,
-    "elapsed_hours_compared": 0,
+    "hourly_expected": [
+      {
+        "time": "2026-08-18 00:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 01:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 02:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 03:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 04:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 05:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 06:00:00",
+        "ghi_w_m2": 0,
+        "expected_kwh": 0.0
+      },
+      {
+        "time": "2026-08-18 07:00:00",
+        "ghi_w_m2": 0.0,
+        "expected_kwh": 1.856
+      }
+    ],
+    "today_expected_total": 1.86,
+    "today_actual_total": 6.87,
+    "performance_pct": 370.2,
+    "elapsed_hours_compared": 1,
     "reason": "Expected = site's own 30-day average for this hour-of-day"
   }
 }
