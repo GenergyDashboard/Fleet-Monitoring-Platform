@@ -1,13 +1,13 @@
 {
   "site_id": "osprey-6",
   "platform": "sunsynk",
-  "updated_at": "2026-08-19T17:43:54+02:00",
+  "updated_at": "2026-08-19T18:12:39+02:00",
   "current": {
-    "power_kw": 0.122,
+    "power_kw": 0.025,
     "today_kwh": 0.4,
-    "status": "online",
-    "status_severity": "ok",
-    "status_reason": "Generating normally"
+    "status": "underperforming",
+    "status_severity": "warning",
+    "status_reason": "Daylight but no PV generation today"
   },
   "energy": {
     "today": {
@@ -50,7 +50,11 @@
         },
         {
           "time": "2026-08-19 17:00:00",
-          "value": 0.129
+          "value": 0.144
+        },
+        {
+          "time": "2026-08-19 18:00:00",
+          "value": 0.007
         }
       ],
       "consumption": [
@@ -60,6 +64,10 @@
         },
         {
           "time": "2026-08-19 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-19 18:00:00",
           "value": 0.0
         }
       ],
@@ -71,6 +79,10 @@
         {
           "time": "2026-08-19 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-19 18:00:00",
+          "value": 0.0
         }
       ],
       "export": [
@@ -80,6 +92,10 @@
         },
         {
           "time": "2026-08-19 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-19 18:00:00",
           "value": 0.0
         }
       ],
@@ -91,6 +107,10 @@
         {
           "time": "2026-08-19 17:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-19 18:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -100,6 +120,10 @@
         },
         {
           "time": "2026-08-19 17:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-19 18:00:00",
           "value": 0.0
         }
       ]
@@ -130,7 +154,20 @@
       "grid_to_batt": 0.0,
       "self_consumed": 0.0,
       "self_sufficient": 0.0,
-      "balance_error": 0.129
+      "balance_error": 0.144
+    },
+    {
+      "time": "2026-08-19 18:00:00",
+      "pv_to_load": 0.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 0.0,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.0,
+      "self_sufficient": 0.0,
+      "balance_error": 0.007
     }
   ],
   "irradiation": null,
