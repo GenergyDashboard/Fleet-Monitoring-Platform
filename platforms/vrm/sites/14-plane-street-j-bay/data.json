@@ -1,37 +1,37 @@
 {
   "site_id": "14-plane-street-j-bay",
   "platform": "vrm",
-  "updated_at": "2026-08-20T08:45:25+02:00",
+  "updated_at": "2026-08-20T09:27:10+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.39501953125,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "today_kwh": 0.745361328125,
+    "status": "unknown",
+    "status_severity": "info",
+    "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 0.39501953125,
-      "consumption": 0.8756103515625,
-      "import": 13.89013671875,
-      "export": 1.76580810546875,
-      "discharge": 0.5892333984375,
+      "pv": 0.745361328125,
+      "consumption": 2.2130126953125,
+      "import": 15.874267578125,
+      "export": 1.802215576171875,
+      "discharge": 0.5955810546875,
       "charge": 0.0
     },
     "month": {
-      "pv": 130.9683837890625,
-      "consumption": 380.59625244140625,
-      "import": 675.0572509765625,
-      "export": 84.068115234375,
-      "discharge": 26.0194091796875,
+      "pv": 131.2081298828125,
+      "consumption": 381.63385009765625,
+      "import": 676.8958740234375,
+      "export": 84.10452270507812,
+      "discharge": 26.0257568359375,
       "charge": 1.22998046875
     },
     "year": {
-      "pv": 3850.8768000267446,
-      "consumption": 3500.7182073760778,
-      "import": 5519.096918903291,
-      "export": 608.7201891541481,
-      "discharge": 2206.043982475996,
+      "pv": 3851.1165461204946,
+      "consumption": 3501.7558050323278,
+      "import": 5520.935541950166,
+      "export": 608.7565966248512,
+      "discharge": 2206.050330132246,
       "charge": 258.27465757727623
     },
     "lifetime": {
@@ -50,7 +50,11 @@
         },
         {
           "time": "2026-08-20 08:00:00",
-          "value": 0.2406005859375
+          "value": 0.4595947265625
+        },
+        {
+          "time": "2026-08-20 09:00:00",
+          "value": 0.13134765625
         }
       ],
       "consumption": [
@@ -64,7 +68,11 @@
         },
         {
           "time": "2026-08-20 08:00:00",
-          "value": 0.46484375
+          "value": 1.1104736328125
+        },
+        {
+          "time": "2026-08-20 09:00:00",
+          "value": 0.6917724609375
         }
       ],
       "import": [
@@ -102,7 +110,11 @@
         },
         {
           "time": "2026-08-20 08:00:00",
-          "value": 0.38232421875
+          "value": 1.638427734375
+        },
+        {
+          "time": "2026-08-20 09:00:00",
+          "value": 0.72802734375
         }
       ],
       "export": [
@@ -140,6 +152,10 @@
         },
         {
           "time": "2026-08-20 08:00:00",
+          "value": 0.036407470703125
+        },
+        {
+          "time": "2026-08-20 09:00:00",
           "value": 0.0181884765625
         }
       ],
@@ -176,6 +192,10 @@
         {
           "time": "2026-08-20 08:00:00",
           "value": 0.0169677734375
+        },
+        {
+          "time": "2026-08-20 09:00:00",
+          "value": 0.00634765625
         }
       ]
     }
@@ -287,16 +307,29 @@
     },
     {
       "time": "2026-08-20 08:00:00",
-      "pv_to_load": 0.2394,
+      "pv_to_load": 0.4402,
       "pv_to_batt": 0.0,
-      "pv_to_grid": 0.0012,
+      "pv_to_grid": 0.0194,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.017,
-      "grid_to_load": 0.3823,
+      "grid_to_load": 1.6384,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.2394,
-      "self_sufficient": 0.1775,
-      "balance_error": 0.1569
+      "self_consumed": 0.4402,
+      "self_sufficient": -0.4754,
+      "balance_error": 0.9681
+    },
+    {
+      "time": "2026-08-20 09:00:00",
+      "pv_to_load": 0.1195,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0118,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0063,
+      "grid_to_load": 0.728,
+      "grid_to_batt": 0.0,
+      "self_consumed": 0.1195,
+      "self_sufficient": -0.0524,
+      "balance_error": 0.1558
     }
   ],
   "irradiation": null,
