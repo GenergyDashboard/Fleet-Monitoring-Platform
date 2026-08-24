@@ -1,37 +1,37 @@
 {
   "site_id": "ecdoh-un-malangeni-clinic",
   "platform": "vrm",
-  "updated_at": "2026-08-24T07:22:45+02:00",
+  "updated_at": "2026-08-24T07:57:27+02:00",
   "current": {
     "power_kw": 0,
-    "today_kwh": 0.31005859375,
-    "status": "underperforming",
-    "status_severity": "warning",
-    "status_reason": "Daylight but no PV generation today"
+    "today_kwh": 0.6359672546386719,
+    "status": "unknown",
+    "status_severity": "info",
+    "status_reason": "Insufficient data"
   },
   "energy": {
     "today": {
-      "pv": 0.31005859375,
-      "consumption": 0.0,
-      "import": 44.5028435587883,
-      "export": 0.6371560096740723,
-      "discharge": 0.0,
+      "pv": 0.6359672546386719,
+      "consumption": 0.3442671149969101,
+      "import": 46.03643515519798,
+      "export": 0.6735644340515137,
+      "discharge": 0.15546417236328125,
       "charge": 0.0
     },
     "month": {
-      "pv": 79.40396162867546,
-      "consumption": 376.6295313423034,
-      "import": 848.1844274383038,
-      "export": 15.455570220947266,
-      "discharge": 33.70767730474472,
+      "pv": 79.72987028956413,
+      "consumption": 376.9737984573003,
+      "import": 849.7180190347135,
+      "export": 15.491978645324707,
+      "discharge": 33.863141477108,
       "charge": 0.009999999776482582
     },
     "year": {
-      "pv": 365.7290863208473,
-      "consumption": 1501.9777256974485,
-      "import": 3620.409173887223,
-      "export": 80.3908216971904,
-      "discharge": 190.67750385403633,
+      "pv": 366.05499498173594,
+      "consumption": 1502.3219928124454,
+      "import": 3621.9427654836327,
+      "export": 80.42723012156785,
+      "discharge": 190.8329680263996,
       "charge": 0.009999999776482582
     },
     "lifetime": {
@@ -50,10 +50,15 @@
         },
         {
           "time": "2026-08-24 07:00:00",
-          "value": 0.2099609375
+          "value": 0.5358695983886719
         }
       ],
-      "consumption": [],
+      "consumption": [
+        {
+          "time": "2026-08-24 07:00:00",
+          "value": 0.3442671149969101
+        }
+      ],
       "import": [
         {
           "time": "2026-08-24 00:00:00",
@@ -85,7 +90,7 @@
         },
         {
           "time": "2026-08-24 07:00:00",
-          "value": 2.3399999737739563
+          "value": 3.8735915701836348
         }
       ],
       "export": [
@@ -116,10 +121,19 @@
         {
           "time": "2026-08-24 06:00:00",
           "value": 0.09102249145507812
+        },
+        {
+          "time": "2026-08-24 07:00:00",
+          "value": 0.036408424377441406
         }
       ],
       "charge": [],
-      "discharge": []
+      "discharge": [
+        {
+          "time": "2026-08-24 07:00:00",
+          "value": 0.15546417236328125
+        }
+      ]
     }
   },
   "energy_powerflow_hourly": [
@@ -216,16 +230,16 @@
     },
     {
       "time": "2026-08-24 07:00:00",
-      "pv_to_load": 0.0,
+      "pv_to_load": 0.3443,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
-      "batt_to_grid": 0.0,
-      "grid_to_load": 2.34,
+      "batt_to_grid": 0.1555,
+      "grid_to_load": 3.8736,
       "grid_to_batt": 0.0,
-      "self_consumed": 0.0,
-      "self_sufficient": 0.0,
-      "balance_error": 2.55
+      "self_consumed": 0.3443,
+      "self_sufficient": -10.2517,
+      "balance_error": 4.1842
     }
   ],
   "irradiation": null,
