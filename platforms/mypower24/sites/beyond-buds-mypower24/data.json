@@ -1,10 +1,10 @@
 {
   "site_id": "beyond-buds-mypower24",
   "platform": "mypower24",
-  "updated_at": "2026-08-25T11:03:57+02:00",
+  "updated_at": "2026-08-25T11:45:27+02:00",
   "current": {
-    "power_kw": 513.0,
-    "today_kwh": 1162.0,
+    "power_kw": 428.0,
+    "today_kwh": 1800.0,
     "status": "online",
     "status_severity": "ok",
     "status_reason": "Generating normally",
@@ -13,33 +13,33 @@
   },
   "energy": {
     "today": {
-      "pv": 1162.0,
-      "consumption": 5465.22,
-      "import": 5011.87,
+      "pv": 1800.0,
+      "consumption": 6092.03,
+      "import": 5226.73,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "month": {
-      "pv": 1162.0,
-      "consumption": 5465.22,
-      "import": 5011.87,
+      "pv": 1800.0,
+      "consumption": 6092.03,
+      "import": 5226.73,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "year": {
-      "pv": 1162.0,
-      "consumption": 5465.22,
-      "import": 5011.87,
+      "pv": 1800.0,
+      "consumption": 6092.03,
+      "import": 5226.73,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 1162.0,
-      "consumption": 5465.22,
-      "import": 5011.87,
+      "pv": 1800.0,
+      "consumption": 6092.03,
+      "import": 5226.73,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
@@ -88,7 +88,11 @@
         },
         {
           "time": "2026-08-25 10:00:00",
-          "value": 513.0
+          "value": 723.0
+        },
+        {
+          "time": "2026-08-25 11:00:00",
+          "value": 428.0
         }
       ],
       "consumption": [
@@ -134,7 +138,11 @@
         },
         {
           "time": "2026-08-25 10:00:00",
-          "value": 695.89
+          "value": 901.91
+        },
+        {
+          "time": "2026-08-25 11:00:00",
+          "value": 420.79
         }
       ],
       "import": [
@@ -180,7 +188,11 @@
         },
         {
           "time": "2026-08-25 10:00:00",
-          "value": 354.82
+          "value": 470.32
+        },
+        {
+          "time": "2026-08-25 11:00:00",
+          "value": 99.36
         }
       ],
       "export": [
@@ -226,6 +238,10 @@
         },
         {
           "time": "2026-08-25 10:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-25 11:00:00",
           "value": 0.0
         }
       ],
@@ -273,6 +289,10 @@
         {
           "time": "2026-08-25 10:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-25 11:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -318,6 +338,10 @@
         },
         {
           "time": "2026-08-25 10:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-25 11:00:00",
           "value": 0.0
         }
       ]
@@ -456,16 +480,29 @@
     },
     {
       "time": "2026-08-25 10:00:00",
-      "pv_to_load": 513.0,
+      "pv_to_load": 723.0,
       "pv_to_batt": 0.0,
       "pv_to_grid": 0.0,
       "batt_to_load": 0.0,
       "batt_to_grid": 0.0,
-      "grid_to_load": 354.82,
+      "grid_to_load": 470.32,
       "grid_to_batt": 0.0,
-      "self_consumed": 513.0,
-      "self_sufficient": 0.4901,
-      "balance_error": 171.93
+      "self_consumed": 723.0,
+      "self_sufficient": 0.4785,
+      "balance_error": 291.41
+    },
+    {
+      "time": "2026-08-25 11:00:00",
+      "pv_to_load": 420.79,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 99.36,
+      "grid_to_batt": 0.0,
+      "self_consumed": 420.79,
+      "self_sufficient": 0.7639,
+      "balance_error": 106.57
     }
   ],
   "irradiation": null,
@@ -520,6 +557,10 @@
       {
         "time": "2026-08-25 10:00:00",
         "value": 0.6862
+      },
+      {
+        "time": "2026-08-25 11:00:00",
+        "value": 0.7984
       }
     ],
     "p90": [
@@ -566,6 +607,10 @@
       {
         "time": "2026-08-25 10:00:00",
         "value": 0.6562
+      },
+      {
+        "time": "2026-08-25 11:00:00",
+        "value": 0.7635
       }
     ],
     "p95": [
@@ -612,13 +657,17 @@
       {
         "time": "2026-08-25 10:00:00",
         "value": 0.6478
+      },
+      {
+        "time": "2026-08-25 11:00:00",
+        "value": 0.7537
       }
     ]
   },
   "prediction_today": {
-    "p50": 1.471,
-    "p90": 1.407,
-    "p95": 1.389
+    "p50": 2.269,
+    "p90": 2.17,
+    "p95": 2.142
   },
   "performance": {
     "method": "empirical",
