@@ -1,10 +1,10 @@
 {
   "site_id": "beyond-buds-mypower24",
   "platform": "mypower24",
-  "updated_at": "2026-08-26T13:10:24+02:00",
+  "updated_at": "2026-08-26T13:41:02+02:00",
   "current": {
-    "power_kw": 782.0,
-    "today_kwh": 2851.0,
+    "power_kw": 254.0,
+    "today_kwh": 3105.0,
     "status": "online",
     "status_severity": "ok",
     "status_reason": "Generating normally",
@@ -13,33 +13,33 @@
   },
   "energy": {
     "today": {
-      "pv": 2851.0,
-      "consumption": 8128.88,
-      "import": 6127.52,
+      "pv": 3105.0,
+      "consumption": 8551.96,
+      "import": 6362.92,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "month": {
-      "pv": 2851.0,
-      "consumption": 8128.88,
-      "import": 6127.52,
+      "pv": 3105.0,
+      "consumption": 8551.96,
+      "import": 6362.92,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "year": {
-      "pv": 2851.0,
-      "consumption": 8128.88,
-      "import": 6127.52,
+      "pv": 3105.0,
+      "consumption": 8551.96,
+      "import": 6362.92,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
     },
     "lifetime": {
-      "pv": 2851.0,
-      "consumption": 8128.88,
-      "import": 6127.52,
+      "pv": 3105.0,
+      "consumption": 8551.96,
+      "import": 6362.92,
       "export": 0.0,
       "charge": 0.0,
       "discharge": 0.0
@@ -97,6 +97,10 @@
         {
           "time": "2026-08-26 12:00:00",
           "value": 782.0
+        },
+        {
+          "time": "2026-08-26 13:00:00",
+          "value": 254.0
         }
       ],
       "consumption": [
@@ -151,6 +155,10 @@
         {
           "time": "2026-08-26 12:00:00",
           "value": 831.7
+        },
+        {
+          "time": "2026-08-26 13:00:00",
+          "value": 423.08
         }
       ],
       "import": [
@@ -205,6 +213,10 @@
         {
           "time": "2026-08-26 12:00:00",
           "value": 471.2
+        },
+        {
+          "time": "2026-08-26 13:00:00",
+          "value": 235.4
         }
       ],
       "export": [
@@ -258,6 +270,10 @@
         },
         {
           "time": "2026-08-26 12:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-26 13:00:00",
           "value": 0.0
         }
       ],
@@ -313,6 +329,10 @@
         {
           "time": "2026-08-26 12:00:00",
           "value": 0.0
+        },
+        {
+          "time": "2026-08-26 13:00:00",
+          "value": 0.0
         }
       ],
       "discharge": [
@@ -366,6 +386,10 @@
         },
         {
           "time": "2026-08-26 12:00:00",
+          "value": 0.0
+        },
+        {
+          "time": "2026-08-26 13:00:00",
           "value": 0.0
         }
       ]
@@ -540,6 +564,19 @@
       "self_consumed": 782.0,
       "self_sufficient": 0.4334,
       "balance_error": 421.5
+    },
+    {
+      "time": "2026-08-26 13:00:00",
+      "pv_to_load": 254.0,
+      "pv_to_batt": 0.0,
+      "pv_to_grid": 0.0,
+      "batt_to_load": 0.0,
+      "batt_to_grid": 0.0,
+      "grid_to_load": 235.4,
+      "grid_to_batt": 0.0,
+      "self_consumed": 254.0,
+      "self_sufficient": 0.4436,
+      "balance_error": 66.32
     }
   ],
   "irradiation": null,
@@ -602,6 +639,10 @@
       {
         "time": "2026-08-26 12:00:00",
         "value": 0.8667
+      },
+      {
+        "time": "2026-08-26 13:00:00",
+        "value": 0.8431
       }
     ],
     "p90": [
@@ -656,6 +697,10 @@
       {
         "time": "2026-08-26 12:00:00",
         "value": 0.8288
+      },
+      {
+        "time": "2026-08-26 13:00:00",
+        "value": 0.8062
       }
     ],
     "p95": [
@@ -710,13 +755,17 @@
       {
         "time": "2026-08-26 12:00:00",
         "value": 0.8182
+      },
+      {
+        "time": "2026-08-26 13:00:00",
+        "value": 0.7959
       }
     ]
   },
   "prediction_today": {
-    "p50": 3.191,
-    "p90": 3.051,
-    "p95": 3.013
+    "p50": 4.034,
+    "p90": 3.858,
+    "p95": 3.808
   },
   "performance": {
     "method": "empirical",
